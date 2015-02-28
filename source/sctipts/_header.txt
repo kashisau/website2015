@@ -1,0 +1,8 @@
+/**
+ * KashiRPiStatic
+ *
+ * This JavaScript file is used to drive the dynamic features of KashiRPiStatic
+ * so that it can interface with the APIs on the server.
+ *
+ * @copyright Kashi Samaraweera <kashi@kashmaniac.com.au>
+ */

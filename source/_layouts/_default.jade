@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+  head
+    -var pageTitle = pageTitle || "KashiRPi2";
+    title=pageTitle
+  body
+    header.PageHeader
+      h1 KashiRPi2
+      nav
+        ul.MainMenu
+          li.MainMenu-selected
+            a(href="/") News
+          li
+            a(href="/work") Work
+          li
+            a(href="/contact") Contact
+    div.Main
+      block MainContent
