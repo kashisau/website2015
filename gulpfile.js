@@ -171,7 +171,7 @@ gulp.task('sass', function() {
     // Parse the SASS into native CSS.
     return sass(
         // Within our source directory, ANY .scss file in any subfolder
-        'source/style/**/*.scss',
+        'source/style/',
         { style: 'expanded' }
     )
     // Output the files to the build folder.
