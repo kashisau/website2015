@@ -1,0 +1,67 @@
+$athens_gray: #FCFCFD;
+body {
+    background-color: $athens_gray;
+    font-family: 'Lora', 'Times New Roman', 'Roman', serif;
+    color: #343434;
+}
+
+.Placeholder {
+    min-width: 200px;
+    max-width: 560px;
+    margin: 140px auto 0 auto;
+    opacity: 0;
+    
+    padding: 20px;
+    
+    transition:
+        margin 600ms 200ms ease-in-out,
+        padding 200ms 0 ease-in-out;
+
+    animation-name: AnimateIn;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 800ms;
+    animation-delay: 1200ms;
+    animation-fill-mode: forwards;
+}
+
+@media (max-width: 480px) {
+    .Placeholder {
+        margin: 20px;
+        padding: 0;
+        transition: margin 200ms 200ms ease-in-out;
+        animation: none;
+        opacity: 1;
+    }
+}
+
+@keyframes AnimateIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+h1, h2 {
+    font-family: 'Ramabhadra', Helvetica, Arial, sans-serif;
+    color: #232323;
+    
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    h2 {
+        font-size: 1.25
+    }
+}
+
+p {
+    font-size: 0.8em;
+    line-height: 150%;
+}
