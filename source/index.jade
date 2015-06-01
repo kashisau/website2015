@@ -3,21 +3,34 @@ block Vars
   -mainMenu = false
 block MainContent
     div.Placeholder
-      h1 Kashi Samaraweera
-      p 
-        | Kashi is a developer specialising in interactive content delivered through the web.
-        | He is currently doing exciting things in online learning for healthcare professionals at Sydney creative agency 
-        a(href="http://ward6.com.au",rel="noreferrer") Ward6
-        | .
-      p.Contact
-        | You can reach me at 
-        a(href="mailto:kashi@kashmaniac.com.au") kashi@kashmaniac.com.au
-        |  or see what's happening on 
-        a(href="https://medium.com/@Kashi") @Kashi on Medium
-        | .
-      h2 This website
+      hgroup
+        h1 Kashi Samaraweera
+        h2 Kashi is a software developer specialising in interactive web content.
       p
-        | This website is being worked on during Q1 2015. 
-        | You can track the progress on 
-        a(href="https://bitbucket.org/KashmaNiaC/Website2015/") BitBucket
+        | I'm currently doing exciting things in online learning for healthcare professionals at Sydney creative agency 
+        a(href="http://ward6.com.au/",rel="noreferrer") Ward6
+        | . You can reach me at 
+        a(href="mailto:kashi@kashmaniac.com.au") kashi@kashmaniac.com.au
+        | ; or see what's happening on my development/travel blog: 
+        a(href="https://enroute.kashmaniac.com.au/") 
+          em en route
         | .
+      h2 Upcoming portfolio
+      p
+        | This website will be host to a portifolio for my front-end development work and is being built during Q2-3 2015 (source on 
+        a(href="https://bitbucket.org/KashmaNiaC/website2015") BitBucket
+        | ).
+    script.
+        /**
+         * Kashi's Website 2015 (Placeholder)
+         *
+         * This is to ensure our fade-in effect only happens once. The code contained 
+         * was taken from MDN and modified to suit. The original method can be found at:
+         *     https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+         **/
+        
+        if (! (document.cookie.replace(/(?:(?:^|.*;\s*)hasVisitedBefore\s*\=\s*([^;]*).*$)|^.*$/, "$1") !== "true")) {
+            var placeholder = document.querySelector('.Placeholder');
+            placeholder.className = placeholder.className + ' Placeholder--dontAnimate';
+        }
+        document.cookie = "hasVisitedBefore=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";

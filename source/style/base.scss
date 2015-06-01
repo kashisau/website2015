@@ -1,8 +1,19 @@
 $athens_gray: #FCFCFD;
 body {
     background-color: $athens_gray;
-    font-family: 'Lora', 'Times New Roman', 'Roman', serif;
+    font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
     color: #343434;
+}
+
+@font-face {
+    font-family: 'colaborate';
+    src: url('assets/fonts/ColabBol-webfont.eot');
+    src: url('assets/fonts/ColabBol-webfont.eot?#iefix') format('embedded-opentype'),
+         url('assets/fonts/ColabBol-webfont.woff') format('woff'),
+         url('assets/fonts/ColabBol-webfont.ttf') format('truetype'),
+         url('assets/fonts/ColabBol-webfont.svg#colaborate-boldregular') format('svg');
+    font-weight: bold;
+    font-style: normal;
 }
 
 .Placeholder {
@@ -25,6 +36,11 @@ body {
     animation-fill-mode: forwards;
 }
 
+.Placeholder--dontAnimate {
+        animation: none;
+        opacity: 1;
+}
+
 @media (max-width: 480px) {
     .Placeholder {
         margin: 20px;
@@ -45,23 +61,105 @@ body {
 }
 
 h1, h2 {
-    font-family: 'Ramabhadra', Helvetica, Arial, sans-serif;
+    font-family: 'colaborate', Helvetica, Arial, sans-serif;
     color: #232323;
+    font-weight: bold;
     
-    padding: 0;
-    margin: 0;
+    font-size-adjust: 0.7;
+    letter-spacing: -0.07em;
+    
+    position: relative;
+    left: -1em;
+}
+
+h1::before,
+h2::before {
+    content: '// ';
+    color: rgba(192,192,192, 0.25);
+    
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -ms-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+
+h1:hover::before,
+h2:hover::before {
+    color: rgba(192,192,192, 1.0);
+}
+
+hgroup h2 {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    
+    color: #0059BF;
+    
+    line-height: 210%;
+    letter-spacing: normal;
+    
+    left: 0;
+    
+    font-weight: normal;
+    font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
+}
+
+hgroup h2::before {
+    content: '';
+}
+
+p {
+    font-size: 1.0em;
+    line-height: 1.7em;
+    font-feature-settings: "liga", "onum", "kern";
+    margin: 0px 0px 1.75em;
+    text-rendering: geometricprecision;
+}
+
+p a {
+    text-decoration: none;
+    
+    color: #0059BF;
+    border-bottom: 1px solid rgba(128,  128,  128,  0);
+    -webkit-transition: border 1s ease;
+    -moz-transition: border 0.8s ease;
+    -ms-transition: border 0.8s ease;
+    -o-transition: border 0.8s ease;
+    transition: border 0.8s ease; 
+}
+
+p a:visited {
+    color: #003B7F;
+}
+
+p a:hover {
+    border-bottom: 1px solid rgba(128,  128,  128,  1);    
+    -webkit-transition: border 0.2s ease;
+    -moz-transition: border 0.2s ease;
+    -ms-transition: border 0.2s ease;
+    -o-transition: border 0.2s ease;
+    transition: border 0.2s ease; 
+
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 1.5em;
+        font-size: 1.75em;
+        margin-top: 1em;
     }
     h2 {
-        font-size: 1.25
+        font-size: 1.25em;
     }
-}
+    hgroup h2 {
+        font-size: 0.85em;
+    }
 
-p {
-    font-size: 0.8em;
-    line-height: 150%;
+    
+    h1, h2 { left: 0; }
+    
+    h1::before,
+    h2::before {
+        content: '';
+        color: rgba(192,192,192, 0.25);
+    }
 }
