@@ -5,6 +5,12 @@
     "gulp-util": "*",
     "gulp-changed": "*",
     "gulp-clean": "*",
-    "require-dir": "*"
+    "require-dir": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-concat": "*",
+    "gulp-debug": "*",
+    "gulp-uglify": "*",
+    "gulp-rename": "*",
+    "run-sequence": "*"
   }
 }

@@ -23,18 +23,3 @@ var requireDir = require('require-dir'),
 gulp.task('default', function() {
     return gutil.log('Gulp is up and running!');
 });
-
-/**
- * Clears the previous output from disk as well as any temporary directories
- * used during the build process.
- */
-gulp.task('dev:clean', function() {
-    gutil
-        .log('Removing build directory...')
-        .log('Removing published directory...');
-
-    gulp.src(['./build','./published', './.sass-cache'], {read: false})
-        .pipe(clean());
-
-    return gutil.log('Removed.');
-});
