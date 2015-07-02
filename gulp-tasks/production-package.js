@@ -40,7 +40,7 @@ gulp.task('prod:js-minify', function() {
         .pipe(sourcemaps.write('./',
             {
                 includeContent: false,
-                sourceRoot: 'https://bitbucket.org/KashmaNiaC/website2015-placeholder/src/source/scripts/',
+                sourceRoot: 'https://bitbucket.org/KashmaNiaC/website2015-placeholder/raw/master/source/scripts/',
             }
         ))
         .pipe(gulp.dest('./production/'));
