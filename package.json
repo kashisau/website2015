@@ -1,20 +1,8 @@
 {
-    "name": "KashiRPiStatic-Build",
-    "dependencies": {
-        "gulp": "*",
-        "gulp-changed": "*",
-        "gulp-jade": "*",
-        "gulp-rimraf": "*",
-        "gulp-ruby-sass": "*",
-        "gulp-minify-css": "*",
-        "gulp-rename": "*",
-        "gulp-concat": "*",
-        "gulp-uglify": "*",
-        "run-sequence": "*",
-        "gulp-rework": "*",
-        "rework-custom-media": "*",
-        "rework-vars": "*",
-        "rework-calc": "*",
-        "gulp-markdown": "*"
-    }
+  "name": "KashiRPiStatic-Build",
+  "dependencies": {
+    "gulp": "*",
+    "gulp-changed": "*",
+    "require-dir": "*"
+  }
 }
