@@ -2,7 +2,9 @@
   "name": "KashiRPiStatic-Build",
   "dependencies": {
     "gulp": "*",
+    "gulp-util": "*",
     "gulp-changed": "*",
+    "gulp-clean": "*",
     "require-dir": "*"
   }
 }
