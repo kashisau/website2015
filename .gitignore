@@ -3,3 +3,4 @@ production/
 build/
 node_modules/
 .sass-cache/
+.idea/
