@@ -35,9 +35,9 @@ gulp.task('build', function(callback) {
         "Running development build on", APP_NAME, "...");
 
     if (production || rebuild)
-        return runSequence('build:clean', ['build:ext:css', 'build:ext:js'], callback);
+        return runSequence('build:clean', ['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
 
-    return runSequence(['build:ext:css', 'build:ext:js'], callback);
+    return runSequence(['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
 });
 
 /**
@@ -55,12 +55,14 @@ gulp.task('build:clean', function() {
 
     return gulp.src(
         [
-            './build/**.js',
-            './build/**.css',
-            './build/**.map',
-            './published/**.js',
-            './published/**.css',
-            './published/**.map',
+            './build/**/*.js',
+            './build/**/*.css',
+            './build/**/*.map',
+            './build/**/*.html',
+            './production/**/*.js',
+            './production/**/*.css',
+            './production/**/*.map',
+            './production/**/*.html',
             './.sass-cache'
         ], {read: false})
         .pipe(clean())
@@ -72,3 +74,4 @@ gulp.task('build:clean', function() {
 
 gulp.task('build:ext:js', require('./build-js.js')(gulp, plugins, production));
 gulp.task('build:ext:css', require('./build-css.js')(gulp, plugins, production));
+gulp.task('build:ext:html', require('./build-html.js')(gulp, plugins, production));

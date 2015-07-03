@@ -31,7 +31,7 @@ module.exports = function(gulp, plugins, production) {
          * piping.
          */
         var jsConcat = lazypipe()
-            .pipe(plugins.concat, 'script-all.js');
+            .pipe(plugins.concat, 'scripts-all.js');
 
         /**
          * This lazypipe function concatenates and minifies all of the JavaScript
@@ -42,11 +42,11 @@ module.exports = function(gulp, plugins, production) {
             .pipe(plugins.uglify)
             .pipe(plugins.rename, { suffix:'.min' });
 
-        return gulp.src('./source/scripts/*.js')
+        return gulp.src('./source/scripts/**/*.js')
             .pipe(plugins.sourcemaps.init())
-            .pipe(plugins.concat('script-all.js'))
+            //.pipe(plugins.concat('scripts-all.js'))
             // Development
-            .pipe(plugins.if(development, jsConcat()))
+            .pipe(jsConcat())
             .pipe(plugins.if(development, plugins.sourcemaps.write(
                 './',
                 {

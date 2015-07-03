@@ -19,6 +19,9 @@
     "gulp-autoprefixer": "*",
     "gulp-rework": "*",
     "rework-custom-media": "*",
+    "gulp-minify-html": "*",
+    "gulp-jade": "*",
+    "gulp-prettify": "*",
     "lazypipe": "*",
     "run-sequence": "*",
     "yargs": "*"
