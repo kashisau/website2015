@@ -3,7 +3,7 @@ html(lang="en")
   //- Defaults for page variables
   -var pageTitle = "Kashi Samaraweera"
   -var mainMenu = true
-  -var baseScripts = []
+  -var baseScripts = ['scripts-all.js']
   //- Optional override of default variables
   block Vars
   -var allScripts = baseScripts
@@ -12,11 +12,19 @@ html(lang="en")
   -}
   head
     title= pageTitle
-    link(href="style.min.css",rel="stylesheet")
+    -if (production) {
+      link(href="styles-all.min.css",rel="stylesheet")
+    -} else {
+      link(href="styles-all.css",rel="stylesheet")
+    -}
     link(href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400",rel="stylesheet",type="text/css")
     meta(name="viewport",content="width=device-width,initial-scale=1.0")
   body
     div.Main
       block MainContent
-    each script in baseScripts
-      script(src="#{script}",type="text/javascript")
+    -if (production) {
+      script(src="scripts-all.min.js",type="text/javascript")
+    -} else {
+      each script in baseScripts
+        script(src="#{script}",type="text/javascript")
+    -}

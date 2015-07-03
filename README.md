@@ -1,23 +1,27 @@
-# Kashi's Website 2015 #
+# Kashi's Website 2015 (front-end)
 
-## Node.js static site
-This is a simple pure HTML/CSS website that uses some of the cooler features of Node.js to cut down on as many repetitive tasks as possible.
+This is the site-generator for Kashi Samaraweera's porfolio website for 2015.
+The aim here is to create a site-generator mechanism using Gulp as a scripting
+tool for the _build_ process.
 
-## Who is this for?
-Anyone really. I haven't yet put in any licence headers but it'll be one of the do-whatever-you-like-with-it style affairs. I'm using this as a chance to flesh out my knowledge of modern HTML and CSS tools and to get up to speed on the latest trends in FED.
+This allows the use of terse and superset languages that compile into 
+plain-old-HTML/CSS/JavaScript for basic web hosting.
 
-## What's missing?
-Design files aren't version controlled, nor are logos and other image assets. Partly because binary files don't really belong in VCS; and partly because there are so many other (read: better) resources for graphic design.
+## Front-end / Back-end seperation
 
-## How do I get started?
-There are three things you'll need installed on your machine to build this site:
+As a portfolio site, most of the content will be fixed; but there will be some
+data going back and forth. Examples include a secure _Work_ section and contact
+form for the site. This will be handled by a separate application that exposes
+an API to this front-end site.
 
-* Node (v0.10+)
-* Ruby (v2.0+)
-* SASS (v3.0+)
+## Early days
 
-As long as each of these are installed (and their executables accessible globally) you can simply:
+This is still very much in development; and thus won't be functional for a
+little while. At present, the Gulp-process is being worked out so that actual
+development can commence in a few weeks' time.
 
-1. Clone this repo
-2. Run `npm install` within the cloned directory to download and install all the Node dependencies
-3. Run `gulp` to build the site (or `gulp watch` to auto-build when any changes are detected in the `./source/` folder).
+## Required tools
+
+[Gulp](http://gulpjs.com/) runs on the [Node.js](http://nodejs.org/) virtual
+environment. This build is being developed against Node `v0.12.5` on both
+Windows (x86) and Mac OS X.

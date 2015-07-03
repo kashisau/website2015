@@ -1,19 +1,12 @@
-$athens_gray: #FCFCFD;
+@import '_common/colours';
+@import '_common/viewports';
+@import '_common/fonts';
+@import '_common/animations';
+
 body {
     background-color: $athens_gray;
     font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
     color: #343434;
-}
-
-@font-face {
-    font-family: 'colaborate';
-    src: url('assets/fonts/ColabBol-webfont.eot');
-    src: url('assets/fonts/ColabBol-webfont.eot?#iefix') format('embedded-opentype'),
-         url('assets/fonts/ColabBol-webfont.woff') format('woff'),
-         url('assets/fonts/ColabBol-webfont.ttf') format('truetype'),
-         url('assets/fonts/ColabBol-webfont.svg#colaborate-boldregular') format('svg');
-    font-weight: bold;
-    font-style: normal;
 }
 
 .Placeholder {
@@ -34,14 +27,14 @@ body {
     animation-duration: 800ms;
     animation-delay: 1200ms;
     animation-fill-mode: forwards;
-}
 
-.Placeholder--dontAnimate {
+    &--dontAnimate {
         animation: none;
         opacity: 1;
+    }
 }
 
-@media (max-width: 480px) {
+@media (--sm-viewport) {
     .Placeholder {
         margin: 20px;
         padding: 0;
@@ -70,27 +63,21 @@ h1, h2 {
     
     position: relative;
     left: -1.25em;
-}
 
-h1::before,
-h2::before {
-    width: 1.25em;
-    display: inline-block;
-    vertical-align: middle;
+    &::before {
+        width: 1.25em;
+        display: inline-block;
+        vertical-align: middle;
 
-    content: '// ';
-    color: rgba(192,192,192, 0.25);
-    
-    -webkit-transition: color 0.2s ease;
-    -moz-transition: color 0.2s ease;
-    -ms-transition: color 0.2s ease;
-    -o-transition: color 0.2s ease;
-    transition: color 0.2s ease;
-}
+        content: '// ';
+        color: rgba(192,192,192, 0.25);
 
-h1:hover::before,
-h2:hover::before {
-    color: rgba(192,192,192, 1.0);
+        transition: color 0.2s ease;
+    }
+
+    &:hover::before {
+        color: rgba(192,192,192, 1.0);
+    }
 }
 
 hgroup h2 {
@@ -125,11 +112,7 @@ p a {
     
     color: #0059BF;
     border-bottom: 1px solid rgba(0,  89,  191,  0);
-    -webkit-transition: border 1s ease;
-    -moz-transition: border 0.8s ease;
-    -ms-transition: border 0.8s ease;
-    -o-transition: border 0.8s ease;
-    transition: border 0.8s ease; 
+    transition: border 0.8s ease;
 }
 
 p a:visited {
@@ -142,15 +125,11 @@ p a:visited:hover {
 
 p a:hover {
     border-bottom: 1px solid rgba(0,  89,  191,  1);    
-    -webkit-transition: border 0.2s ease;
-    -moz-transition: border 0.2s ease;
-    -ms-transition: border 0.2s ease;
-    -o-transition: border 0.2s ease;
-    transition: border 0.2s ease; 
+    transition: border 0.2s ease;
 
 }
 
-@media (max-width: 480px) {
+@media (--sm-viewport) {
     h1 {
         font-size: 1.75em;
         margin-top: 1em;
