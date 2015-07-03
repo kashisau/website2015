@@ -13,6 +13,12 @@
     "gulp-uglify": "*",
     "gulp-rename": "*",
     "gulp-if": "*",
+    "gulp-wait": "*",
+    "gulp-sass": "*",
+    "gulp-minify-css": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-rework": "*",
+    "rework-custom-media": "*",
     "lazypipe": "*",
     "run-sequence": "*",
     "yargs": "*"

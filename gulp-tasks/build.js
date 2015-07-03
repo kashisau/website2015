@@ -35,9 +35,9 @@ gulp.task('build', function(callback) {
         "Running development build on", APP_NAME, "...");
 
     if (production || rebuild)
-        return runSequence('build:clean', 'build:ext:js', callback);
+        return runSequence('build:clean', ['build:ext:css', 'build:ext:js'], callback);
 
-    return runSequence('build:ext:js', callback);
+    return runSequence(['build:ext:css', 'build:ext:js'], callback);
 });
 
 /**
@@ -53,7 +53,16 @@ gulp.task('build:clean', function() {
             gutil.colors.white.bgGreen('PRODUCTION'),
             'Removing production directory...');
 
-    return gulp.src(['./build','./published', './.sass-cache'], {read: false})
+    return gulp.src(
+        [
+            './build/**.js',
+            './build/**.css',
+            './build/**.map',
+            './published/**.js',
+            './published/**.css',
+            './published/**.map',
+            './.sass-cache'
+        ], {read: false})
         .pipe(clean())
         .on('error', function(e) {
             gutil.beep().log('Error: ' + e.toString())
@@ -62,3 +71,4 @@ gulp.task('build:clean', function() {
 });
 
 gulp.task('build:ext:js', require('./build-js.js')(gulp, plugins, production));
+gulp.task('build:ext:css', require('./build-css.js')(gulp, plugins, production));
