@@ -47,6 +47,14 @@ module.exports = function(gulp, plugins, production) {
             });
 
         /**
+         * This lazypipe function concatenates all of the stylsheet files into
+         * a single file (without minification), passing on the stream for
+         * further piping.
+         */
+        var cssConcat = lazypipe()
+            .pipe(plugins.concat, 'styles-all.css');
+
+        /**
          * This lazypipe function minifies native CSS and changes the output
          * filename by prepending the extension with .min. This returns the
          * stream for further piping.
@@ -58,9 +66,10 @@ module.exports = function(gulp, plugins, production) {
         var cssRework = lazypipe()
             .pipe(plugins.rework, reworkCustomMedia());
 
-        return gulp.src(['./source/styles/*.scss', './source/styles/*.sass'])
+        return gulp.src(['./source/styles/*.scss', './source/styles/*.sass', '!./_**'])
             .pipe(plugins.sourcemaps.init())
             .pipe(cssCompileSass())
+            .pipe(cssConcat())
             .pipe(cssAutoprefix())
             .pipe(cssRework())
             // Development

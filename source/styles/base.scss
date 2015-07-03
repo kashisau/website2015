@@ -1,24 +1,12 @@
-$athens_gray: #FCFCFD;
-
-@custom-media --sm-viewport (min-width:320px) and (max-width:480px);
-@custom-media --md-viewport (min-width:480px) and (max-width:920px);
-@custom-media --lg-viewport (min-width:920px);
+@import '_common/colours';
+@import '_common/viewports';
+@import '_common/fonts';
+@import '_common/animations';
 
 body {
     background-color: $athens_gray;
     font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
     color: #343434;
-}
-
-@font-face {
-    font-family: 'colaborate';
-    src: url('assets/fonts/ColabBol-webfont.eot');
-    src: url('assets/fonts/ColabBol-webfont.eot?#iefix') format('embedded-opentype'),
-         url('assets/fonts/ColabBol-webfont.woff') format('woff'),
-         url('assets/fonts/ColabBol-webfont.ttf') format('truetype'),
-         url('assets/fonts/ColabBol-webfont.svg#colaborate-boldregular') format('svg');
-    font-weight: bold;
-    font-style: normal;
 }
 
 .Placeholder {
