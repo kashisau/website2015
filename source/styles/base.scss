@@ -1,4 +1,9 @@
 $athens_gray: #FCFCFD;
+
+@custom-media --sm-viewport (min-width:320px) and (max-width:480px);
+@custom-media --md-viewport (min-width:480px) and (max-width:920px);
+@custom-media --lg-viewport (min-width:920px);
+
 body {
     background-color: $athens_gray;
     font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
@@ -41,7 +46,7 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (--sm-viewport) {
     .Placeholder {
         margin: 20px;
         padding: 0;
@@ -136,7 +141,7 @@ p a:hover {
 
 }
 
-@media (max-width: 480px) {
+@media (--sm-viewport) {
     h1 {
         font-size: 1.75em;
         margin-top: 1em;

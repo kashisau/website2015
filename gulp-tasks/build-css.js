@@ -55,10 +55,14 @@ module.exports = function(gulp, plugins, production) {
             .pipe(plugins.minifyCss)
             .pipe(plugins.rename, { suffix:'.min' });
 
+        var cssRework = lazypipe()
+            .pipe(plugins.rework, reworkCustomMedia());
+
         return gulp.src(['./source/styles/*.scss', './source/styles/*.sass'])
             .pipe(plugins.sourcemaps.init())
             .pipe(cssCompileSass())
             .pipe(cssAutoprefix())
+            .pipe(cssRework())
             // Development
             .pipe(plugins.if(development, plugins.sourcemaps.write(
                './',
