@@ -12,6 +12,7 @@
     "gulp-uglify": "*",
     "gulp-rename": "*",
     "gulp-if": "*",
+    "lazypipe": "*",
     "run-sequence": "*",
     "yargs": "*"
   }

@@ -20,7 +20,8 @@ var requireDir = require('require-dir'),
     debug = require('gulp-debug'),
     args = require('yargs').argv,
     gulpif = require('gulp-if'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    lazypipe = require('lazypipe');
 
 var production = !!(args.production),
     development = !production,
@@ -39,9 +40,9 @@ gulp.task('build', function(callback) {
         "Running development build on", APP_NAME, "...");
 
     if (production || rebuild)
-        return runSequence('build:clean', 'build:js-concat', callback);
+        return runSequence('build:clean', 'build:js', callback);
 
-    return runSequence('build:js-concat', callback);
+    return runSequence('build:js', callback);
 });
 
 /**
@@ -65,6 +66,10 @@ gulp.task('build:clean', function() {
     );
 });
 
+/*
+ * JavaScript
+ */
+
 /**
  * Concatenates and (optionally) minifies the JavaScript contained in the
  * source directory into a single file. This method uses the --production
@@ -75,35 +80,53 @@ gulp.task('build:clean', function() {
  * sources folder in a development build; or the public repository for the
  * production build of the site.
  */
-gulp.task('build:js-concat', function() {
+gulp.task('build:js', function() {
     return gulp.src('./source/scripts/*.js')
         .pipe(sourcemaps.init())
         .pipe(concat('script-all.js'))
 
-        // Production only
-        .pipe(gulpif(production, uglify()))
-        // Production only
-        .pipe(gulpif(production, rename({ suffix: '.min' })))
+        // Development
+        .pipe(gulpif(development, jsConcatAndWrite()))
+        // Production
+        .pipe(gulpif(production, jsMinifyAndWrite()))
+});
 
-        // Development sourcemapping
-        .pipe(gulpif(development, sourcemaps.write('./',
+/* Lazy pipes for JavaScript */
+/**
+ * This lazypipe function concatenates all of the JavaScript source files into
+ * a single file (without minification) and produces a corresponding sourcemap
+ * that references the project directory.
+ *
+ * This is typically used for development builds of the client-side JavaScript.
+ */
+var jsConcatAndWrite = lazypipe()
+        .pipe(concat, 'script-all.js')
+        .pipe(sourcemaps.write, './',
             {
                 includeContent: false,
                 sourceRoot: '../source/scripts/'
             }
-        )))
+        )
+        .pipe(gulp.dest, './build/');
 
-        // Production sourcemapping
-        .pipe(gulpif(production, sourcemaps.write('./',
+/**
+ * This lazypipe function concatenates and minifies all of the JavaScript
+ * source files into a single minified file, complete with sourcemaps.
+ * The sourcemaps point to the public repository so that they can be accessed
+ * without the development files present (i.e., when investigating the
+ * JavaScript over the WWW).
+ */
+var jsMinifyAndWrite = lazypipe()
+        .pipe(uglify)
+        .pipe(rename, { suffix:'.min' })
+        .pipe(sourcemaps.write, './',
             {
                 includeContent: false,
-                sourceRoot: REPO_SRC_URL,
+                sourceRoot: REPO_SRC_URL
             }
-        )))
+        )
+        .pipe(gulp.dest, './production/');
 
-        // Development write
-        .pipe(gulpif(development, gulp.dest('./build/')))
-
-        // Production write
-        .pipe(gulpif(production, gulp.dest('./production/')));
-});
+/*
+ * END JavaScript
+ */
