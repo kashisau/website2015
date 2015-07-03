@@ -11,6 +11,8 @@
     "gulp-debug": "*",
     "gulp-uglify": "*",
     "gulp-rename": "*",
-    "run-sequence": "*"
+    "gulp-if": "*",
+    "run-sequence": "*",
+    "yargs": "*"
   }
 }
