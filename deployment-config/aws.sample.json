@@ -1,0 +1,10 @@
+{
+  "accessKey" : "<your AWS access key>",
+  "secret" : "<The secret that corresponds to the access key>",
+  "s3" : {
+    "bucket": "https://<yourbucketname>.aws.com/"
+  },
+  "cloudFront" : {
+    "endpoint": "https://<yourdomain>"
+  }
+}

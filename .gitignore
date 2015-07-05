@@ -4,3 +4,5 @@ build/
 node_modules/
 .sass-cache/
 .idea/
+deployment-config/*.json
+!deployment-config/*.sample.json
