@@ -25,6 +25,10 @@
     "gulp-webserver": "*",
     "gulp-watch": "*",
     "gulp-plumber": "*",
+    "gulp-rev": "*",
+    "gulp-rev-replace": "*",
+    "gulp-rev-napkin": "*",
+    "rev-del": "*",
     "lazypipe": "*",
     "run-sequence": "*",
     "yargs": "*"
