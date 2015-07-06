@@ -3,24 +3,36 @@
 @import '_common/fonts';
 @import '_common/animations';
 
+html {
+    height: 100%;
+}
 body {
     background-color: $athens_gray;
+    background:
+        linear-gradient(to bottom, #eaeaef 0%, $athens_gray 33%, $athens_gray 100%) repeat-x,
+        $athens_gray repeat; /* W3C */
     font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
     color: #343434;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
-
+.Main {
+    height: 100%;
+}
 .Placeholder {
     min-width: 200px;
     max-width: 560px;
-    margin: 140px auto 0 auto;
+    margin: 0 auto 0 auto;
     opacity: 0;
+
+
+    position: relative;
+    top: 30%;
+    transform: translateY(-30%);
     
     padding: 20px;
     
-    transition:
-        margin 600ms 200ms ease-in-out,
-        padding 200ms 0 ease-in-out;
-
     animation-name: AnimateIn;
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
@@ -32,15 +44,12 @@ body {
         animation: none;
         opacity: 1;
     }
-}
 
-@media (--sm-viewport) {
-    .Placeholder {
-        margin: 20px;
-        padding: 0;
-        transition: margin 200ms 200ms ease-in-out;
-        animation: none;
-        opacity: 1;
+    @media (max-height: 450px) {
+        & {
+            top: auto;
+            transform: none;
+        }
     }
 }
 
@@ -80,7 +89,7 @@ h1, h2 {
     }
 }
 
-hgroup h2 {
+header h2 {
     font-size: 1.2em;
     margin-bottom: 1em;
     
@@ -95,7 +104,7 @@ hgroup h2 {
     font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
 }
 
-hgroup h2::before {
+header h2::before {
     display: none;
 }
 
@@ -125,20 +134,40 @@ p a:visited:hover {
 
 p a:hover {
     border-bottom: 1px solid rgba(0,  89,  191,  1);    
-    transition: border 0.2s ease;
+    transition: border 0.3s ease;
 
 }
 
 @media (--sm-viewport) {
+    .Main,
+    html,
+    body {
+        height: auto;
+    }
+    .Placeholder {
+        top: auto;
+        transform: none;
+        margin: 20px;
+        padding: 0;
+        animation: none;
+        opacity: 1;
+    }
+
     h1 {
-        font-size: 1.75em;
-        margin-top: 1em;
+        font-size: 2.8em;
+        margin-top: 0.25em;
+        margin-bottom: 0;
+        width: 80%;
     }
     h2 {
         font-size: 1.25em;
+        line-height: 1.25em;
     }
-    hgroup h2 {
-        font-size: 1.0em;
+
+    header h2 {
+        font-size: 1.25em;
+        line-height: 150%;
+        margin: 0.5em 0 0.5em 0;
     }
 
     

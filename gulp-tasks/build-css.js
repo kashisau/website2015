@@ -68,6 +68,7 @@ module.exports = function(gulp, plugins, production) {
 
         return gulp.src(['./source/styles/*.scss', './source/styles/*.sass', '!./_**'])
             .pipe(plugins.sourcemaps.init())
+            .pipe(plugins.plumber())
             .pipe(cssCompileSass())
             .pipe(cssConcat())
             .pipe(cssAutoprefix())
@@ -91,6 +92,7 @@ module.exports = function(gulp, plugins, production) {
                     sourceRoot: REPO_SRC_URL
                 }
             )))
-            .pipe(plugins.if(production, gulp.dest('./production/')));
+            .pipe(plugins.if(production, gulp.dest('./production/')))
+            .pipe(plugins.plumber.stop());
     };
 };
