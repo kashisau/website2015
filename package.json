@@ -12,6 +12,7 @@
     "gulp-debug": "*",
     "gulp-uglify": "*",
     "gulp-rename": "*",
+    "gulp-replace": "*",
     "gulp-if": "*",
     "gulp-wait": "*",
     "gulp-sass": "*",

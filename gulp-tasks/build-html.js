@@ -40,9 +40,13 @@ module.exports = function(gulp, plugins, production) {
         var minifyHtml = lazypipe()
             .pipe(plugins.minifyHtml);
 
+        var rewriteAssetUrls = lazypipe()
+            .pipe(plugins.replace, '"assets/', '"../source/assets/');
+
         return gulp.src(['./source/**/*.jade', '!./source/_**/*'])
             .pipe(htmlJadeCompile())
             // Development
+            .pipe(plugins.if(development, rewriteAssetUrls()))
             .pipe(plugins.if(development, htmlPrettify()))
             .pipe(plugins.if(development, gulp.dest('./build/')))
             // Production

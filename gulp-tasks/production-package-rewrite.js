@@ -28,6 +28,7 @@ module.exports = function(gulp, plugins, production) {
                 ]
             )
             .pipe(plugins.revReplace({manifest: gulp.src('./build/rev-manifest.json')}))
+            .pipe(plugins.revReplace({manifest: gulp.src('./build/rev-asset-manifest.json')}))
             .pipe(gulp.dest('./production'));
     };
 };
