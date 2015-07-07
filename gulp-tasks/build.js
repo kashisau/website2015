@@ -37,9 +37,21 @@ gulp.task('build', function(callback) {
         "Running development build on", APP_NAME, "...");
 
     if (production || rebuild)
-        return runSequence('build:clean', ['build:ext:css', 'build:ext:js', 'build:ext:html'], 'production:ext:packageAssets', 'production:ext:packageRewrite',  callback);
+        return runSequence(
+            'build:clean',
+            [
+                'build:ext:css',
+                'build:ext:js',
+                'build:ext:html'
+            ],
+            'production:ext:packageAssets',
+            'production:ext:packageRewrite',
+            'production:ext:packageRemoveUnrevisioned',
+            callback
+        );
 
-    return runSequence(['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
+    return runSequence(
+        ['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
 });
 
 /**
@@ -122,3 +134,4 @@ gulp.task('build:ext:css', require('./build-css.js')(gulp, plugins, production))
 gulp.task('build:ext:html', require('./build-html.js')(gulp, plugins, production));
 gulp.task('production:ext:packageAssets', require('./production-package-assets.js')(gulp, plugins, production));
 gulp.task('production:ext:packageRewrite', require('./production-package-rewrite.js')(gulp, plugins, production));
+gulp.task('production:ext:packageRemoveUnrevisioned', require('./production-package-rm-unrev.js')(gulp, plugins, production));

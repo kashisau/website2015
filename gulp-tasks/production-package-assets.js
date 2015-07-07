@@ -21,16 +21,16 @@ module.exports = function(gulp, plugins, production) {
             development = !production;
 
         return gulp.src(
-                [
-                    './production/**/*.map',
-                    './production/**/*.css',
-                    './production/**/*.js',
-                    './production/**/*.{png|jpg|gif|svg}'
-                ]
-            )
+            [
+                './production/**/*.css',
+                './production/**/*.js',
+                './production/**/*.{png|jpg|gif|svg}'
+            ]
+        )
+            .pipe(plugins.sourcemaps.init({loadMaps: true}))
             .pipe(plugins.rev())
+            .pipe(plugins.sourcemaps.write('./'))
             .pipe(gulp.dest('./production/'))
-            .pipe(plugins.revNapkin())
             .pipe(plugins.rev.manifest({path:'rev-manifest.json'}))
             .pipe(gulp.dest('./build/'));
     };
