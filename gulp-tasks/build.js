@@ -104,11 +104,11 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build:webserver', function() {
-    gulp.src('./build/')
+    gulp.src('./')
         .pipe(webserver({
             livereload: true,
             directoryListing: true,
-            open: "index.html",
+            open: "build/index.html",
             host: '0.0.0.0'
         }));
 });
