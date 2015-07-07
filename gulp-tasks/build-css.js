@@ -63,16 +63,35 @@ module.exports = function(gulp, plugins, production) {
             .pipe(plugins.minifyCss)
             .pipe(plugins.rename, { suffix:'.min' });
 
+        /**
+         * Performs CSS post-processing for Rework (library)
+         */
         var cssRework = lazypipe()
             .pipe(plugins.rework, reworkCustomMedia());
 
+        /**
+         * Re-writes URLs for assets so that they're accessible from the build
+         * directory.
+         */
+        var rewriteAssetUrls = lazypipe()
+            .pipe(plugins.replace, '../assets/', '../source/assets/');
+
+        /**
+         * Re-writes URLs for assets so that they're accessible from the build
+         * directory.
+         */
+        var rewriteAssetUrlsProduction = lazypipe()
+            .pipe(plugins.replace, '../assets/', 'assets/');
+
         return gulp.src(['./source/styles/*.scss', './source/styles/*.sass', '!./_**'])
             .pipe(plugins.sourcemaps.init())
+            .pipe(plugins.plumber())
             .pipe(cssCompileSass())
             .pipe(cssConcat())
             .pipe(cssAutoprefix())
             .pipe(cssRework())
             // Development
+            .pipe(plugins.if(development, rewriteAssetUrls()))
             .pipe(plugins.if(development, plugins.sourcemaps.write(
                './',
                {
@@ -83,6 +102,7 @@ module.exports = function(gulp, plugins, production) {
             .pipe(plugins.if(development, gulp.dest('./build/')))
             // Production
             .pipe(plugins.if(production, cssMinify()))
+            .pipe(plugins.if(production, rewriteAssetUrlsProduction()))
             // Development
             .pipe(plugins.if(production, plugins.sourcemaps.write(
                 './',
@@ -91,6 +111,7 @@ module.exports = function(gulp, plugins, production) {
                     sourceRoot: REPO_SRC_URL
                 }
             )))
-            .pipe(plugins.if(production, gulp.dest('./production/')));
+            .pipe(plugins.if(production, gulp.dest('./production/')))
+            .pipe(plugins.plumber.stop());
     };
 };

@@ -16,7 +16,9 @@ var requireDir = require('require-dir'),
     clean = require('gulp-clean'),
     plugins = require('gulp-load-plugins')({lazy:false}),
     args = require('yargs').argv,
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    webserver = require('gulp-webserver'),
+    watch = require('gulp-watch');
 
 var production = !!(args.production),
     development = !production,
@@ -35,9 +37,22 @@ gulp.task('build', function(callback) {
         "Running development build on", APP_NAME, "...");
 
     if (production || rebuild)
-        return runSequence('build:clean', ['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
+        return runSequence(
+            'build:clean',
+            [
+                'build:ext:css',
+                'build:ext:js',
+                'build:ext:html'
+            ],
+            'production:ext:packageAssets',
+            'production:ext:packageCopyAssets',
+            'production:ext:packageRewrite',
+            'production:ext:packageRemoveUnrevisioned',
+            callback
+        );
 
-    return runSequence(['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
+    return runSequence(
+        ['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
 });
 
 /**
@@ -63,6 +78,7 @@ gulp.task('build:clean', function() {
             './production/**/*.css',
             './production/**/*.map',
             './production/**/*.html',
+            './production/assets/',
             './.sass-cache'
         ], {read: false})
         .pipe(clean())
@@ -72,6 +88,53 @@ gulp.task('build:clean', function() {
     );
 });
 
+gulp.task('watch', function() {
+    gutil.log(gutil.colors.white.bgYellow('DEVELOPMENT'), "Watching development build " +
+        "for changes");
+
+    return runSequence(
+        ['build:ext:css', 'build:ext:js', 'build:ext:html'],
+        [
+            'build:webserver',
+            'build:rebuildCSSOnDemand',
+            'build:rebuildJSOnDemand',
+            'build:rebuildHTMLOnDemand'
+        ]
+    );
+});
+
+gulp.task('build:webserver', function() {
+    gulp.src('./')
+        .pipe(webserver({
+            livereload: true,
+            directoryListing: true,
+            open: "build/index.html",
+            host: '0.0.0.0'
+        }));
+});
+
+gulp.task('build:rebuildCSSOnDemand', function() {
+    watch(['./source/styles/**/*.scss'], function() {
+        return runSequence('build:ext:css');
+    });
+});
+
+gulp.task('build:rebuildJSOnDemand', function() {
+    watch(['./source/scripts/**/*.js'], function() {
+        return runSequence('build:ext:js');
+    });
+});
+
+gulp.task('build:rebuildHTMLOnDemand', function() {
+    watch(['./source/**/*.jade'], function() {
+        return runSequence('build:ext:html');
+    });
+});
+
 gulp.task('build:ext:js', require('./build-js.js')(gulp, plugins, production));
 gulp.task('build:ext:css', require('./build-css.js')(gulp, plugins, production));
 gulp.task('build:ext:html', require('./build-html.js')(gulp, plugins, production));
+gulp.task('production:ext:packageAssets', require('./production-package-assets.js')(gulp, plugins, production));
+gulp.task('production:ext:packageRewrite', require('./production-package-rewrite.js')(gulp, plugins, production));
+gulp.task('production:ext:packageRemoveUnrevisioned', require('./production-package-rm-unrev.js')(gulp, plugins, production));
+gulp.task('production:ext:packageCopyAssets', require('./production-package-copy-assets.js')(gulp, plugins, production));
