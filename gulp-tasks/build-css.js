@@ -90,6 +90,10 @@ module.exports = function(gulp, plugins, production) {
             .pipe(cssConcat())
             .pipe(cssAutoprefix())
             .pipe(cssRework())
+            .on('error', function(error) {
+                gutil.log(gutil.colors.bgRed.white('ERROR'), error);
+                this.emit('end');
+            })
             // Development
             .pipe(plugins.if(development, rewriteAssetUrls()))
             .pipe(plugins.if(development, plugins.sourcemaps.write(

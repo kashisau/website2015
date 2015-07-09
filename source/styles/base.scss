@@ -3,6 +3,9 @@
 @import '_common/fonts';
 @import '_common/animations';
 
+@media screen {
+    @-ms-viewport { width: device-width; }
+}
 html {
     height: 100%;
 }
@@ -64,29 +67,35 @@ h1, h2 {
     position: relative;
     left: -1.25em;
 
+    &::before {
+        width: 1.25em;
+        display: inline-block;
+        vertical-align: middle;
+
+        content: '// ';
+        text-indent: 0;
+        color: rgba(192,192,192, 0.25);
+
+        transition: color 0.2s ease;
+    }
+
     &:hover::before {
         color: rgba(192,192,192, 1.0);
     }
 }
 
 h1 {
-    font-size: 3em;
-    width: 50%;
-    margin: 0 0 0 0.25em;
+    font-size: 2.4em;
+    margin: 0;
+    text-indent: -1.25em;
     left: auto;
     display: inline-block;
-    line-height: 110%;
+    line-height: 150%;
 }
 
-h2::before {
-        width: 1.25em;
-        display: inline-block;
-        vertical-align: middle;
+h2::before,
+h1::before {
 
-        content: '// ';
-        color: rgba(192,192,192, 0.25);
-
-        transition: color 0.2s ease;
     }
 
 header {
@@ -108,18 +117,6 @@ header {
         &::before {
             display: none;
         }
-    }
-    
-    .ProfilePhoto {
-        border-radius: 100%;
-        
-        position: relative;
-        display: inline-block;
-           
-        height: 6em;
-        vertical-align: top;
-        
-        border: 0.3em solid rgba(30,30,30,0.25);
     }
 }
 
@@ -152,43 +149,5 @@ p a {
 }
 
 @media (--sm-viewport) {
-    .Main,
-    html,
-    body {
-        height: auto;
-    }
-    
-    .Placeholder {
-        top: auto;
-        transform: none;
-        margin: 20px;
-        padding: 0;
-        animation: none;
-        opacity: 1;
-    }
-
-    h1 {
-        font-size: 2.8em;
-        margin-top: 0.25em;
-        margin-bottom: 0;
-        width: 80%;
-    }
-    h2 {
-        font-size: 1.25em;
-        line-height: 1.25em;
-    }
-
-    header h2 {
-        font-size: 1.25em;
-        line-height: 150%;
-        margin: 0.5em 0 0.5em 0;
-    }
-
-    
-    h1, h2 { 
-        left: 0;
-        &::before {
-            display: none;
-        }
-    }
+    @import '_common/sm_viewport';
 }

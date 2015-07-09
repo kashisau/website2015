@@ -1,0 +1,43 @@
+.Main,
+html,
+body {
+  height: auto;
+}
+
+.Placeholder {
+  top: auto;
+  transform: none;
+  margin: 20px;
+  padding: 0;
+  animation: none;
+  opacity: 1;
+}
+
+h1 {
+  font-size: 15vw;
+  margin-top: 0.25em;
+  margin-bottom: 0;
+  text-indent: 0;
+  line-height: 110%;
+}
+h2 {
+  font-size: 1.75em;
+  line-height: 110%;
+}
+
+p {
+  font-size: 1.15em;
+}
+
+header h2 {
+  font-size: 1.5em;
+  line-height: 150%;
+  margin: 0.5em 0 0.5em 0;
+}
+
+h1, h2 {
+  left: 0;
+  &::before {
+    display: none;
+  }
+}
