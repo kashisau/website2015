@@ -29,6 +29,8 @@
     "gulp-rev": "*",
     "gulp-rev-replace": "*",
     "gulp-rev-napkin": "*",
+    "gulp-awspublish": "*",
+    "gulp-cloudfront": "*",
     "rev-del": "*",
     "lazypipe": "*",
     "run-sequence": "*",

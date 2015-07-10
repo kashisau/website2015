@@ -1,24 +1,28 @@
 /**
  * Production Deploy Gulp task
  *
- * Deploys the web application to the production server (s).
+ * Deploys the web application to the production server (which in our case is
+ * Amazon Web Services). This task will copy files across to the S3 bucket,
+ * and then invalidate the caches on the CloudFront instance for the files that
+ * have been effected.
  */
+module.exports = function(gulp, plugins, production) {
+    return function () {
+        var lazypipe = require('lazypipe');
+        var development = !production;
+        var awsConfig = require('../deployment-config/aws.json');
 
-'use strict';
-var APP_NAME = "Kashi's website";
+        /* Lazy pipes for JavaScript */
+        var publisher = plugins.awspublish.create(awsConfig);
+        var headers = {'Cache-Control': 'max-age=315360000, no-transform, public'};
 
-var requireDir = require('require-dir'),
-    gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    clean = require('gulp-clean');
-
-
-/**
- * Gulp task dev:build
- *
- * This performs a full-build (or rebuild) of the website, clearing out any
- * published assets.
- */
-gulp.task('prod:deploy', function() {
-    return gutil.log('Performing full (re-)build of', APP_NAME, '...');
-});
+        console.log(awsConfig);
+        return gulp.src('./production/**')
+            .pipe(plugins.awspublish.gzip())
+            .pipe(publisher.sync())
+            .pipe(publisher.publish(headers))
+            .pipe(publisher.cache())
+            .pipe(plugins.awspublish.reporter())
+            .pipe(plugins.cloudfront(awsConfig))
+    };
+};

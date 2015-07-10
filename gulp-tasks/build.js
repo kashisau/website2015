@@ -138,3 +138,4 @@ gulp.task('production:ext:packageAssets', require('./production-package-assets.j
 gulp.task('production:ext:packageRewrite', require('./production-package-rewrite.js')(gulp, plugins, production));
 gulp.task('production:ext:packageRemoveUnrevisioned', require('./production-package-rm-unrev.js')(gulp, plugins, production));
 gulp.task('production:ext:packageCopyAssets', require('./production-package-copy-assets.js')(gulp, plugins, production));
+gulp.task('production:ext:deploy', require('./production-deploy.js')(gulp, plugins, production));

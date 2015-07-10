@@ -1,10 +1,12 @@
 {
-  "accessKey" : "<your AWS access key>",
-  "secret" : "<The secret that corresponds to the access key>",
-  "s3" : {
-    "bucket": "https://<yourbucketname>.aws.com/"
+  "params": {
+    "Bucket": "bucket-name"
   },
-  "cloudFront" : {
-    "endpoint": "https://<yourdomain>"
-  }
+  "accessKeyId": "<key>",
+  "secretAccessKey": "<secret>",
+  "key": "<key>",
+  "secret": "<secret>",
+  "Bucket": "bucket-name",
+  "region": "ap-southeast-2",
+  "distributionId": "<CloudFront distribution id>"
 }
