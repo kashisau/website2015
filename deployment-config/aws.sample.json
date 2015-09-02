@@ -1,0 +1,12 @@
+{
+  "params": {
+    "Bucket": "bucket-name"
+  },
+  "accessKeyId": "<key>",
+  "secretAccessKey": "<secret>",
+  "key": "<key>",
+  "secret": "<secret>",
+  "Bucket": "bucket-name",
+  "region": "ap-southeast-2",
+  "distributionId": "<CloudFront distribution id>"
+}
