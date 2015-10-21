@@ -109,7 +109,7 @@ gulp.task('build:webserver', function() {
             livereload: true,
             directoryListing: true,
             open: "build/index.html",
-            host: '0.0.0.0'
+            host: "localhost"
         }));
 });
 
