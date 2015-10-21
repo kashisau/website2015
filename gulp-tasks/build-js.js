@@ -22,7 +22,7 @@ module.exports = function(gulp, plugins, production) {
     return function () {
         var lazypipe = require('lazypipe');
         var development = !production;
-        var REPO_SRC_URL = 'https://bitbucket.org/KashmaNiaC/website2015-placeholder/raw/master/source/scripts/';
+        var REPO_SRC_URL = 'https://bitbucket.org/KashiS/website2015-placeholder/raw/master/source/scripts/';
 
         /* Lazy pipes for JavaScript */
         /**
