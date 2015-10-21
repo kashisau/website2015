@@ -16,7 +16,6 @@ module.exports = function(gulp, plugins, production) {
         var publisher = plugins.awspublish.create(awsConfig);
         var headers = {'Cache-Control': 'max-age=315360000, no-transform, public'};
 
-        console.log(awsConfig);
         return gulp.src('./production/**')
             .pipe(plugins.awspublish.gzip())
             .pipe(publisher.sync())
