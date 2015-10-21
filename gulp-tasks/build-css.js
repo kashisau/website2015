@@ -25,7 +25,7 @@ module.exports = function(gulp, plugins, production) {
             reworkCustomMedia = require('rework-custom-media');
 
         var development = !production;
-        var REPO_SRC_URL = 'https://bitbucket.org/KashmaNiaC/website2015-placeholder/raw/master/source/styles/';
+        var REPO_SRC_URL = 'https://bitbucket.org/KashiS/website2015-placeholder/raw/master/source/styles/';
 
         /* Lazy pipes for CSS */
         /**

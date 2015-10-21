@@ -8,7 +8,7 @@
  */
 'use strict';
 var APP_NAME = "Kashi's website",
-    REPO_SRC_URL = 'https://bitbucket.org/KashmaNiaC/website2015-placeholder/raw/master/source/scripts/';
+    REPO_SRC_URL = 'https://bitbucket.org/KashiS/website2015-placeholder/raw/master/source/scripts/';
 
 var requireDir = require('require-dir'),
     gulp = require('gulp'),
