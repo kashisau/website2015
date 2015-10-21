@@ -6,4 +6,5 @@ node_modules/
 .idea/
 deployment-config/*.json
 !deployment-config/*.sample.json
-./awspublish*
+.awspublish*
+.vscode/
