@@ -2,6 +2,7 @@
 @import '_common/viewports';
 @import '_common/fonts';
 @import '_common/animations';
+@import '_common/icons';
 
 @media screen {
     @-ms-viewport { width: device-width; }
@@ -20,6 +21,7 @@ body {
     padding: 0;
     margin: 0;
 }
+@import '_common/_main_menu';
 .Main {
     height: 100%;
 }
@@ -61,7 +63,6 @@ h1, h2 {
     color: #232323;
     font-weight: bold;
     
-    font-size-adjust: 0.7;
     letter-spacing: -0.07em;
     
     position: relative;

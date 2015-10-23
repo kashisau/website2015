@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<defs>
+<font id="icons" horiz-adv-x="1000" >
+<font-face font-family="icons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="search" unicode="&#xe800;" d="m643 386q0 103-74 176t-176 74-177-74-73-176 73-177 177-73 176 73 74 177z m286-465q0-29-22-50t-50-21q-30 0-50 21l-191 191q-100-69-223-69-80 0-153 31t-125 84-84 125-31 153 31 152 84 126 125 84 153 31 152-31 126-84 84-126 31-152q0-123-69-223l191-191q21-21 21-51z" horiz-adv-x="928.6" />
+<glyph glyph-name="home" unicode="&#xe801;" d="m0-150l0 649 453 351 453-351 0-649-312 0 0 391-281 0 0-391-313 0z" horiz-adv-x="906" />
+<glyph glyph-name="user" unicode="&#xe802;" d="m0-150l0 156q0 24 58 58t159 71q99 35 137 73t37 101q0 29-27 72t-32 59q-12 35-29 135-10 52-14 93-2 22 6 50t28 60 67 51 110 21 110-21 67-51 28-60 6-50q-4-41-14-93-17-100-29-135-6-16-32-59t-27-72q0-64 37-101t137-73q217-80 217-129l0-156-1000 0z" horiz-adv-x="1000" />
+<glyph glyph-name="folder-close" unicode="&#xe803;" d="m0-52l0 560 1000 0 0-560-1000 0z m0 594l0 121 139 0 68 90 217 0 68-90 508 0 0-121-1000 0z" horiz-adv-x="1000" />
+<glyph glyph-name="address-book" unicode="&#xe804;" d="m0-150l0 1000 1000 0 0-178-109 0 0-95 109 0 0-178-109 0 0-98 109 0 0-178-109 0 0-95 109 0 0-178-1000 0z m193 285l504 0 0 155-187 111q37 19 58 54t22 77q0 58-42 101t-103 43-102-43-42-101q0-43 22-77t58-54l-188-111 0-155z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

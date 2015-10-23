@@ -1,0 +1,152 @@
+$menu_open_time: 200ms;
+$menu_close_time: 400ms;
+
+.MainMenu {
+	height: 100vh;
+	width: 58.33vw;
+	background-color: rgba($dark_gray, 1);
+
+	left: 100%;
+	top: 0;
+	
+	position: fixed;
+	z-index: 9998;
+	
+	padding: 0;
+	
+	
+	transition:
+		left $menu_close_time ease-in,
+		background-color $menu_close_time ease-in,
+		width $menu_close_time ease-in,
+		padding $menu_close_time ease-in;
+	
+	&-icon {
+		width: 16.66vw;
+		height: 16.66vw;
+		display: block;
+		overflow: hidden;
+		
+		position: absolute;
+		right: 0;
+		top: 16.66vw;
+		background-color: $dark_gray;
+		
+		z-index: 9999;
+		
+		transition:
+			right $menu_close_time ease-in;
+		
+		> img {
+			height: 50%;
+			padding: 25% 16.72%;
+			
+			&:active {
+				background-color: $athens_gray;
+			}
+		}
+		
+		&.MainMenu-closeBtn {
+			left: auto;
+			right: 74.99vw;
+			
+			transition:
+				right $menu_open_time ease-in;
+		}
+	}
+	
+	&--open {
+		left: 24.999vw;
+		width: 58.33vw;
+		
+		background-color: $dark_gray;
+		padding: 0 8.33vw;
+		
+		overflow-y: scroll;
+		overflow-x: auto;
+		transition:
+			left $menu_open_time ease-in,
+			background-color $menu_open_time ease-in,
+			width $menu_open_time ease-in,
+			padding $menu_open_time ease-in;
+	}
+	
+	&-title {
+		color: rgba(255,255,255,0.6);
+		font-size: 8vw;
+		margin: 8.33vw 0 0 0;
+	}
+	
+	&-search {
+		//background-color: rgba(255,255,255,0.1);
+		display: block;
+		margin: 4.16vw 0;
+		height: 8.33vw;
+		
+		position: relative;
+		
+		border-bottom: 1px solid $dark_gray_accent;
+		
+		::placeholder {
+			font-color: rgba(255,255,255,0.2);
+		}
+		
+		label {
+			font-size: 0;
+			width: 46.98vw;
+			display: inline-block;
+			float: left;
+		}
+		
+		.MainMenu-searchText {
+			color: rgba(255,255,255,0.4);
+			font-size: 6vw;
+			
+			line-height: 8.33vw;
+			vertical-align: middle;
+			padding: 0;
+			margin: 0;
+			
+			width: 100%;
+			border: none;
+			background-color: rgba(255,255,255,0);
+		}
+		
+		.MainMenu-searchBtn {
+			width: 8.33vw;
+			height: 8.33vw;	
+			
+			font-family: "icons";
+			color: $dark_gray_accent;
+			
+			border: none;
+			background-color: rgba(255,255,255,0);
+		}
+	}
+	
+	&-menuLinks {
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		li {
+			list-style: none;
+			text-indent: 0;
+			padding: 0;
+			margin: 0;
+			
+			a {
+				color: #ffffff;
+				text-decoration: none;
+				font-family: 'colaborate';
+				text-transform: lowercase;
+				
+				font-size: 10vw;
+				letter-spacing: -0.1em;
+				display: block;
+				line-height: 2.33;
+			}
+		}
+	}
+}

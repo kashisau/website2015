@@ -52,7 +52,7 @@ gulp.task('build', function(callback) {
         );
 
     return runSequence(
-        ['build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
+        ['build:ext:assets', 'build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
 });
 
 /**
@@ -130,7 +130,7 @@ gulp.task('build:rebuildHTMLOnDemand', function() {
         return runSequence('build:ext:html');
     });
 });
-
+gulp.task('build:ext:assets', require('./build-assets.js')(gulp, plugins, production));
 gulp.task('build:ext:js', require('./build-js.js')(gulp, plugins, production));
 gulp.task('build:ext:css', require('./build-css.js')(gulp, plugins, production));
 gulp.task('build:ext:html', require('./build-html.js')(gulp, plugins, production));
