@@ -2,15 +2,22 @@ $menu_open_time: 200ms;
 $menu_close_time: 400ms;
 
 .MainMenu {
-	height: 10vh;
+	height: 45vh;
 	width: 100vw;;
 	position: fixed;
 	z-index: 9998;
-	bottom: 0;
+	bottom: -30vh;
 	left: 0;
 	
 	background-color: $dark_gray_accent2;
 	padding: 0;
+	
+	transition:
+		bottom $menu_open_time ease-in;
+	
+	.LogoName {
+		margin: 4vh 6vw;
+	}
 	
 	&-icon {
 		width: 16.66vw;
@@ -70,8 +77,7 @@ $menu_close_time: 400ms;
 	}
 	
 	&-search {
-		//background-color: rgba(255,255,255,0.1);
-		display: block;
+		display: none;
 		margin: 4.16vw 0;
 		height: 8.33vw;
 		
@@ -118,10 +124,11 @@ $menu_close_time: 400ms;
 	}
 	
 	&-menuLinks {
+		display: inline-block;
 		ul {
 			list-style: none;
 			padding: 0;
-			margin: 2.78vw 0;
+			
 		}
 		li {
 			list-style: none;
@@ -129,13 +136,15 @@ $menu_close_time: 400ms;
 			padding: 0;
 			margin: 0;
 			
+			display: inline-block;
+			
 			a {
+				font-size: 2em;
 				color: #ffffff;
 				text-decoration: none;
 				font-family: 'colaborate';
 				text-transform: lowercase;
-				
-				font-size: 10vw;
+
 				letter-spacing: -0.1em;
 				display: block;
 				line-height: 1.33;
@@ -144,11 +153,11 @@ $menu_close_time: 400ms;
 	}
 	
 	.ProfileLinks {
-		border-top: 1px solid $dark_gray;
+		display: inline-block;
 		
 		> ul {
 			list-style: none;
-			margin: 5.55vw auto;
+			margin: 0;
 			padding: 0;
 			
 			li {
@@ -162,18 +171,22 @@ $menu_close_time: 400ms;
 					display: block;
 					
 					padding: 0;
-					margin: 1.08vw;
+					margin: 0.2rem;
 					
 					text-align: center;
 					text-decoration: none;
 					
 					&::before {
-						font-size: 8vw;
+						font-size: 2rem;
 						margin: 0;
 						padding: 0;
 					}
 				}
 			}
+		}
+		
+		&-source {
+			display: none;
 		}
 	}
 	
@@ -182,7 +195,9 @@ $menu_close_time: 400ms;
 		width: 58.33vw;
 		left: 100%;
 		top: 0;
-		
+		&:hover {
+			height: inherit;
+		}
 		transition:
 			left $menu_close_time ease-in,
 			background-color $menu_close_time ease-in,
@@ -192,6 +207,10 @@ $menu_close_time: 400ms;
 		.LogoName {
 			font-size: 12vw;
 			margin-top: 16.66vw;
+			margin: 16.66vw 0 0 0;
+			&-logo {
+				display: none;
+			}
 		}
 		
 		&-icon {
@@ -214,8 +233,12 @@ $menu_close_time: 400ms;
 		}
 		
 		&-menuLinks {
+			ul {
+				margin: 2.78vw 0;
+			}
 			li {
 				a {
+					font-size: 10vw;
 					line-height: 1.25;
 					padding: 0.2em 0;
 					
@@ -223,6 +246,26 @@ $menu_close_time: 400ms;
 						background-color: $dark_gray;
 					}
 				}
+			}
+		}
+		
+		.ProfileLinks {
+			border-top: 1px solid $dark_gray;
+			display: block;
+			> ul {
+				margin: 5.55vw auto;
+				
+				li {
+					a {
+						margin: 1.08vw;
+						&::before {
+							font-size: 8vw;
+						}
+					}
+				}
+			}
+			&-source {
+				display: none;
 			}
 		}
 	}

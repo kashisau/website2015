@@ -3,8 +3,10 @@ a(href="/menu").MainMenu-icon.MainMenu-openBtn
 div.MainMenu
   a(href="javascript:void(0);",title="Close the main menu").MainMenu-permanentCloseBtn.MainMenu-closeBtn.icon-cancel
   h1.LogoName
-    span.LogoName-first Kashi
-    span.LogoName-last Samaraweera
+    img(src="images/mainmenu-logo.png").LogoName-logo
+    div.LogoName-logotype
+      span.LogoName-first Kashi
+      span.LogoName-last Samaraweera
   form.MainMenu-search
     label Search
       input(type="input",maxlength="100",placeholder="search").MainMenu-searchText
@@ -32,5 +34,5 @@ div.MainMenu
       li.ProfileLinks-instagram
         a(href="https://instagram.com/kashisamaraweera",title="Photos by Kashi on Instagram").icon-instagram Instagram
     div.ProfileLinks-source
-      a(href="https://bitbucket.org/KashiS/website2015") View source
-      |  o Published 2015
+      | This is an open-source project, available on 
+      a(href="https://bitbucket.org/KashiS/website2015") BitBucket
