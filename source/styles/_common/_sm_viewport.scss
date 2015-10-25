@@ -12,7 +12,7 @@ body.--mainMenuOpen {
 }
 
 .Main {
-  padding: 8.33vw 8.33vw;
+  padding: 0 8.33vw;
   overflow-y: scroll;
   
   &--mainMenuOpen {
@@ -26,20 +26,7 @@ h1 {
   text-indent: 0;
   line-height: 1.1;
   letter-spacing: -0.1em;
-  
-  &.LogoName {
-    font-size: 14vw;
-    line-height: 0.8;
-
-    .LogoName-first {
-      display: block;
-    }
-    .LogoName-last {
-      display: block;
-      font-size: 0.85em;
-      letter-spacing: -0.1em;
-    }
-  }
+  margin: 0;
 }
 h2 {
   font-size: 4.8vw;

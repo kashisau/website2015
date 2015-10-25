@@ -73,6 +73,7 @@ com.kashis.fed.MainMenu = function() {
 
 		menu.addClass('MainMenu--open');
 		main.addClass('Main--mainMenuOpen');
+		main.on('click', MainMenuAPI.close);
 		
 		icon
 			.removeClass('MainMenu-openBtn')
@@ -89,6 +90,7 @@ com.kashis.fed.MainMenu = function() {
 
 		menu.removeClass('MainMenu--open');
 		main.removeClass('Main--mainMenuOpen');
+		main.off('click', MainMenuAPI.close);
 		
 		icon
 			.removeClass('MainMenu-closeBtn')

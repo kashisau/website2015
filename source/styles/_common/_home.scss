@@ -1,0 +1,41 @@
+.Intro {
+	background-color: $dark_gray;
+	color: rgba(255,255,255, 0.65);
+	position: relative;
+	padding: 6vw 6vw 4vw 6vw;
+	margin: 2vw 2vw 0 2vw;
+	min-height: calc(100vh - 12vw);
+  
+  p {
+		font-family: 'colaborate';
+		font-size: 3.0em;
+		line-height: 1.33;
+		letter-spacing: -0.05em;
+		
+		margin: 0 0 1em 0;
+				
+		strong {
+			font-style: normal;
+			font-weight: normal;
+			color: rgba(255,255,255,1);
+		}
+	}
+  
+  	@media(--sm-viewport) {
+		width: 83.34vw;
+		padding: 16.66vw 8.33vw 8.33vw 8.33vw;
+		position: relative;
+		left: -8.33vw;
+		min-height: calc(100vh - 24.99vw);
+		margin: 0;
+		
+		p {
+			font-size: 6vw;
+			line-height: 1.33;
+			letter-spacing: -0.05em;
+			margin: 0 0 1.75em 0;
+		}
+	}
+	
+	
+}

@@ -2,38 +2,28 @@ $menu_open_time: 200ms;
 $menu_close_time: 400ms;
 
 .MainMenu {
-	height: 100vh;
-	width: 58.33vw;
-	background-color: rgba($dark_gray, 1);
-
-	left: 100%;
-	top: 0;
-	
+	height: 10vh;
+	width: 100vw;;
 	position: fixed;
 	z-index: 9998;
+	bottom: 0;
+	left: 0;
 	
+	background-color: $dark_gray_accent2;
 	padding: 0;
-	
-	
-	transition:
-		left $menu_close_time ease-in,
-		background-color $menu_close_time ease-in,
-		width $menu_close_time ease-in,
-		padding $menu_close_time ease-in;
 	
 	&-icon {
 		width: 16.66vw;
 		height: 16.66vw;
 		display: block;
 		overflow: hidden;
-		
 		position: absolute;
 		right: 0;
 		top: 16.66vw;
-		background-color: $dark_gray;
-		
+		background-color: $dark_gray_accent2;
 		z-index: 9999;
 		
+		display: none;	
 		transition:
 			right $menu_close_time ease-in;
 		
@@ -55,20 +45,22 @@ $menu_close_time: 400ms;
 		}
 	}
 	
-	&--open {
-		left: 24.999vw;
-		width: 58.33vw;
+	.MainMenu-permanentCloseBtn {
+		position: absolute;
+		top: 4.17vw;
+		right: 4.17vw;
 		
-		background-color: $dark_gray;
-		padding: 0 8.33vw;
+		display: block;
+		width: 8.33vw;
+		height: 8.33vw;
 		
-		overflow-y: scroll;
-		overflow-x: auto;
-		transition:
-			left $menu_open_time ease-in,
-			background-color $menu_open_time ease-in,
-			width $menu_open_time ease-in,
-			padding $menu_open_time ease-in;
+		line-height: 8.33vw;
+		text-align: center;
+		
+		font-size: 1em;
+		
+		text-decoration: none;
+		color: $dark_gray_accent;
 	}
 	
 	&-title {
@@ -93,17 +85,18 @@ $menu_close_time: 400ms;
 		
 		label {
 			font-size: 0;
-			width: 46.98vw;
+			width: 45vw;
 			display: inline-block;
 			float: left;
 		}
 		
 		.MainMenu-searchText {
-			color: rgba(255,255,255,0.4);
-			font-size: 6vw;
+			color: rgba(255,255,255,0.6);
+			font-size: 5vw;
 			
 			line-height: 8.33vw;
 			vertical-align: middle;
+			letter-spacing: -0.05em;
 			padding: 0;
 			margin: 0;
 			
@@ -128,7 +121,7 @@ $menu_close_time: 400ms;
 		ul {
 			list-style: none;
 			padding: 0;
-			margin: 0;
+			margin: 2.78vw 0;
 		}
 		li {
 			list-style: none;
@@ -145,7 +138,91 @@ $menu_close_time: 400ms;
 				font-size: 10vw;
 				letter-spacing: -0.1em;
 				display: block;
-				line-height: 2.33;
+				line-height: 1.33;
+			}
+		}
+	}
+	
+	.ProfileLinks {
+		border-top: 1px solid $dark_gray;
+		
+		> ul {
+			list-style: none;
+			margin: 5.55vw auto;
+			padding: 0;
+			
+			li {
+				display: inline-block;
+				margin: 0;
+				padding: 0;
+				
+				a {
+					font-size: 0;
+					color: $dark_gray_accent;
+					display: block;
+					
+					padding: 0;
+					margin: 1.08vw;
+					
+					text-align: center;
+					text-decoration: none;
+					
+					&::before {
+						font-size: 8vw;
+						margin: 0;
+						padding: 0;
+					}
+				}
+			}
+		}
+	}
+	
+	@media (--sm-viewport) {
+		height: 100vh;
+		width: 58.33vw;
+		left: 100%;
+		top: 0;
+		
+		transition:
+			left $menu_close_time ease-in,
+			background-color $menu_close_time ease-in,
+			width $menu_close_time ease-in,
+			padding $menu_close_time ease-in;
+		
+		.LogoName {
+			font-size: 12vw;
+			margin-top: 16.66vw;
+		}
+		
+		&-icon {
+			display: block;
+		}
+		
+		&--open {
+			left: 24.999vw;
+			width: 58.33vw;
+			
+			padding: 0 8.33vw;
+			
+			overflow-y: scroll;
+			overflow-x: auto;
+			transition:
+				left $menu_open_time ease-in,
+				background-color $menu_open_time ease-in,
+				width $menu_open_time ease-in,
+				padding $menu_open_time ease-in;
+		}
+		
+		&-menuLinks {
+			li {
+				a {
+					line-height: 1.25;
+					padding: 0.2em 0;
+					
+					&::active {
+						background-color: $dark_gray;
+					}
+				}
 			}
 		}
 	}

@@ -1,7 +1,10 @@
 a(href="/menu").MainMenu-icon.MainMenu-openBtn
     img(src="images/mainmenu-logo.png")
 div.MainMenu
-  h2.MainMenu-title Main menu
+  a(href="javascript:void(0);",title="Close the main menu").MainMenu-permanentCloseBtn.MainMenu-closeBtn.icon-cancel
+  h1.LogoName
+    span.LogoName-first Kashi
+    span.LogoName-last Samaraweera
   form.MainMenu-search
     label Search
       input(type="input",maxlength="100",placeholder="search").MainMenu-searchText
@@ -16,3 +19,18 @@ div.MainMenu
         a(href="about") About
       li.MainMenu-contactLink
         a(href="contact") Contact
+   footer.ProfileLinks
+    ul.ProfileLinks-social
+      li.ProfileLinks-linkedin
+        a(href="https://au.linkedin.com/in/kashis",title="LinkedIn profile for Kashi Samaraweera").icon-linkedin LinkedIn
+      li.ProfileLinks-bitbucket
+        a(href="https://bitbucket.org/KashiS",title="BitBucket repositories owned by Kashi Samaraweera").icon-bitbucket BitBucket
+      li.ProfileLinks-slack
+        a(href="https://kashis.slack.com",title="Collaborate with Kashi on slack").icon-slack Slack
+      li.ProfileLinks-skype
+        a(href="skype:kashisau?chat",title="Skype chat with Kashi").icon-skype Skype
+      li.ProfileLinks-instagram
+        a(href="https://instagram.com/kashisamaraweera",title="Photos by Kashi on Instagram").icon-instagram Instagram
+    div.ProfileLinks-source
+      a(href="https://bitbucket.org/KashiS/website2015") View source
+      |  o Published 2015

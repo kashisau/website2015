@@ -1,11 +1,10 @@
-
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'icons';
-    src: url('../font/icons.svg?86066016#icons') format('svg');
+    src: url('../font/icons.svg?16795074#icons') format('svg');
   }
 }
 */
@@ -50,3 +49,13 @@
 .icon-user:before { content: '\e802'; } /* '' */
 .icon-folder-close:before { content: '\e803'; } /* '' */
 .icon-address-book:before { content: '\e804'; } /* '' */
+.icon-facebook:before { content: '\e805'; } /* '' */
+.icon-instagram:before { content: '\e806'; } /* '' */
+.icon-linkedin:before { content: '\e807'; } /* '' */
+.icon-slack:before { content: '\e808'; } /* '' */
+.icon-skype:before { content: '\e809'; } /* '' */
+.icon-bitbucket:before { content: '\e80a'; } /* '' */
+.icon-cancel:before { content: '\e80b'; } /* '' */
+.icon-lock:before { content: '\e80c'; } /* '' */
+.icon-lock-open:before { content: '\e80d'; } /* '' */
+.icon-cc:before { content: '\e80e'; } /* '' */
