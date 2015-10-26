@@ -2,21 +2,31 @@ $menu_open_time: 200ms;
 $menu_close_time: 400ms;
 
 .MainMenu {
-	height: 45vh;
-	width: 100vw;;
+	width: 100vw;
+	height: 15vh;
+
 	position: fixed;
 	z-index: 9998;
-	bottom: -30vh;
+	
 	left: 0;
+	bottom: 0;
 	
 	background-color: $dark_gray_accent2;
 	padding: 0;
 	
 	transition:
-		bottom $menu_open_time ease-in;
+		bottom $menu_open_time ease-in,
+		height $menu_open_time ease-in,
+		padding $menu_open_time ease-in;
+	
+	&:hover {
+		height: 16vh;
+		padding-top: 0.5vh;
+	}
 	
 	.LogoName {
 		margin: 4vh 6vw;
+		font-size: 2vw;
 	}
 	
 	&-icon {
@@ -125,21 +135,25 @@ $menu_close_time: 400ms;
 	
 	&-menuLinks {
 		display: inline-block;
+		padding: 0px;
+		vertical-align: top;
+		margin: 6vh 2vw 2vh 2vw;
+		
 		ul {
 			list-style: none;
 			padding: 0;
-			
+			margin: 0;
 		}
 		li {
 			list-style: none;
 			text-indent: 0;
 			padding: 0;
-			margin: 0;
+			margin: 0 1vw;;
 			
 			display: inline-block;
 			
 			a {
-				font-size: 2em;
+				font-size: 1.7vw;
 				color: #ffffff;
 				text-decoration: none;
 				font-family: 'colaborate';
@@ -154,16 +168,18 @@ $menu_close_time: 400ms;
 	
 	.ProfileLinks {
 		display: inline-block;
+		position: absolute;
+		right: 8vw;
 		
 		> ul {
 			list-style: none;
-			margin: 0;
+			margin: 4vh 2vw;
 			padding: 0;
 			
 			li {
 				display: inline-block;
 				margin: 0;
-				padding: 0;
+				padding: 1vh 0.25vw;
 				
 				a {
 					font-size: 0;
@@ -176,8 +192,13 @@ $menu_close_time: 400ms;
 					text-align: center;
 					text-decoration: none;
 					
+					&:hover {
+						color: #ffffff;
+						transition: color $menu_open_time ease-in;
+					}
+					
 					&::before {
-						font-size: 2rem;
+						font-size: 2vw;
 						margin: 0;
 						padding: 0;
 					}
@@ -187,6 +208,20 @@ $menu_close_time: 400ms;
 		
 		&-source {
 			display: none;
+			margin: 5.55vw 0 5.55vw 8.33vw;
+			
+			position: relative;
+			&::before {
+				position: absolute;
+				left: -8.33vw;
+				font-size: 7vw;
+				margin: 0.1vw;
+			}
+			
+			color: $dark_gray_accent;
+			a {
+				color: $dark_gray_highlight;	
+			}
 		}
 	}
 	
@@ -208,6 +243,8 @@ $menu_close_time: 400ms;
 			font-size: 12vw;
 			margin-top: 16.66vw;
 			margin: 16.66vw 0 0 0;
+			display: block;
+
 			&-logo {
 				display: none;
 			}
@@ -233,10 +270,13 @@ $menu_close_time: 400ms;
 		}
 		
 		&-menuLinks {
+			margin: 0;
+			
 			ul {
 				margin: 2.78vw 0;
 			}
 			li {
+				display: block;
 				a {
 					font-size: 10vw;
 					line-height: 1.25;
@@ -252,6 +292,7 @@ $menu_close_time: 400ms;
 		.ProfileLinks {
 			border-top: 1px solid $dark_gray;
 			display: block;
+			position: static;
 			> ul {
 				margin: 5.55vw auto;
 				
@@ -265,7 +306,8 @@ $menu_close_time: 400ms;
 				}
 			}
 			&-source {
-				display: none;
+				display: block;
+				font-size: 2.78vw;
 			}
 		}
 	}

@@ -2,7 +2,7 @@ a(href="/menu").MainMenu-icon.MainMenu-openBtn
     img(src="images/mainmenu-logo.png")
 div.MainMenu
   a(href="javascript:void(0);",title="Close the main menu").MainMenu-permanentCloseBtn.MainMenu-closeBtn.icon-cancel
-  h1.LogoName
+  a(href="/").LogoName
     img(src="images/mainmenu-logo.png").LogoName-logo
     div.LogoName-logotype
       span.LogoName-first Kashi
@@ -33,6 +33,7 @@ div.MainMenu
         a(href="skype:kashisau?chat",title="Skype chat with Kashi").icon-skype Skype
       li.ProfileLinks-instagram
         a(href="https://instagram.com/kashisamaraweera",title="Photos by Kashi on Instagram").icon-instagram Instagram
-    div.ProfileLinks-source
-      | This is an open-source project, available on 
-      a(href="https://bitbucket.org/KashiS/website2015") BitBucket
+    footer.ProfileLinks
+      div.ProfileLinks-source.icon-cc
+        | This is an open-source project, available on 
+        a(href="https://bitbucket.org/KashiS/website2015") BitBucket

@@ -14,9 +14,17 @@ body.--mainMenuOpen {
 .Main {
   padding: 0 8.33vw;
   overflow-y: scroll;
-  
+
+  transition:
+    all $menu_open_time ease-in $menu_close_time;
+
   &--mainMenuOpen {
+    transition:
+      all $menu_open_time ease-in $menu_open_time;
+
 	 overflow-y: hidden;
+   filter: blur(0.5vw);
+   transform: scale(0.95);
   }
 }
 

@@ -49,6 +49,11 @@ h1 {
 .LogoName {
     color: #ffffff;
     line-height: 0.8;
+    font-family: "colaborate",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    letter-spacing: -0.07em;
+    display: inline-block;
+    
     .LogoName-logo {
         height: 1.38em;
         display: inline-block;
@@ -65,6 +70,8 @@ h1 {
         font-size: 0.85em;
         letter-spacing: -0.1em;
     }
+    
+    text-decoration: none;
 }
 
 @import '_common/_main_menu';
