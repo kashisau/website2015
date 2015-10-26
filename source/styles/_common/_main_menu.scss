@@ -49,7 +49,7 @@ $menu_close_time: 400ms;
 			padding: 25% 16.72%;
 			
 			&:active {
-				background-color: $athens_gray;
+				background-color: $dark_gray_accent;
 			}
 		}
 		
@@ -63,11 +63,11 @@ $menu_close_time: 400ms;
 	}
 	
 	.MainMenu-permanentCloseBtn {
+		display: none;
 		position: absolute;
 		top: 4.17vw;
 		right: 4.17vw;
-		
-		display: block;
+
 		width: 8.33vw;
 		height: 8.33vw;
 		
@@ -75,6 +75,8 @@ $menu_close_time: 400ms;
 		text-align: center;
 		
 		font-size: 1em;
+		
+		border-radius: 100%;
 		
 		text-decoration: none;
 		color: $dark_gray_accent;
@@ -171,7 +173,7 @@ $menu_close_time: 400ms;
 		position: absolute;
 		right: 8vw;
 		
-		> ul {
+		&--social > ul {
 			list-style: none;
 			margin: 4vh 2vw;
 			padding: 0;
@@ -207,20 +209,26 @@ $menu_close_time: 400ms;
 		}
 		
 		&-source {
+			border-left: 1px dashed $dark_gray_accent;
+		}
+		
+		&--source {
 			display: none;
-			margin: 5.55vw 0 5.55vw 8.33vw;
-			
-			position: relative;
-			&::before {
-				position: absolute;
-				left: -8.33vw;
-				font-size: 7vw;
-				margin: 0.1vw;
-			}
-			
-			color: $dark_gray_accent;
-			a {
-				color: $dark_gray_highlight;	
+			div {
+				margin: 0 0 0 0.5vw;
+				&::before {
+					position: absolute;
+					left: -1vw;
+					margin: 0.2vh;
+				}
+				
+				color: $dark_gray_accent;
+				a {
+					color: $dark_gray_highlight;
+					&:hover {
+						color: #ffffff;
+					}	
+				}
 			}
 		}
 	}
@@ -230,14 +238,17 @@ $menu_close_time: 400ms;
 		width: 58.33vw;
 		left: 100%;
 		top: 0;
+		
+		padding: 0 8.33vw;
+		
 		&:hover {
 			height: inherit;
+			padding: 0 8.33vw;
 		}
 		transition:
 			left $menu_close_time ease-in,
 			background-color $menu_close_time ease-in,
-			width $menu_close_time ease-in,
-			padding $menu_close_time ease-in;
+			width $menu_close_time ease-in;
 		
 		.LogoName {
 			font-size: 12vw;
@@ -265,13 +276,21 @@ $menu_close_time: 400ms;
 			transition:
 				left $menu_open_time ease-in,
 				background-color $menu_open_time ease-in,
-				width $menu_open_time ease-in,
-				padding $menu_open_time ease-in;
+				width $menu_open_time ease-in;
+		}
+		
+		.MainMenu-permanentCloseBtn {
+			display: block;
+			&:active {
+				background-color: $dark_gray_accent;
+				color: #ffffff;
+			}
 		}
 		
 		&-menuLinks {
-			margin: 0;
-			
+			margin: 8.33vw 0 0 0;
+			border-top: 1px solid $dark_gray;
+			display: block;
 			ul {
 				margin: 2.78vw 0;
 			}
@@ -293,21 +312,50 @@ $menu_close_time: 400ms;
 			border-top: 1px solid $dark_gray;
 			display: block;
 			position: static;
-			> ul {
+			&--social > ul {
 				margin: 5.55vw auto;
 				
 				li {
+					padding: 0;
 					a {
-						margin: 1.08vw;
+						padding: 2.08vw;
+						border-radius: 100%;
 						&::before {
-							font-size: 8vw;
+							font-size: 6vw;
 						}
-					}
+						&:active {
+							color: #ffffff;
+							background-color: $dark_gray_accent;
+						}
+					}					
 				}
 			}
+			
 			&-source {
+				display: none !important;
+			}
+
+			
+			&--source div {
+				margin: 5.55vw 0 5.55vw 11.11vw;
+				position: relative;
+
 				display: block;
 				font-size: 2.78vw;
+
+				&::before {
+					left: -11.11vw;
+					font-size: 7vw;
+					margin: 0.1vw;
+				}
+				
+				a:active {
+					padding: 4vw;
+					margin: -4vw;
+					background-color: $dark_gray_accent;
+					text-decoration: none;
+					border-radius: 2vw;
+				}
 			}
 		}
 	}
