@@ -318,14 +318,18 @@ $menu_close_time: 400ms;
 				li {
 					padding: 0;
 					a {
-						padding: 2.08vw;
+						padding: 1.9vw;
 						border-radius: 100%;
+						margin: 0;
+
 						&::before {
 							font-size: 6vw;
 						}
 						&:active {
 							color: #ffffff;
 							background-color: $dark_gray_accent;
+							padding: 2.9vw;
+							margin: -1vw;
 						}
 					}					
 				}

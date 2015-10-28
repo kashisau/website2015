@@ -127,5 +127,8 @@ p a {
 }
 
 @media (--sm-viewport) {
+    a {
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+    }
     @import '_common/sm_viewport';
 }
