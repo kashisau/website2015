@@ -8,3 +8,4 @@ deployment-config/*.json
 !deployment-config/*.sample.json
 .awspublish*
 .vscode/
+source/assets/videos/
