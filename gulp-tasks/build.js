@@ -40,6 +40,7 @@ gulp.task('build', function(callback) {
         return runSequence(
             'build:clean',
             [
+                'build:ext:assets',
                 'build:ext:css',
                 'build:ext:js',
                 'build:ext:html'
