@@ -105,11 +105,10 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build:webserver', function() {
-    gulp.src('./')
+    gulp.src('./build/')
         .pipe(webserver({
             livereload: true,
-            directoryListing: true,
-            open: "build/index.html",
+            open: "/",
             host: "localhost"
         }));
 });
