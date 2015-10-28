@@ -1,0 +1,21 @@
+extends ../_layouts/_default
+block Vars
+  -mainMenu = true
+  -relativeDir = '../'
+block MainContent
+  div.Work
+    h1 Work
+    nav.WorkList
+      ul
+        li.WorkList-item0
+          a(href="work/work0.html").WorkList-is-active
+          | Work item 1
+         span.WorkList-itemType Web application
+        li.WorkList-item1
+          a(href="work/work1.html")
+          | Work item 2
+          span.WorkList-itemType Web application
+        li.WorkList-item2
+          a(href="work/work2.html")
+          | Work item 3
+          span.WorkList-itemType Interactive detailer

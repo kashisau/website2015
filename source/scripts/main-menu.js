@@ -36,6 +36,7 @@ com.kashis.fed.MainMenu = function() {
 				_controls[control] = $(_controls[control]);
 
 		_controls.menuToggleBtns.on('click', _mainMenuToggle);
+		_controls.body.removeClass('preload');
 	}
 	
 	/**

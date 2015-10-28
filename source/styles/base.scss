@@ -7,6 +7,10 @@
 @media screen {
     @-ms-viewport { width: device-width; }
 }
+.preload * {
+    transition: none !important;
+}
+
 html {
     height: 100%;
 }
@@ -26,7 +30,8 @@ body {
     height: 100%;
 }
 
-@import '_common/_home';
+@import '_sections/_home';
+@import '_sections/_work';
 
 h1, h2 {
     font-family: 'colaborate', Helvetica, Arial, sans-serif;
