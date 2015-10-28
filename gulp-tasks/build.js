@@ -40,6 +40,7 @@ gulp.task('build', function(callback) {
         return runSequence(
             'build:clean',
             [
+                'build:ext:assets',
                 'build:ext:css',
                 'build:ext:js',
                 'build:ext:html'
@@ -104,11 +105,10 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build:webserver', function() {
-    gulp.src('./')
+    gulp.src('./build/')
         .pipe(webserver({
             livereload: true,
-            directoryListing: true,
-            open: "build/index.html",
+            open: "/",
             host: "localhost"
         }));
 });
