@@ -8,15 +8,15 @@
   
   p {
 		font-family: 'colaborate';
-		font-size: 3.0em;
+		font-weight: bold;
+		font-size: 0.75em;;
 		line-height: 1.33;
 		letter-spacing: -0.05em;
 		
 		margin: 0 0 1em 0;
 				
 		strong {
-			font-style: normal;
-			font-weight: normal;
+			font-weight: bold;
 			color: rgba(255,255,255,1);
 		}
 	}

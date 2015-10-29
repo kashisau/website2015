@@ -3,7 +3,6 @@ $menu_close_time: 400ms;
 
 .MainMenu {
 	width: 100vw;
-	height: 15vh;
 
 	position: fixed;
 	z-index: 9998;
@@ -20,15 +19,14 @@ $menu_close_time: 400ms;
 		padding $menu_open_time ease-in;
 	
 	&:hover {
-		height: 16vh;
-		padding-top: 0.5vh;
+
 	}
-	
+
 	.LogoName {
 		margin: 4vh 6vw;
-		font-size: 2vw;
+		font-size: 2em;
 	}
-	
+
 	&-icon {
 		width: 16.66vw;
 		height: 16.66vw;
@@ -81,65 +79,12 @@ $menu_close_time: 400ms;
 		text-decoration: none;
 		color: $dark_gray_accent;
 	}
-	
-	&-title {
-		color: rgba(255,255,255,0.6);
-		font-size: 8vw;
-		margin: 8.33vw 0 0 0;
-	}
-	
-	&-search {
-		display: none;
-		margin: 4.16vw 0;
-		height: 8.33vw;
-		
-		position: relative;
-		
-		border-bottom: 1px solid $dark_gray_accent;
-		
-		::placeholder {
-			font-color: rgba(255,255,255,0.2);
-		}
-		
-		label {
-			font-size: 0;
-			width: 45vw;
-			display: inline-block;
-			float: left;
-		}
-		
-		.MainMenu-searchText {
-			color: rgba(255,255,255,0.6);
-			font-size: 5vw;
-			
-			line-height: 8.33vw;
-			vertical-align: middle;
-			letter-spacing: -0.05em;
-			padding: 0;
-			margin: 0;
-			
-			width: 100%;
-			border: none;
-			background-color: rgba(255,255,255,0);
-		}
-		
-		.MainMenu-searchBtn {
-			width: 8.33vw;
-			height: 8.33vw;	
-			
-			font-family: "icons";
-			color: $dark_gray_accent;
-			
-			border: none;
-			background-color: rgba(255,255,255,0);
-		}
-	}
-	
+
 	&-menuLinks {
 		display: inline-block;
 		padding: 0px;
 		vertical-align: top;
-		margin: 6vh 2vw 2vh 2vw;
+		margin: 4vh 2vw 2vh 2vw;
 		
 		ul {
 			list-style: none;
@@ -150,20 +95,19 @@ $menu_close_time: 400ms;
 			list-style: none;
 			text-indent: 0;
 			padding: 0;
-			margin: 0 1vw;;
+			margin: 0 1vw;
 			
 			display: inline-block;
 			
 			a {
-				font-size: 1.7vw;
+				font-size: 0.5em;
+				line-height: 2em;
 				color: #ffffff;
 				text-decoration: none;
 				font-family: 'colaborate';
 				text-transform: lowercase;
-
-				letter-spacing: -0.1em;
+				
 				display: block;
-				line-height: 1.33;
 			}
 		}
 	}
@@ -181,7 +125,7 @@ $menu_close_time: 400ms;
 			li {
 				display: inline-block;
 				margin: 0;
-				padding: 1vh 0.25vw;
+				padding: 1vh 0.5vw;
 				
 				a {
 					font-size: 0;
@@ -189,7 +133,7 @@ $menu_close_time: 400ms;
 					display: block;
 					
 					padding: 0;
-					margin: 0.2rem;
+					margin: 0;
 					
 					text-align: center;
 					text-decoration: none;
@@ -200,7 +144,7 @@ $menu_close_time: 400ms;
 					}
 					
 					&::before {
-						font-size: 2vw;
+						font-size: 2rem;
 						margin: 0;
 						padding: 0;
 					}
@@ -251,10 +195,10 @@ $menu_close_time: 400ms;
 			width $menu_close_time ease-in;
 		
 		.LogoName {
-			font-size: 12vw;
 			margin-top: 16.66vw;
 			margin: 16.66vw 0 0 0;
 			display: block;
+			font-size: 3em;
 
 			&-logo {
 				display: none;
@@ -297,7 +241,7 @@ $menu_close_time: 400ms;
 			li {
 				display: block;
 				a {
-					font-size: 10vw;
+					font-size: 2.5rem;
 					line-height: 1.25;
 					padding: 0.2em 0;
 					
@@ -314,22 +258,22 @@ $menu_close_time: 400ms;
 			position: static;
 			&--social > ul {
 				margin: 5.55vw auto;
-				
+				width: 110%;
 				li {
 					padding: 0;
 					a {
-						padding: 1.9vw;
+						padding: 0.3rem;
 						border-radius: 100%;
 						margin: 0;
 
 						&::before {
-							font-size: 6vw;
+							font-size: 2rem;
 						}
 						&:active {
 							color: #ffffff;
 							background-color: $dark_gray_accent;
-							padding: 2.9vw;
-							margin: -1vw;
+							padding: 0.6rem;
+							margin: -0.3rem;
 						}
 					}					
 				}
@@ -345,12 +289,12 @@ $menu_close_time: 400ms;
 				position: relative;
 
 				display: block;
-				font-size: 2.78vw;
+				font-size: 0.66em;
 
 				&::before {
 					left: -11.11vw;
-					font-size: 7vw;
-					margin: 0.1vw;
+					font-size: 3em;
+					margin: 0;
 				}
 				
 				a:active {

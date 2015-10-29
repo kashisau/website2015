@@ -9,6 +9,16 @@
     font-style: normal;
 }
 @font-face {
+    font-family: 'colaborate';
+    src: url('fonts/ColabReg-webfont.eot');
+    src: url('fonts/ColabReg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/ColabReg-webfont.woff') format('woff'),
+         url('fonts/ColabReg-webfont.ttf') format('truetype'),
+         url('fonts/ColabReg-webfont.svg#colaborate-boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
   font-family: 'icons';
   src: url('fonts/icons.eot?16795074');
   src: url('fonts/icons.eot?16795074#iefix') format('embedded-opentype'),

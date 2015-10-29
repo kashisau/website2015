@@ -19,7 +19,7 @@ body {
     background:
         linear-gradient(to bottom, #eaeaef 0%, $athens_gray 33%, $athens_gray 100%) repeat-x,
         $athens_gray repeat; /* W3C */
-    font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
+
     color: #343434;
     height: 100%;
     padding: 0;
@@ -30,33 +30,14 @@ body {
     height: 100%;
 }
 
+@import '_common/type';
+
 @import '_sections/_home';
 @import '_sections/_work';
-
-h1, h2 {
-    font-family: 'colaborate', Helvetica, Arial, sans-serif;
-    color: #232323;
-    font-weight: bold;
-    
-    letter-spacing: -0.07em;
-    
-    position: relative;
-}
-
-h1 {
-    font-size: 2.4em;
-    margin: 0;
-    left: auto;
-    display: inline-block;
-    line-height: 1.33;
-}
 	
 .LogoName {
     color: #ffffff;
     line-height: 0.8;
-    font-family: "colaborate",Helvetica,Arial,sans-serif;
-    font-weight: bold;
-    letter-spacing: -0.07em;
     display: inline-block;
     
     .LogoName-logo {
@@ -73,9 +54,7 @@ h1 {
     .LogoName-last {
         display: block;
         font-size: 0.85em;
-        letter-spacing: -0.1em;
     }
-    
     text-decoration: none;
 }
 
