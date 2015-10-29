@@ -9,3 +9,4 @@ deployment-config/*.json
 .awspublish*
 .vscode/
 source/assets/videos/
+source/assets/images/work*
