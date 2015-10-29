@@ -1,17 +1,20 @@
 .Work {
 	background-color: $work-red;
-	color: rgba(255,255,255, 0.65);
+	color: #ffffff;
 	position: relative;
 	padding: 4vh 4vw;
 	margin: 2vh 2vw;
-	min-height: calc(75vh);	
+	min-height: 75vh;	
 	
 	position: relative;
+	
+	h1 {
+		color: #ffffff;
+		z-index: 101;
+		margin: 0;
+	}
   
   .WorkList {
-	  font-family: 'colaborate';
-	  letter-spacing: -0.07em;
-	  
 	  display: inline-block;
 	  position: absolute;
 	  background-color: $work_red;
@@ -37,15 +40,17 @@
 			  margin: 2rem 2vw;
 			  
 			  a {
+				  font-size: 0.75em;
 				  text-decoration: none;
-				  color: #ffffff;
-				  font-size: 3em;
-				  
-				  font-weight: bold;
+				  color: #ffffff;	
+				  line-height: 0.5;
+				  			  
 				  span {
 					  display: block;
 					  font-weight: normal;
-					  font-size: 0.8em;
+					  font-size: 0.75em;
+					  
+					  text-transform: lowercase;
 				  }
 			  }
 		  }
@@ -84,19 +89,6 @@
 	  }
   }
   
-  h1 {
-		font-family: 'colaborate';
-		font-size: 4.0em;
-		line-height: 1.33;
-		letter-spacing: -0.05em;
-		
-		margin: 0 0 1em 0;
-		color: #ffffff;
-		
-		z-index: 101;
-		
-	}
-  
   	@media(--sm-viewport) {
 		width: 83.34vw;
 		padding: 16.66vw 8.33vw 8.33vw 8.33vw;
@@ -104,12 +96,7 @@
 		left: -8.33vw;
 		min-height: calc(100vh - 24.99vw);
 		margin: 0;
-		
-		h1 {
-			font-size: 12vw;
-			margin: 0 0 4.78vh 0;
-		}
-		
+			
 		.WorkList {
 			width: auto;
 			height: auto;
@@ -117,11 +104,14 @@
 			position: static;
 			z-index: inherit;
 			
+			ul li {
+				margin: 0.66em 0;
+			}
+			
 			margin: 0;
 			padding: 0;
-			
-			font-size: 4vw;
 		}
+
 		.WorkStage {
 			display: none;
 			&-backgroundVideo {
