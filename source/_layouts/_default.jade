@@ -22,8 +22,7 @@ html(lang="en")
     meta(name="viewport",content="width=device-width,initial-scale=1.0")
   body.preload
     include ../_partials/main_menu
-    div.Main
-      block MainContent
+    block MainContent
     -if (production) {
       script(src="scripts-all.min.js",type="text/javascript")
     -} else {

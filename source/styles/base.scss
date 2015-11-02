@@ -21,13 +21,15 @@ body {
         $athens_gray repeat; /* W3C */
 
     color: #343434;
-    height: 100%;
     padding: 0;
     margin: 0;
 }
 
 .Main {
-    height: 100%;
+    position: relative;
+	padding: 4vh 4vw;
+	margin: 2vh 2vw calc(12vh + 57rem/25) 2vw;
+	min-height: calc(78vh - 57rem/25);
 }
 
 @import '_common/type';

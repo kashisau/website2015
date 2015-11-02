@@ -1,4 +1,3 @@
-.Main,
 html,
 body {
   margin: 0;
@@ -12,19 +11,19 @@ body.--mainMenuOpen {
 }
 
 .Main {
-  padding: 0 8.33vw;
+  width: 83.34vw;
+  padding: 16.66vw 8.33vw 8.33vw 8.33vw;
+  
+  position: relative;
+  min-height: calc(100vh - 24.99vw);
+  margin: 0;
+  
+  height: calc(100vh - 24.99vw);
+
   overflow-y: scroll;
 
-  transition:
-    all $menu_open_time ease-in $menu_close_time;
-
   &--mainMenuOpen {
-    transition:
-      all $menu_open_time ease-in $menu_open_time;
-
 	 overflow-y: hidden;
-   filter: blur(0.5vw);
-   transform: scale(0.95);
   }
 }
 
