@@ -84,12 +84,13 @@ $menu_close_time: 400ms;
 		display: inline-block;
 		padding: 0px;
 		vertical-align: top;
-		margin: 4vh 2vw 2vh 2vw;
+		margin: 4vh 2vw;
 		
 		ul {
 			list-style: none;
 			padding: 0;
 			margin: 0;
+      line-height: 0;
 		}
 		li {
 			list-style: none;
@@ -98,7 +99,8 @@ $menu_close_time: 400ms;
 			margin: 0 1vw;
 			
 			display: inline-block;
-			
+			vertical-align: top;
+      
 			a {
 				font-size: 0.5em;
 				line-height: 2em;
@@ -119,7 +121,7 @@ $menu_close_time: 400ms;
 		
 		&--social > ul {
 			list-style: none;
-			margin: 4vh 2vw;
+			margin: 5vh 2vw;
 			padding: 0;
 			
 			li {
@@ -144,7 +146,7 @@ $menu_close_time: 400ms;
 					}
 					
 					&::before {
-						font-size: 2rem;
+						font-size: 1.66rem;
 						margin: 0;
 						padding: 0;
 					}

@@ -1,11 +1,9 @@
 .Work {
-	background-color: $work-red;
-	color: #ffffff;
 	
 	h1 {
-		color: #ffffff;
 		z-index: 101;
 		margin: 0;
+    color: $work_red;
 	}
   
   .WorkList {
@@ -33,7 +31,7 @@
 			  a {
 				  font-size: 0.75em;
 				  text-decoration: none;
-				  color: #ffffff;	
+				  color: $dark_gray_accent;
 				  line-height: 0.5;
 				  			  
 				  span {
@@ -41,12 +39,38 @@
 					  font-weight: normal;
 					  font-size: 0.75em;
 					  letter-spacing: -0.07em;
-					  
+					  color: $dark_gray_highlight;
 					  text-transform: lowercase;
 				  }
+          
+          &:hover, &.is-active {
+            color: $dark_gray_accent2;
+          }
 			  }
 		  }
 	  }
+  }
+  
+  .WorkAccess {
+    fieldset {
+      border: 1px solid $dark_gray_highlight;
+    }
+    
+    input.WorkAccess-codeInput {
+      font-family: "colaborate", Helvetica, Arial, sans-serif;
+      font-size: 2em;
+      
+      background-color: rgba(black, 0.2);
+      color: #323228;
+      border: 3px solid rgba(black, 0.4);
+      border-radius: 2%;
+      
+      padding: 0.33em;
+      
+      &::placeholder {
+        color: #ffffff;
+      }
+    }
   }
   
   .WorkStage {
@@ -81,7 +105,11 @@
 	  }
   }
   
-  	@media(--sm-viewport) {
+  @media(--sm-viewport) {
+    background-color: $work_red;
+    h1 {
+      color: #ffffff;
+    }
 		.WorkList {
 			width: auto;
 			height: auto;
@@ -91,6 +119,9 @@
 			
 			ul li {
 				margin: 0.66em 0;
+        a, a span {
+          color: #ffffff;
+        }
 			}
 			
 			margin: 0;
@@ -115,6 +146,4 @@
 			margin: 0 0 1.75em 0;
 		}
 	}
-	
-	
 }
