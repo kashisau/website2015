@@ -1,0 +1,60 @@
+$main-height: calc(80vh - 2.96rem);
+$main-menu-height: calc(8vh + 2.96em);
+
+.Main {
+    background-color: #0000ff;
+    position: relative;
+	padding: 4vh 4vw;
+	margin: 4vh 2vw $main-menu-height 2vw;
+	min-height: $main-height;
+
+    &-stageLeft, &-mainContent {
+        display: inline-block;
+        position: relative;
+        margin: 0 0 -8vh 0;
+        
+        vertical-align: top;
+    }
+
+    &-stageLeft {
+        // An area to the left of the main page that might contain an
+        // introdutionary paragraph or some sort of tab system.
+
+        display: inline-block;
+        width: 26vw;
+
+        padding: 4vh 4vw;
+        margin: 0 0 -8vh 0;
+        
+        position: relative;
+        left: -4vw;
+        top: -4vh;
+        
+        min-height: $main-height;
+        
+        background-color: #00ff00;
+        
+        h1 {
+            margin: 0;
+            padding: 0;
+            line-height: 1.66;
+        }
+    }
+    
+    &-mainContent {
+        width: 66vw;
+        background-color: #ff0000;
+    }
+    
+    &--layout-stageLeft {
+        // Used to modify the Main page area into two columns, one for the
+        // navigation / blurb (.Main-stageLeft) and the main content area
+        // (.Main-mainContent).
+        
+    }
+    
+    &--layout-fullMainContent {
+        // Makes the Main occupy the entire content area.
+        
+    }
+}

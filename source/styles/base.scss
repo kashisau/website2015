@@ -25,14 +25,8 @@ body {
     margin: 0;
 }
 
-.Main {
-    position: relative;
-	padding: 4vh 4vw;
-	margin: 2vh 2vw calc(12vh + 57rem/25) 2vw;
-	min-height: calc(78vh - 57rem/25);
-}
-
-@import '_common/type';
+@import '_common/_stage-layouts';
+@import '_common/_type';
 
 @import '_sections/_home';
 @import '_sections/_work';
@@ -60,7 +54,7 @@ body {
     text-decoration: none;
 }
 
-@import '_common/_main_menu';
+@import '_common/_main-menu';
 
 header {
     
@@ -116,5 +110,5 @@ p a {
     a {
         -webkit-tap-highlight-color:rgba(0,0,0,0);
     }
-    @import '_common/sm_viewport';
+    @import '_common/sm-viewport';
 }

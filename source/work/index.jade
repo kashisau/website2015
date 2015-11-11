@@ -3,9 +3,8 @@ block Vars
   -mainMenu = true
   -relativeDir = '../'
 block MainContent
-  div.Main.Work
-    h1 Work
-    -if (typeof(workToken) === "undefined")
+  div.Main.Main--layout-stageLeft.Work
+    -if (typeof(workToken) !== "undefined")
       include _worklist
     -else
-      include _login
+      include _access
