@@ -179,7 +179,7 @@ $menu_close_time: 400ms;
 		}
 	}
 	
-	@media (--sm-viewport) {
+	@include sm-viewport {
 		height: 100vh;
 		width: 58.33vw;
 		left: 100%;

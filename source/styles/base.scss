@@ -106,7 +106,7 @@ p a {
     }
 }
 
-@media (--sm-viewport) {
+@include sm-viewport {
     a {
         -webkit-tap-highlight-color:rgba(0,0,0,0);
     }

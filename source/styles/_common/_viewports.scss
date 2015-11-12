@@ -1,3 +1,21 @@
-@custom-media --sm-viewport (min-width:320px) and (max-width:1080px);
-@custom-media --md-viewport (min-width:1080px) and (max-width:1280px);
-@custom-media --lg-viewport (min-width:1280px);
+$sm-min-width: 320px;
+$md-min-width: 1024px;
+$lg-min-width: 1280px;
+
+@mixin sm-viewport {
+    @media (min-width:#{$sm-min-width}) and (max-width: #{$md-min-width - 1}) {
+        @content;
+    }
+}
+
+@mixin md-viewport {
+    @media (min-width: #{$md-min-width}) and (max-width: #{$lg-min-width - 1}) {
+        @content;
+    }
+}
+
+@mixin lg-viewport {
+    @media (min-width: #{$lg-min-width}) {
+        @content;
+    }
+}
