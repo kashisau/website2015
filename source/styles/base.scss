@@ -15,11 +15,7 @@ html {
     height: 100%;
 }
 body {
-    background-color: $athens_gray;
-    background:
-        linear-gradient(to bottom, #eaeaef 0%, $athens_gray 33%, $athens_gray 100%) repeat-x,
-        $athens_gray repeat; /* W3C */
-
+    @include background-gradient;
     color: #343434;
     padding: 0;
     margin: 0;

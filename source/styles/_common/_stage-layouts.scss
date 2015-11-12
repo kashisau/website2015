@@ -1,5 +1,9 @@
 $main-height: calc(80vh - 2.96rem);
 $main-menu-height: calc(8vh + 2.96em);
+$main-sm-padding: 16.66vw 8.33vw 8.33vw 8.33vw;
+$main-sm-offset-margin: -16.66vw -8.33vw 0 -8.33vw;
+$main-sm-offset-margin-nextblock: 0 -8.33vw 0 -8.33vw;
+$section-shadow: 0 0 .1em rgba(0,0,0,0.65);
 
 .Main {
     position: relative;
@@ -8,7 +12,22 @@ $main-menu-height: calc(8vh + 2.96em);
 	min-height: $main-height;
     
     font-size: 0;
+    
+    @include sm-viewport {
+        position: relative;
+        margin: 0;
+        padding: $main-sm-padding;
+        min-height: calc(100vh - 24.99vw);
+        margin: 0;
+        height: calc(100vh - 24.99vw);
 
+        overflow-y: scroll;
+
+        &--mainMenuOpen {
+            overflow-y: hidden;
+        }
+    }
+    
     &-stageLeft, &-mainContent {
         display: inline-block;
         position: relative;
@@ -20,31 +39,79 @@ $main-menu-height: calc(8vh + 2.96em);
         vertical-align: top;
         
         font-size: 1rem;
+        
+        @include md-viewport {
+            display: block;
+            min-height: auto;
+        }
+        
+        @include sm-viewport {
+            display: block;
+            min-height: auto;
+
+            margin: $main-sm-offset-margin;
+            padding: $main-sm-padding;
+        }
+
     }
 
     &-stageLeft {
         // An area to the left of the main page that might contain an
         // introdutionary paragraph or some sort of tab system.
-
-        display: inline-block;
         width: 28%;
         
         h1 {
             margin: 0;
             padding: 0;
-            line-height: 1;
+            line-height: 1.66;
+        }
+        
+        @include sm-viewport {
+            background-color: $work-red;
+            color: #ffffff;
+            width: auto;
+            height: calc(100vh - 24.99vw);
+
+            h1 {
+                color: #ffffff !important;
+            }
+        }
+        
+        @include md-viewport {
+            width: auto;
+            z-index: 101;
+            background-color: #ffffff;
+            box-shadow: $section-shadow;
         }
     }
     
     &-mainContent {
         width: 56%;
+        box-shadow: $section-shadow;
+        
+        @include md-viewport {
+            width: auto;
+            z-index: 100;
+        }
+        
+        @include sm-viewport {
+            margin: $main-sm-offset-margin-nextblock;
+            width: auto;
+            
+            @include background-gradient;
+            color: $dark_gray;
+        }
     }
     
     &--layout-stageLeft {
         // Used to modify the Main page area into two columns, one for the
         // navigation / blurb (.Main-stageLeft) and the main content area
         // (.Main-mainContent).
-        padding: 0;   
+        padding: 0; 
+        
+        @include sm-viewport {
+            padding: $main-sm-padding;
+        }  
     }
     
     &--layout-fullMainContent {
