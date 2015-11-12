@@ -18,8 +18,6 @@
     "gulp-sass": "*",
     "gulp-minify-css": "*",
     "gulp-autoprefixer": "*",
-    "gulp-rework": "*",
-    "rework-custom-media": "*",
     "gulp-minify-html": "*",
     "gulp-jade": "*",
     "gulp-prettify": "*",

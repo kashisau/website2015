@@ -21,8 +21,7 @@
  */
 module.exports = function(gulp, plugins, production) {
     return function () {
-        var lazypipe = require('lazypipe'),
-            reworkCustomMedia = require('rework-custom-media');
+        var lazypipe = require('lazypipe');
 
         var development = !production;
         var REPO_SRC_URL = 'https://bitbucket.org/KashiS/website2015-placeholder/raw/master/source/styles/';
@@ -64,12 +63,6 @@ module.exports = function(gulp, plugins, production) {
             .pipe(plugins.rename, { suffix:'.min' });
 
         /**
-         * Performs CSS post-processing for Rework (library)
-         */
-        var cssRework = lazypipe()
-            .pipe(plugins.rework, reworkCustomMedia());
-
-        /**
          * Re-writes URLs for assets so that they're accessible from the build
          * directory.
          */
@@ -89,7 +82,6 @@ module.exports = function(gulp, plugins, production) {
             .pipe(cssCompileSass())
             .pipe(cssConcat())
             .pipe(cssAutoprefix())
-            .pipe(cssRework())
             .on('error', function(error) {
                 gutil.log(gutil.colors.bgRed.white('ERROR'), error);
                 this.emit('end');
