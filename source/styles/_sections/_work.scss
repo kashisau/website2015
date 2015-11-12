@@ -1,3 +1,12 @@
 .Work {
-	
+	h1 {
+        color: $work_red;
+    }
+    
+    &.Main .Main-mainContent {
+        background-color: $work_red;
+        color: #ffffff;
+        
+        box-shadow: 0 0 .1em rgba(0,0,0,0.65);
+    }
 }
