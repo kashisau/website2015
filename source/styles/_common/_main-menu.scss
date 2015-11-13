@@ -243,7 +243,7 @@ $menu_close_time: 400ms;
 			li {
 				display: block;
 				a {
-					font-size: 2.5rem;
+					font-size: 8vw;
 					line-height: 1.25;
 					padding: 0.2em 0;
 					
@@ -269,7 +269,7 @@ $menu_close_time: 400ms;
 						margin: 0;
 
 						&::before {
-							font-size: 2rem;
+							font-size: 8vw;
 						}
 						&:active {
 							color: #ffffff;

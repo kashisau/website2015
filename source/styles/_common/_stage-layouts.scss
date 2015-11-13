@@ -51,6 +51,8 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
 
             margin: $main-sm-offset-margin;
             padding: $main-sm-padding;
+            
+            font-size: 5vw;
         }
 
     }
@@ -70,7 +72,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
             background-color: $work-red;
             color: #ffffff;
             width: auto;
-            height: calc(100vh - 24.99vw);
+            min-height: calc(100vh - 24.99vw);
 
             h1 {
                 color: #ffffff !important;
