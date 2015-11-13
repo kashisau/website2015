@@ -1,27 +1,39 @@
-# Kashi's Website 2015 (front-end)
+# Kashi's Website 2015
 
-This is the site-generator for Kashi Samaraweera's porfolio website for 2015.
-The aim here is to create a site-generator mechanism using Gulp as a scripting
-tool for the _build_ process.
+This project contains the source code and gulp build process for my 2015 portfolio website. The website is built using terse derivatives of native HTML5 languages (such as Jade, SASS, etc.) and the various build processes coordinate the compilation of this source into native HTML, and further apply optimisations for production readying and deployment. 
 
-This allows the use of terse and superset languages that compile into 
-plain-old-HTML/CSS/JavaScript for basic web hosting.
+## Static front-end
 
-## Front-end / Back-end seperation
+This website contains some interactive features that pass data between client and server however there is a complete seperation between content served to a user's browser and dyanmic data injected onto the page using AJAX. The goal of this approach is to maximise the availability and simplyfy the deployment process for changes to the front-end.
 
-As a portfolio site, most of the content will be fixed; but there will be some
-data going back and forth. Examples include a secure _Work_ section and contact
-form for the site. This will be handled by a separate application that exposes
-an API to this front-end site.
+The corresponding project which will provide data integration is called API-server, and is also hosted alongside this repository.
 
-## Early days
+## Process: build and deployment
 
-This is still very much in development; and thus won't be functional for a
-little while. At present, the Gulp-process is being worked out so that actual
-development can commence in a few weeks' time.
+Gulp tasks coordinate the build process and seperately, optimisation for production along with deployment to Amazon Web Services (AWS).
+
+A development server hosts the latest release version of this project (a link should be available on the repository page where the project is hosted). The final target for version 1.0 releases (and beyond) is [kashis.com.au](https://kashis.com.au)
 
 ## Required tools
 
-[Gulp](http://gulpjs.com/) runs on the [Node.js](http://nodejs.org/) virtual
-environment. This build is being developed against Node `v0.12.5` on both
-Windows (x86) and Mac OS X.
+The output of the build process is native HTML, CSS and JavaScript and thus can be stored as local files, uploaded to a HTTP server or distributed to a cloud service for high availability.
+
+The repository does not include any compiled code and thus the required tools for building the website must be installed on the target machine. [Node.js](http://nodejs.org/) `v0.12.0` or greater should be used for the compilation process and once installed, `npm install` will install all the requisite packages on your local machine.
+
+# License
+
+This project is both a learning opportunity for myself and also functions as a method to demonstrate my technical aptitude in current front-end development trends. As such it uses a license that makes copying, distribution, modification and publication permissable; however reserving the rights to use my trademarks (after all, it is _my_ portfolio).
+
+Copyright 2015 Kashi Samaraweera
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
