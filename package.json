@@ -36,19 +36,28 @@
     
     "run-sequence": "*",
     "gulp-if": "*",
+    
+    "gulp-imagemin": "*",
+    "gulp-filter": "*",
+    "gulp-rev": "*",
+    "gulp-rev-replace": "*",
 
     "gulp-jade": "*",
     "gulp-prettify": "*",
     "gulp-replace": "*",
-
+    "gulp-minify-html": "*",
+    
     "gulp-plumber": "*",
     "gulp-sass": "*",
     "gulp-autoprefixer": "*",
     "gulp-concat": "*",
     "gulp-sourcemaps": "*",
+    "gulp-minify-css": "*",
     
     "gulp-uglify": "*",
-    "gulp-rename": "*"
+    "gulp-rename": "*",
+    
+    "gulp-rimraf": "*"
     
   }
 }

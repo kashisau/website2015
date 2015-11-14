@@ -42,7 +42,9 @@ gulp.task(
                 'build-styles',
                 'build-scripts',
                 'build-html'
-            ]
+            ],
+            'revision-mapping',
+            'revision-cleanup'
         );
     }
 );
@@ -65,5 +67,15 @@ gulp.task(
 // Task definition
 gulp.task(
     'build-html',
-    require('./build/html.js')(gulp, plugins, packageFile)
+    require('./build/html.js')(gulp, plugins, BUILD_OPTIONS)
+);
+
+gulp.task(
+    'revision-mapping',
+    require('./build/revision-mapping.js')(gulp, plugins, BUILD_OPTIONS)
+);
+
+gulp.task(
+    'revision-cleanup',
+    require('./build/revision-cleanup.js')(gulp, plugins, BUILD_OPTIONS)
 );
