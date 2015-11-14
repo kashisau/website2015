@@ -11,4 +11,17 @@
             color: inherit;
         }
     }
+    
+    &Access fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+        
+        legend {
+            display: inline-block;
+        }
+        
+        input[type="radio"] {
+        }
+    }
 }
