@@ -55,6 +55,11 @@ module.exports = function(gulp, plugins, buildOptions) {
         var cssConcat = lazypipe()
             .pipe(plugins.concat, 'styles-all.css');
 
+        /** BrowserSync controls. Used by the gulp watch function **/
+        var bs = buildOptions.browserSync.stream !== undefined,
+            bsFunc = buildOptions.browserSync.stream ||
+                function () { return; };
+
         /**
          * Re-writes URLs for assets so that they're accessible from the build
          * directory.
@@ -80,6 +85,7 @@ module.exports = function(gulp, plugins, buildOptions) {
                 }
             )))
             .pipe(plugins.if(development, gulp.dest('./build/')))
+            .pipe(plugins.if(bs, bsFunc()))
             // Production
             .pipe(plugins.if(production, styleOptimisationPipe()))
             .pipe(plugins.if(

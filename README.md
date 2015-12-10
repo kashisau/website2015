@@ -18,7 +18,7 @@ A development server hosts the latest release version of this project (a link sh
 
 The output of the build process is native HTML, CSS and JavaScript and thus can be stored as local files, uploaded to a HTTP server or distributed to a cloud service for high availability.
 
-The repository does not include any compiled code and thus the required tools for building the website must be installed on the target machine. [Node.js](http://nodejs.org/) `v0.12.0` or greater should be used for the compilation process and once installed, `npm install` will install all the requisite packages on your local machine.
+The repository does not include any compiled code and thus the required tools for building the website must be installed on the target machine. [Node.js](http://nodejs.org/) `v5.0.0` or greater should be used for the compilation process and once installed, `npm install` will install all the requisite packages on your local machine.
 
 # License
 

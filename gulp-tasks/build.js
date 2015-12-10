@@ -20,18 +20,22 @@ var BUILD_OPTIONS = {
 
 var gulp = require('gulp'),
     gulpRun = require('run-sequence'),
-    plugins = require('gulp-load-plugins')();
+    plugins = require('gulp-load-plugins')(),
+    browserSync = require('browser-sync').create();
+
+BUILD_OPTIONS.browserSync = browserSync;
 
 gulp.task(
     'build',
     function() {       
         var gutil = plugins.util,
+            production = !!(BUILD_OPTIONS.PRODUCTION),
             logColour = (BUILD_OPTIONS.PRODUCTION)? gutil.colors.black.bgRed
                 : gutil.colors.black.bgYellow;
 
         gutil.log(
             logColour(
-                (BUILD_OPTIONS.PRODUCTION? 'PRODUCTION' : 'DEVELOPMENT'),
+                (production? 'PRODUCTION' : 'DEVELOPMENT'),
                 'BUILD'
             )
         );
@@ -48,6 +52,11 @@ gulp.task(
         );
     }
 );
+
+gulp.task(
+    'watch',
+    require('./build/watch.js')(gulp, plugins, BUILD_OPTIONS)
+)
 
 // Task definition
 gulp.task(

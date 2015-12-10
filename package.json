@@ -33,6 +33,8 @@
     "gulp-load-plugins": "*",
     "gulp-util": "*",
     "gulp-env": "*",
+    "require-dir": "*",
+    "lazypipe": "*",
     
     "run-sequence": "*",
     "gulp-if": "*",
@@ -57,7 +59,7 @@
     "gulp-uglify": "*",
     "gulp-rename": "*",
     
-    "gulp-rimraf": "*"
-    
+    "gulp-rimraf": "*",
+    "browser-sync": "*"
   }
 }

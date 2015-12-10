@@ -43,6 +43,11 @@ module.exports = function(gulp, plugins, buildOptions) {
             .pipe(plugins.uglify)
             .pipe(plugins.rename, { suffix:'.min' });
 
+        /** BrowserSync controls. Used by the gulp watch function **/
+        var bs = buildOptions.browserSync.stream !== undefined,
+            bsFunc = buildOptions.browserSync.stream ||
+                function () { return; };
+
         return gulp.src('./source/scripts/**/*.js')
             .pipe(plugins.sourcemaps.init())
             //.pipe(plugins.concat('scripts-all.js'))
@@ -56,6 +61,7 @@ module.exports = function(gulp, plugins, buildOptions) {
                 }
             )))
             .pipe(plugins.if(development, gulp.dest('./build/')))
+            .pipe(plugins.if(bs, bsFunc()))
             // Production
             // .pipe(plugins.if(production, jsMinify()))
             // .pipe(plugins.if(production, plugins.sourcemaps.write(

@@ -44,6 +44,11 @@ module.exports = function(gulp, plugins, buildOptions) {
         var rewriteAssetUrls = lazypipe()
             .pipe(plugins.replace, 'assets/', '');
 
+        /** BrowserSync controls. Used by the gulp watch function **/
+        var bs = buildOptions.browserSync.stream !== undefined,
+            bsFunc = buildOptions.browserSync.stream ||
+                function () { return; };
+
         return gulp.src([
                 './source/**/[^_]*.jade',
                 '!./source/_**/*'
@@ -53,6 +58,7 @@ module.exports = function(gulp, plugins, buildOptions) {
             .pipe(plugins.if(development, rewriteAssetUrls()))
             .pipe(plugins.if(development, htmlPrettify()))
             .pipe(plugins.if(development, gulp.dest('./build/')))
+            .pipe(plugins.if(bs, bsFunc()))
             // Production
             .pipe(plugins.if(production, minifyHtml()))
             .pipe(plugins.if(production, gulp.dest('./production/')));
