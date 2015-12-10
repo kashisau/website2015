@@ -16,6 +16,10 @@ module.exports = function(gulp, plugins, buildOptions) {
 
         // 1. a. Initialise BrowserSync
         browserSync.init({
+            port: 8000,
+            ui: {
+                port: 8001
+            },
             server: {
                 baseDir: './build'
             }
