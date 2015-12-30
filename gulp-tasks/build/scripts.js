@@ -18,11 +18,12 @@
  * sources folder in a development build; or the public repository for the
  * production build of the site.
  */
-module.exports = function(gulp, plugins, production) {
+module.exports = function(gulp, plugins, buildOptions) {
     return function () {
         var lazypipe = require('lazypipe');
-        var development = !production;
-        var REPO_SRC_URL = 'https://bitbucket.org/KashiS/website2015-placeholder/raw/master/source/scripts/';
+        var production = buildOptions.PRODUCTION,
+            development = !buildOptions.DEVELOPMENT;
+
 
         /* Lazy pipes for JavaScript */
         /**
@@ -42,6 +43,11 @@ module.exports = function(gulp, plugins, production) {
             .pipe(plugins.uglify)
             .pipe(plugins.rename, { suffix:'.min' });
 
+        /** BrowserSync controls. Used by the gulp watch function **/
+        var bs = buildOptions.browserSync.stream !== undefined,
+            bsFunc = buildOptions.browserSync.stream ||
+                function () { return; };
+
         return gulp.src('./source/scripts/**/*.js')
             .pipe(plugins.sourcemaps.init())
             //.pipe(plugins.concat('scripts-all.js'))
@@ -55,15 +61,16 @@ module.exports = function(gulp, plugins, production) {
                 }
             )))
             .pipe(plugins.if(development, gulp.dest('./build/')))
+            .pipe(plugins.if(bs, bsFunc()))
             // Production
-            .pipe(plugins.if(production, jsMinify()))
-            .pipe(plugins.if(production, plugins.sourcemaps.write(
-                './',
-                {
-                    includeContent: false,
-                    sourceRoot: REPO_SRC_URL
-                }
-            )))
-            .pipe(plugins.if(production, gulp.dest('./production/')));
+            // .pipe(plugins.if(production, jsMinify()))
+            // .pipe(plugins.if(production, plugins.sourcemaps.write(
+            //     './',
+            //     {
+            //         includeContent: false,
+            //         sourceRoot: REPO_SRC_URL
+            //     }
+            // )))
+            // .pipe(plugins.if(production, gulp.dest('./production/')));
     };
 };

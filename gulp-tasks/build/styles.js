@@ -19,12 +19,14 @@
  * sources folder in a development build; or the public repository for the
  * production build of the site.
  */
-module.exports = function(gulp, plugins, production) {
+module.exports = function(gulp, plugins, buildOptions) {
     return function () {
         var lazypipe = require('lazypipe');
-
-        var development = !production;
-        var REPO_SRC_URL = 'https://bitbucket.org/KashiS/website2015-placeholder/raw/master/source/styles/';
+        var production = buildOptions.PRODUCTION,
+            development = !buildOptions.DEVELOPMENT;
+            
+        var styleOptimisationPipe = require('../optimise/styles-lazypipe.js')
+            (gulp, plugins, buildOptions);
 
         /* Lazy pipes for CSS */
         /**
@@ -53,28 +55,17 @@ module.exports = function(gulp, plugins, production) {
         var cssConcat = lazypipe()
             .pipe(plugins.concat, 'styles-all.css');
 
-        /**
-         * This lazypipe function minifies native CSS and changes the output
-         * filename by prepending the extension with .min. This returns the
-         * stream for further piping.
-         */
-        var cssMinify = lazypipe()
-            .pipe(plugins.minifyCss)
-            .pipe(plugins.rename, { suffix:'.min' });
+        /** BrowserSync controls. Used by the gulp watch function **/
+        var bs = buildOptions.browserSync.stream !== undefined,
+            bsFunc = buildOptions.browserSync.stream ||
+                function () { return; };
 
         /**
          * Re-writes URLs for assets so that they're accessible from the build
          * directory.
          */
-        var rewriteAssetUrls = lazypipe()
-            .pipe(plugins.replace, '../assets/', '../source/assets/');
-
-        /**
-         * Re-writes URLs for assets so that they're accessible from the build
-         * directory.
-         */
-        var rewriteAssetUrlsProduction = lazypipe()
-            .pipe(plugins.replace, '../assets/', 'assets/');
+        // var rewriteAssetUrlsProduction = lazypipe()
+        //     .pipe(plugins.replace, '../assets/', '');
 
         return gulp.src(['./source/styles/*.scss', './source/styles/*.sass', '!./_**'])
             .pipe(plugins.sourcemaps.init())
@@ -86,8 +77,6 @@ module.exports = function(gulp, plugins, production) {
                 gutil.log(gutil.colors.bgRed.white('ERROR'), error);
                 this.emit('end');
             })
-            // Development
-            .pipe(plugins.if(development, rewriteAssetUrls()))
             .pipe(plugins.if(development, plugins.sourcemaps.write(
                './',
                {
@@ -96,18 +85,30 @@ module.exports = function(gulp, plugins, production) {
                 }
             )))
             .pipe(plugins.if(development, gulp.dest('./build/')))
+            .pipe(plugins.if(bs, bsFunc()))
             // Production
-            .pipe(plugins.if(production, cssMinify()))
-            .pipe(plugins.if(production, rewriteAssetUrlsProduction()))
-            // Development
+            .pipe(plugins.if(production, styleOptimisationPipe()))
+            .pipe(plugins.if(
+                production,
+                plugins.rev()
+                )
+            )
             .pipe(plugins.if(production, plugins.sourcemaps.write(
                 './',
                 {
                     includeContent: false,
-                    sourceRoot: REPO_SRC_URL
+                    sourceRoot: buildOptions.REPO_URL
                 }
             )))
             .pipe(plugins.if(production, gulp.dest('./production/')))
+            .pipe(plugins.if(
+                production,
+                plugins.rev.manifest("source-rev-manifest.json")
+            ))
+            .pipe(plugins.if(
+                production,
+                gulp.dest('./build/')
+            ))
             .pipe(plugins.plumber.stop());
     };
 };

@@ -13,10 +13,11 @@
  * of the web site. Source-mapping of HTML is not yet possible so this method
  * does not provide it.
  */
-module.exports = function(gulp, plugins, production) {
+module.exports = function(gulp, plugins, buildOptions) {
     return function () {
         var lazypipe = require('lazypipe');
-        var development = !production;
+        var production = buildOptions.PRODUCTION,
+            development = !buildOptions.DEVELOPMENT;
 
         /* Lazy pipes for HTML */
         /**
@@ -41,14 +42,23 @@ module.exports = function(gulp, plugins, production) {
             .pipe(plugins.minifyHtml);
 
         var rewriteAssetUrls = lazypipe()
-            .pipe(plugins.replace, '"assets/', '"../source/assets/');
+            .pipe(plugins.replace, 'assets/', '');
 
-        return gulp.src(['./source/**/*.jade', '!./source/_**/*'])
+        /** BrowserSync controls. Used by the gulp watch function **/
+        var bs = buildOptions.browserSync.stream !== undefined,
+            bsFunc = buildOptions.browserSync.stream ||
+                function () { return; };
+
+        return gulp.src([
+                './source/**/[^_]*.jade',
+                '!./source/_**/*'
+            ])
             .pipe(htmlJadeCompile())
             // Development
             .pipe(plugins.if(development, rewriteAssetUrls()))
             .pipe(plugins.if(development, htmlPrettify()))
             .pipe(plugins.if(development, gulp.dest('./build/')))
+            .pipe(plugins.if(bs, bsFunc()))
             // Production
             .pipe(plugins.if(production, minifyHtml()))
             .pipe(plugins.if(production, gulp.dest('./production/')));

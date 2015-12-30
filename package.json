@@ -1,37 +1,65 @@
 {
-  "name": "KashisWebsite2015",
+  "name": "@kashis/website-2015",
+  "version": "0.1.0",
+  "description": "A package containing both the source code and gulp build process for Kashi Samaraweera's 2015 website. This accounts for the front-end part of the site, implementing the API methods exposed in the corresponding API server (@kashis/api-server) for data exchange.",
+  "keywords": [
+    "Kashi",
+    "Samaraweera",
+    "personal website",
+    "portfolio",
+    "front-end",
+    "software developer",
+    "static website",
+    "gulp website"
+  ],
+  "homepage": "http://wip.kashis.com.au/",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Kashi Samaraweera",
+    "email": "kashi@kashis.com.au",
+    "url": "https://kashis.com.au"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/kashisau/website2015.git"
+  },
+  "scripts" : {
+    "build": "gulp build",
+    "build-production": "gulp build --production",
+    "deploy": "gulp build --production && gulp:ext:production-deploy"
+  },
   "dependencies": {
     "gulp": "*",
     "gulp-load-plugins": "*",
     "gulp-util": "*",
-    "gulp-changed": "*",
-    "gulp-clean": "*",
+    "gulp-env": "*",
     "require-dir": "*",
-    "gulp-sourcemaps": "*",
-    "gulp-concat": "*",
-    "gulp-debug": "*",
-    "gulp-uglify": "*",
-    "gulp-rename": "*",
-    "gulp-replace": "*",
+    "lazypipe": "*",
+    
+    "run-sequence": "*",
     "gulp-if": "*",
-    "gulp-wait": "*",
-    "gulp-sass": "*",
-    "gulp-minify-css": "*",
-    "gulp-autoprefixer": "*",
-    "gulp-minify-html": "*",
-    "gulp-jade": "*",
-    "gulp-prettify": "*",
-    "gulp-webserver": "*",
-    "gulp-watch": "*",
-    "gulp-plumber": "*",
+    
+    "gulp-imagemin": "*",
+    "gulp-filter": "*",
     "gulp-rev": "*",
     "gulp-rev-replace": "*",
-    "gulp-rev-napkin": "*",
-    "gulp-awspublish": "*",
-    "gulp-cloudfront": "*",
-    "rev-del": "*",
-    "lazypipe": "*",
-    "run-sequence": "*",
-    "yargs": "*"
+
+    "gulp-jade": "*",
+    "gulp-prettify": "*",
+    "gulp-replace": "*",
+    "gulp-minify-html": "*",
+    
+    "gulp-plumber": "*",
+    "gulp-sass": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-concat": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-minify-css": "*",
+    
+    "gulp-uglify": "*",
+    "gulp-rename": "*",
+    
+    "gulp-rimraf": "*",
+    "browser-sync": "*"
   }
 }

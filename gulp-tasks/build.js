@@ -1,141 +1,90 @@
-/**
- * Development Build Gulp tasks
- *
- * Holds the development functions of building the web application without
- * much regard for optimisation or deployment.
- *
- * @author Kashi Samaraweera <kashi@kashisam.com.au>
- */
 'use strict';
-var APP_NAME = "Kashi's website",
-    REPO_SRC_URL = 'https://bitbucket.org/KashiS/website2015-placeholder/raw/master/source/scripts/';
-
-var requireDir = require('require-dir'),
-    gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    clean = require('gulp-clean'),
-    plugins = require('gulp-load-plugins')({lazy:false}),
-    args = require('yargs').argv,
-    runSequence = require('run-sequence'),
-    webserver = require('gulp-webserver'),
-    watch = require('gulp-watch');
-
-var production = !!(args.production),
-    development = !production,
-    rebuild = !!(args.clean);
-
 /**
- * Gulp task dev:build
- *
- * This performs a full-build (or rebuild) of the website, clearing out any
- * published assets.
+ * Build tasks
+ * 
+ * This gulp file will load the subtasks from the build folder, facilitating
+ * a build sequence for the HTML, CSS and JavaScript contained in the source
+ * directory of the project.
+ * 
+ * @author Kashi Samaraweera <kashi@kashis.com.au>
+ * @version 0.1.0
  */
-gulp.task('build', function(callback) {
-    if (production) gutil.log(gutil.colors.white.bgGreen("PRODUCTION"),
-        "Running production build on", APP_NAME, "...");
-    else gutil.log(gutil.colors.white.bgYellow("DEVELOPMENT"),
-        "Running development build on", APP_NAME, "...");
+var packageFile = require('../package.json');
 
-    if (production || rebuild)
-        return runSequence(
-            'build:clean',
-            [
-                'build:ext:assets',
-                'build:ext:css',
-                'build:ext:js',
-                'build:ext:html'
-            ],
-            'production:ext:packageAssets',
-            'production:ext:packageCopyAssets',
-            'production:ext:packageRewrite',
-            'production:ext:packageRemoveUnrevisioned',
-            callback
+var BUILD_OPTIONS = {
+        APP_NAME: packageFile.name,
+        REPO_URL: packageFile.repository.url,
+        PRODUCTION: !!(process.env.NODE_ENV === "PRODUCTION"),
+        DEVELOPMENT: !!(process.env.NODE_ENV === "DEVELOPMENT")
+    };
+
+var gulp = require('gulp'),
+    gulpRun = require('run-sequence'),
+    plugins = require('gulp-load-plugins')(),
+    browserSync = require('browser-sync').create();
+
+BUILD_OPTIONS.browserSync = browserSync;
+
+gulp.task(
+    'build',
+    function() {       
+        var gutil = plugins.util,
+            production = !!(BUILD_OPTIONS.PRODUCTION),
+            logColour = (BUILD_OPTIONS.PRODUCTION)? gutil.colors.black.bgRed
+                : gutil.colors.black.bgYellow;
+
+        gutil.log(
+            logColour(
+                (production? 'PRODUCTION' : 'DEVELOPMENT'),
+                'BUILD'
+            )
         );
+        
+        return gulpRun(
+            [
+                'build-assets',
+                'build-styles',
+                'build-scripts',
+                'build-html'
+            ],
+            'revision-mapping',
+            'revision-cleanup'
+        );
+    }
+);
 
-    return runSequence(
-        ['build:ext:assets', 'build:ext:css', 'build:ext:js', 'build:ext:html'], callback);
-});
+gulp.task(
+    'watch',
+    require('./build/watch.js')(gulp, plugins, BUILD_OPTIONS)
+)
 
-/**
- * Clears the previous output from disk as well as any temporary directories
- * used during the build process.
- */
-gulp.task('build:clean', function() {
-    gutil
-        .log(gutil.colors.white.bgRed('CLEAN'),
-            gutil.colors.white.bgYellow('DEVELOPMENT'),
-            'Removing build directory...')
-        .log(gutil.colors.white.bgRed('CLEAN'),
-            gutil.colors.white.bgGreen('PRODUCTION'),
-            'Removing production directory...');
+// Task definition
+gulp.task(
+    'build-assets',
+    require('./build/assets.js')(gulp, plugins, BUILD_OPTIONS)
+);
+// Task definition
+gulp.task(
+    'build-styles',
+    require('./build/styles.js')(gulp, plugins, BUILD_OPTIONS)
+);
+// Task definition
+gulp.task(
+    'build-scripts',
+    require('./build/scripts.js')(gulp, plugins, BUILD_OPTIONS)
+);
+// Task definition
+gulp.task(
+    'build-html',
+    require('./build/html.js')(gulp, plugins, BUILD_OPTIONS)
+);
 
-    return gulp.src(
-        [
-            './build/**/*.js',
-            './build/**/*.css',
-            './build/**/*.map',
-            './build/**/*.html',
-            './production/**/*.js',
-            './production/**/*.css',
-            './production/**/*.map',
-            './production/**/*.html',
-            './production/assets/',
-            './.sass-cache'
-        ], {read: false})
-        .pipe(clean())
-        .on('error', function(e) {
-            gutil.beep().log('Error: ' + e.toString())
-        }
-    );
-});
+gulp.task(
+    'revision-mapping',
+    require('./build/revision-mapping.js')(gulp, plugins, BUILD_OPTIONS)
+);
 
-gulp.task('watch', function() {
-    gutil.log(gutil.colors.white.bgYellow('DEVELOPMENT'), "Watching development build " +
-        "for changes");
-
-    return runSequence(
-        ['build:ext:css', 'build:ext:js', 'build:ext:html'],
-        [
-            'build:webserver',
-            'build:rebuildCSSOnDemand',
-            'build:rebuildJSOnDemand',
-            'build:rebuildHTMLOnDemand'
-        ]
-    );
-});
-
-gulp.task('build:webserver', function() {
-    gulp.src('./build/')
-        .pipe(webserver({
-            livereload: true,
-            open: "/",
-            host: "localhost"
-        }));
-});
-
-gulp.task('build:rebuildCSSOnDemand', function() {
-    watch(['./source/styles/**/*.scss'], function() {
-        return runSequence('build:ext:css');
-    });
-});
-
-gulp.task('build:rebuildJSOnDemand', function() {
-    watch(['./source/scripts/**/*.js'], function() {
-        return runSequence('build:ext:js');
-    });
-});
-
-gulp.task('build:rebuildHTMLOnDemand', function() {
-    watch(['./source/**/*.jade'], function() {
-        return runSequence('build:ext:html');
-    });
-});
-gulp.task('build:ext:assets', require('./build-assets.js')(gulp, plugins, production));
-gulp.task('build:ext:js', require('./build-js.js')(gulp, plugins, production));
-gulp.task('build:ext:css', require('./build-css.js')(gulp, plugins, production));
-gulp.task('build:ext:html', require('./build-html.js')(gulp, plugins, production));
-gulp.task('production:ext:packageAssets', require('./production-package-assets.js')(gulp, plugins, production));
-gulp.task('production:ext:packageRewrite', require('./production-package-rewrite.js')(gulp, plugins, production));
-gulp.task('production:ext:packageRemoveUnrevisioned', require('./production-package-rm-unrev.js')(gulp, plugins, production));
-gulp.task('production:ext:packageCopyAssets', require('./production-package-copy-assets.js')(gulp, plugins, production));
-gulp.task('production:ext:deploy', require('./production-deploy.js')(gulp, plugins, production));
+gulp.task(
+    'revision-cleanup',
+    require('./build/revision-cleanup.js')(gulp, plugins, BUILD_OPTIONS)
+);

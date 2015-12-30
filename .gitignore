@@ -1,12 +1,23 @@
-# Created by .ignore support plugin (hsz.mobi)
-production/
-build/
-node_modules/
-.sass-cache/
-.idea/
-deployment-config/*.json
-!deployment-config/*.sample.json
-.awspublish*
+# Compilation output
+/production/
+/build/
+
+# Node.js libraries
+/node_modules/
+# SASS compilation
+sass-cache/
+
+# IDE settings
 .vscode/
-source/assets/videos/
-source/assets/images/work*
+.idea/
+
+#Sensitive data
+./deployment-config/*.json
+!./deployment-config/*.sample.json
+/source/assets/images/work*
+
+# Deployment log
+.awspublish*
+
+# Large files
+/source/assets/videos/
