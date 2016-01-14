@@ -23,7 +23,7 @@ com.kashis.fed.MainMenu = function() {
 		menuIcon: '.MainMenu-icon',
 		menuToggleBtns: '.MainMenu-openBtn, .MainMenu-closeBtn'
 	},
-	$ = jQuery;
+	$ = jQuery; 
 	
 	/**
 	 * This initilisation method gathers the controls on the page using jQuery,
