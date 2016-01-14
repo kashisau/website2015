@@ -1,23 +1,35 @@
 /**
- * Front-end authenticator
+ * Front-end authenticator library
  * 
- * In order for this website to interface with the API server the client must
- * be authenticated to an appropriate level by the server. This library is used
- * to automatically gather an authentication token and make it available to
- * other modules of the front-end.
+ * This is a common libray that's used to acquire and maintain a set of valid
+ * authentication tokens from the API server (github.com/kashisau/api-server/).
  * 
- * This client assumes that tokens are assigned as HTTPonly cookies and thus
- * only the server may read and verify auth token information.
+ * Beginning v0.3.0 of the API server (and v0.5.0 of the Auth module) client
+ * authentication began implementing OAuth2 compatible token issuance with both
+ * long-life renew tokens and temporal auth tokens.
+ * 
+ * Renew tokens are stored in localStorage. Promises are the main vehicle for
+ * asynchronous method defferal (beware of browser compatibility in DEV).
  * 
  * @author Kashi Samaraweera <kashi@kashis.com.au>
- * @version 0.0.2
+ * @version 0.1.0
  */
-/** Namespacing */
+
+/* Namespacing */
 var com = com || {};
 com.kashis = com.kashis || {};
 com.kashis.fed = com.kashis.fed || {};
 
-/** Payload */
+/*Type definitions (for jsDoc) */
+
+/**
+ * @typedef TokenPair
+ * @type Object
+ * @property {string} renew The renew token as a JWT-encoded string.
+ * @property {string} renew A corresponding auth token as a JWT-encoded string.
+ */
+
+/* Payload */
 com.kashis.fed.auth = function(){
 	
 	var AuthAPI = {},
@@ -29,85 +41,176 @@ com.kashis.fed.auth = function(){
 	var _controls = {
 			body: 'body'
 		},
-		_tokenUpdateSubscribers = [],
-		_authToken,
-        _tokenLookupXhr;
-	
-	/**
-	 * Initialising method that gathers all of the controls on the page and
-	 * performs an initial lookup to see if there's an authentication token
-	 * available.
-	 */
-	function _init() {
-		for (var control in _controls)
-			if (_controls.hasOwnProperty(control))
-				_controls[control] = $(_controls[control]);
-                
-        AuthAPI.getTokenStatus(_processTokenLookup);
-	}
-    
-    function _processTokenLookup(err, tokenData) {
-        if (typeof(err) !== "undefined") {
-            switch (err.name) {
-                case "auth_token_expired":
-                    // Refesh the current token.
-                    break;
-                case "auth_token_revoked":
-                    // Display a security warning.
-                    break;
-
-                case "auth_token_missing":
-                    // Get a new token.
-                case "auth_token_invalid":
-                    // Get a new set of tokens.
-                case "auth_refresh_token_inalid":
-                    // Get a new set of tokens.
-                default:
-                    // Same as above.
-                    
-            }
-            return;
-        }
-        
-        console.log(tokenData);
-    }
+		_subscribers = [],
+		_tokens,
+        _xhr;
 	
     /**
-     * This method produces a HTTP GET request to the API server to check if
-     * an authentication token has been issued and if so retrieve some data
-     * about the token (such as issue date, accessLevel, etc.).
-     * @param {Function({Error}, {Result})} A callback function that accepts
-     *                                      two parameters for continuation.
+     * Initialises our library with the API server. This method will bind DOM
+     * elements to their respective variables as well as investigate the any
+     * existing renew token for usage.
      */
-	AuthAPI.getTokenStatus = function(callback) {
-        // Cancel any concurrent calls to perform this lookup.
-        if (typeof(_tokenLookupXhr) !== "undefined")
-            return callback(
-                    new Error("There is already an authentication " +
-                    "being processed.")
-                );
+	function _init() {
+        // Bind our controls
+        for (var control in _controls)
+            if (_controls.hasOwnProperty(control))
+                _controls[control] = $(_controls[control]);
 
-        _tokenLookupXhr = $.ajax({
-            url: API_SERVER_URL + PATH_AUTH_TOKEN
-        });
-
-        _tokenLookupXhr.done(lookupSuccessCallback);
-        _tokenLookupXhr.fail(lookupFailCallback);
+        // Find any existing tokens
+        var renewToken = localStorage.getItem('renewToken'),
+            authToken = localStorage.getItem('authToken');
         
-        function lookupSuccessCallback(jqXhr) {
-            return callback(null, xhXhr.responseJSON);
-        }
-        
-        function lookupFailCallback(jqXhr) {
-            var response = jqXhr.responseJSON,
-                errors = response.errors,
-                error;
-            
-            while (error = errors.pop())
-                callback(error);
+        _validateRenewToken({renew: renewToken, auth: authToken})
+            .then(_validateAuthToken)
+            .catch(_replaceTokens)
+            .then(_saveTokens)
+            .then(_notifySubscribers);
+    }
+    
+    /**
+     * Takes a renew token and checks its validity with the API server.
+     * @param {TokenPair} tokenPair The renew and auth token pair as JWT
+     *                              strings.
+     * @return {Promise.<TokenPair>}    Implements the Promise object,
+     *                                  returning the same TokenPair if
+     *                                  fulfilled.
+     */
+    function _validateRenewToken(tokenPair) {
+        return new Promise(
+            function(resolve, reject) {
+                if (!tokenPair.renew) {
+                    var missingError = new Error("Missing renew token.");
+                    missingError.name = "renew_token_missing";
+                    return reject(missingError);
+                }
 
-            return;
-        }
+                var renewToken = tokenPair.renew;
+
+                $.ajax({
+                    url: API_SERVER_URL + PATH_AUTH_TOKEN,
+                    accepts: "text/json",
+                    method: "get",
+                    headers: {
+                        'Authorization': 'Bearer ' + renewToken
+                    }
+                }).done(function (res) {
+                    var token = res.data.token,
+                        validation = res.data.validation;
+
+                    if (token.type !== "renew") return reject(
+                        () => {
+                            var e = new Error("Wrong token type");
+                            e.name = "renew_token_invalid";
+                            return e;
+                        });
+                    if (validation !== "valid") return reject(
+                        () => {
+                            var e = new Error("Token invalid");
+                            e.name = "renew_token_invalid";
+                            return e;
+                        });
+
+                    return resolve(tokenPair);
+                }).fail(function (jxXhr, httpStatus, error) {
+                    var serverResponse = jxXhr.responseJSON.errors[0],
+                        serverError = new Error(serverResponse.message);
+                        
+                    serverError.name = serverResponse.name;
+                    return reject(serverError);
+                });
+            }
+        );
+    
+    }
+    
+    function _validateAuthToken(tokenPair) {
+        
+    }
+    
+    /**
+     * Applies to the API server for a new set of authentication tokens for
+     * future use. This method may be used in a token validation chain to
+     * resolve any expired token errors, replacing the necessary token with a
+     * new one.
+     * @param {Error} validationError   (Optional) Error object thrown during
+     *                                  stored renew token validation.
+     * @return {Promise.<TokenPair>}    Implements a Promise which resolves the
+     *                                  a new token pair if fulfilled.
+     */
+    function _replaceTokens(validationError) { 
+        return new Promise(
+            function(resolve, reject) {
+                // Remove any obsolete tokens from the localStorage.
+                if (typeof(validationError) !== "undefined")
+                    switch(validationError.name) {
+                        case "renew_token_missing":
+                        case "renew_token_invalid":
+                        case "renew_token_expired":
+                            localStorage.removeItem("renewToken");
+                            return resolve(AuthAPI.newTokenPair());
+                        case "auth_token_missing":
+                        case "auth_token_expired":
+                        case "renew_token_invalid":
+                            localStorage.removeItem("authToken");
+                            return resolve(
+                                AuthAPI.refreshAuthToken(validationError.renewAuthToken)
+                            );
+                    }
+                // Unexpected error.
+                reject(validationError);                
+            }
+        );
+    };
+    
+    /**
+     * Applies to the API server for a new auth token that can be used to 
+     * authenticate API calls. This method returns a Promise object resolving
+     * a renew, auth token pair.
+     * @param {string} renewToken   The renew token with which to apply for a
+     *                              new authentication token.
+     * @return {Promise.<TokenPair>}    Returns an authentication token pair
+     *                                  containing the original renew token and
+     *                                  a new auth token.
+     */
+    AuthAPI.refreshAuthToken = function(renewToken) {
+        
+    }
+    
+    /**
+     * Applies to the API server for a new auth token that can be used to 
+     * authenticate API calls. This method returns a Promise object resolving
+     * a renew, auth token pair.
+     * @param {string} apiKey   (Optional) API key with which to identify the
+     *                          generated token pair. If valid, the tokens will
+     *                          have a corresponding AccessLevel of 1 (see the
+     *                          apiKeySecret param for AccessLevel 2 tokens).
+     * @param {string} apiKeySecret (Optional) secret key corresponding to the
+     *                              API key, if supplied. If the apiKeySecret
+     *                              is also supplied (and valid) then a token
+     *                              pair of AccessLevel 2 is generated.
+     * @return {Promise.<TokenPair>}    Returns an authentication token pair
+     *                                  containing the original renew token and
+     *                                  a newly issued auth token.
+     */
+    AuthAPI.newTokenPair = function(apiKey, apiKeySecret) {
+        return new Promise(
+            function(resolve, reject) {
+                $.ajax({
+                    url: API_SERVER_URL + PATH_AUTH_TOKEN,
+                    method: 'post'
+                }).done(function(response) {
+                    var tokens = response.data;
+
+                    localStorage.setItem('renewToken', tokens.renew);
+                    localStorage.setItem('authToken', tokens.auth);
+
+                    return resolve(tokens);
+                }).fail(function(jqXhr, httpStatus, error) {
+                    console.log(httpStatus);
+                    return reject(error);
+                });
+            }
+        )
     }
     
 	$(document).ready(_init);
