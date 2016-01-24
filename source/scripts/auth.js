@@ -122,8 +122,12 @@ com.kashis.fed.auth = function(){
     /**
      * Validates the auth token with the API server, throwing an error if no
      * valid auth token exists.
+     * @param {TokenPair} tokenPair A TokenPair object (containing the renew
+     *                              and auth JWT) used for validation.
+     * @param {number} minAccessLevel   (Optional) minimum access level for
+     *                                  the token. Default 0.
      */
-    function _validateAuthToken(tokenPair) {
+    function _validateAuthToken(tokenPair, minAccessLevel) {
         return new Promise(
             function(resolve, reject) {
                 if (!tokenPair.renew) {
@@ -138,7 +142,8 @@ com.kashis.fed.auth = function(){
                     return reject(missingError);
                 }
 
-                var authToken = tokenPair.auth;
+                var authToken = tokenPair.auth,
+                    minAccessLevel = minAccessLevel || 0;
 
                 $.ajax({
                     url: API_SERVER_URL + PATH_AUTH_TOKEN + '/bearer',
@@ -164,6 +169,13 @@ com.kashis.fed.auth = function(){
                             e.renewToken = tokenPair.renew;
                             return e;
                         });
+                    if (!token.accessLevel < minAccessLevel) return reject(
+                        () => {
+                            var e = new Error("Insufficient access level");
+                            e.name = "auth_token_insufficient_access";
+                            return e;
+                        }
+                    );
 
                     return resolve(tokenPair);
                 }).fail(function (jxXhr, httpStatus, error) {
@@ -235,6 +247,45 @@ com.kashis.fed.auth = function(){
             localStorage.setItem("renewToken", tokenPair.renew);
             
             resolve(tokenPair);
+        });
+    }
+    
+    /**
+     * A Promise generator that resolved a valid auth token that can be used to
+     * authenticate a request made to the server. This method may be modified
+     * with an optional accessLevel, which sets the minimum token accessLevel
+     * required to proceed.
+     * @param {number} accessLevel  (Optional) minimum accessLevel that the
+     *                              succeeding command expects. Default 0.
+     * @return {Promise.<string>}   Returns a valid authentication token that
+     *                              may be used by the Authorization header for
+     *                              the request that follows.
+     */
+    AuthAPI.getAuth = function(accessLevel) {
+        return new Promise(function(resolve, reject) {
+            var tokenPair = { 
+                    renew: localStorage.getItem('renew'),
+                    auth: localStorage.getItem('renew')
+                };
+
+            _validateAuthToken(tokenPair, accessLevel)
+                .catch(AuthAPI.refreshAuthToken)
+                .then(returnAuthToken)
+                .catch(function() {
+                    reject(() => {
+                        var e = Error("Error gaining authentication");
+                        e.name = "auth_failure";
+                        return e;
+                        }
+                    );
+                });
+            
+            /**
+             * Supplies the authentication token to our requesting party.
+             */
+            function returnAuthToken(tokenPair) {
+                resolve(tokenPair.auth);
+            }
         });
     }
     
