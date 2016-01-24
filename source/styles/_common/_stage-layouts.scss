@@ -8,7 +8,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
 .Main {
     position: relative;
 	padding: 4vh 4vw;
-	margin: 4vh 2vw $main-menu-height 2vw;
+	margin: 4vh 2vw 0 2vw;
 	min-height: $main-height;
     
     font-size: 0;
@@ -31,7 +31,6 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
     &-stageLeft, &-mainContent {
         display: inline-block;
         position: relative;
-
         margin: 0;
         padding: 4vh 4%;
         min-height: $main-height;
@@ -89,6 +88,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
     
     &-mainContent {
         width: 56%;
+        margin: 0 0 $main-menu-height 0;
         box-shadow: $section-shadow;
         
         @include md-viewport {
