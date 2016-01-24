@@ -36,14 +36,11 @@ com.kashis.fed.auth = function(){
 		$ = jQuery;
 	
 	var API_SERVER_URL = 'http://localhost:3000/v1',
-		PATH_AUTH_TOKEN = '/auth/tokens.json';
+		PATH_AUTH_TOKEN = '/auth/tokens';
 		
 	var _controls = {
 			body: 'body'
-		},
-		_subscribers = [],
-		_tokens,
-        _xhr;
+		};
 	
     /**
      * Initialises our library with the API server. This method will bind DOM
@@ -63,8 +60,7 @@ com.kashis.fed.auth = function(){
         _validateRenewToken({renew: renewToken, auth: authToken})
             .then(_validateAuthToken)
             .catch(_replaceTokens)
-            .then(_saveTokens)
-            .then(_notifySubscribers);
+            .then(_saveTokens);
     }
     
     /**
@@ -87,15 +83,15 @@ com.kashis.fed.auth = function(){
                 var renewToken = tokenPair.renew;
 
                 $.ajax({
-                    url: API_SERVER_URL + PATH_AUTH_TOKEN,
-                    accepts: "text/json",
+                    url: API_SERVER_URL + PATH_AUTH_TOKEN + '/bearer',
+                    accepts: "application/json",
                     method: "get",
                     headers: {
                         'Authorization': 'Bearer ' + renewToken
                     }
                 }).done(function (res) {
                     var token = res.data.token,
-                        validation = res.data.validation;
+                        tokenValid = res.data.validity;
 
                     if (token.type !== "renew") return reject(
                         () => {
@@ -103,7 +99,7 @@ com.kashis.fed.auth = function(){
                             e.name = "renew_token_invalid";
                             return e;
                         });
-                    if (validation !== "valid") return reject(
+                    if (!tokenValid) return reject(
                         () => {
                             var e = new Error("Token invalid");
                             e.name = "renew_token_invalid";
@@ -123,8 +119,62 @@ com.kashis.fed.auth = function(){
     
     }
     
+    /**
+     * Validates the auth token with the API server, throwing an error if no
+     * valid auth token exists.
+     */
     function _validateAuthToken(tokenPair) {
-        
+        return new Promise(
+            function(resolve, reject) {
+                if (!tokenPair.renew) {
+                    var missingError = new Error("Missing renew token.");
+                    missingError.name = "renew_token_missing";
+                    return reject(missingError);
+                }
+                if (!tokenPair.auth) {
+                    var missingError = new Error("Missing auth token.");
+                    missingError.name = "auth_token_missing";
+                    missingError.renewToken = tokenPair.renew;
+                    return reject(missingError);
+                }
+
+                var authToken = tokenPair.auth;
+
+                $.ajax({
+                    url: API_SERVER_URL + PATH_AUTH_TOKEN + '/bearer',
+                    accepts: "application/json",
+                    method: "get",
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken
+                    }
+                }).done(function (res) {
+                    var token = res.data.token,
+                        tokenValid = res.data.validity;
+
+                    if (token.type !== "auth") return reject(
+                        () => {
+                            var e = new Error("Wrong token type");
+                            e.name = "auth_token_invalid";
+                            return e;
+                        });
+                    if (!tokenValid) return reject(
+                        () => {
+                            var e = new Error("Token invalid");
+                            e.name = "auth_token_invalid";
+                            e.renewToken = tokenPair.renew;
+                            return e;
+                        });
+
+                    return resolve(tokenPair);
+                }).fail(function (jxXhr, httpStatus, error) {
+                    var serverResponse = jxXhr.responseJSON.errors[0],
+                        serverError = new Error(serverResponse.message);
+                        
+                    serverError.name = serverResponse.name;
+                    return reject(serverError);
+                });
+            }
+        );
     }
     
     /**
@@ -153,7 +203,7 @@ com.kashis.fed.auth = function(){
                         case "renew_token_invalid":
                             localStorage.removeItem("authToken");
                             return resolve(
-                                AuthAPI.refreshAuthToken(validationError.renewAuthToken)
+                                AuthAPI.refreshAuthToken(validationError.renewToken)
                             );
                     }
                 // Unexpected error.
@@ -161,6 +211,32 @@ com.kashis.fed.auth = function(){
             }
         );
     };
+    
+    /**
+     * Stores the validated renew an auth tokens in the localStorage so that
+     * they're available for future requests.
+     * @return {Promise.<TokenPair>}    The token pair as supplied to the
+     *                                  method initially.
+     */    
+    function _saveTokens(tokenPair) {
+        return new Promise(function (resolve, reject) {
+            if (!tokenPair.renew) return reject(() => {
+                var e = new Error("Missing renew token.");
+                e.name = "renew_token_missing";
+                return e;
+            });
+            if (!tokenPair.auth) return reject(() => {
+                var e = new Error("Missing renew token.");
+                e.name = "renew_token_missing";
+                return e;
+            });
+            
+            localStorage.setItem("renewToken", tokenPair.renew);
+            localStorage.setItem("renewToken", tokenPair.renew);
+            
+            resolve(tokenPair);
+        });
+    }
     
     /**
      * Applies to the API server for a new auth token that can be used to 
@@ -173,7 +249,33 @@ com.kashis.fed.auth = function(){
      *                                  a new auth token.
      */
     AuthAPI.refreshAuthToken = function(renewToken) {
-        
+        return new Promise(function(resolve, reject) {
+            var renewToken = renewToken || localStorage.getItem('renewToken'),
+                tokenPair = { renew: renewToken };
+            
+            if (!renewToken)
+                return resolve(AuthAPI.newTokenPair);
+            
+            $.ajax({
+                url: API_SERVER_URL + PATH_AUTH_TOKEN,
+                accepts: "application/json",
+                method: "put",
+                headers: {
+                    'Authorization': 'Bearer ' + renewToken
+                }
+            }).done(function(response) {
+                var tokenPair = response.data;
+
+                localStorage.setItem('renewToken', tokenPair.renew);
+                localStorage.setItem('authToken', tokenPair.auth);
+
+                return resolve(tokenPair);
+            }).fail(function(jqXhr, httpStatus, error) {
+                console.log(httpStatus);
+                return reject(error);
+            });
+            
+        });       
     }
     
     /**
