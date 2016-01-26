@@ -23,7 +23,7 @@ module.exports = function(gulp, plugins, buildOptions) {
     return function () {
         var lazypipe = require('lazypipe');
         var production = buildOptions.PRODUCTION,
-            development = !buildOptions.DEVELOPMENT;
+            development = !!buildOptions.DEVELOPMENT;
             
         var styleOptimisationPipe = require('../optimise/styles-lazypipe.js')
             (gulp, plugins, buildOptions);

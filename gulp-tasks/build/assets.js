@@ -14,7 +14,7 @@
 module.exports = function(gulp, plugins, buildOptions) {
     return function () {
         var production = buildOptions.PRODUCTION,
-            development = !buildOptions.DEVELOPMENT;
+            development = !!buildOptions.DEVELOPMENT;
 
         var assetOptimisationPipe = 
             require('../optimise/assets-lazypipe.js')

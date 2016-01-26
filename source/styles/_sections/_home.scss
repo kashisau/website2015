@@ -5,8 +5,8 @@
   p {
 		font-family: 'colaborate';
 		font-weight: bold;
-		font-size: 0.75em;;
-		line-height: 1.33;
+		font-size: 0.66em;;
+		line-height: 1.66;
 		letter-spacing: -0.05em;
 		
 		margin: 0 0 1em 0;
@@ -19,7 +19,7 @@
   
   	@include sm-viewport {
 		p {
-			font-size: 6vw;
+			font-size: 6.82vw;
 			line-height: 1.33;
 			letter-spacing: -0.05em;
 			margin: 0 0 1.75em 0;

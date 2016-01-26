@@ -15,7 +15,10 @@ var BUILD_OPTIONS = {
         APP_NAME: packageFile.name,
         REPO_URL: packageFile.repository.url,
         PRODUCTION: !!(process.env.NODE_ENV === "PRODUCTION"),
-        DEVELOPMENT: !!(process.env.NODE_ENV === "DEVELOPMENT")
+        DEVELOPMENT: !!(
+            process.env.NODE_ENV === "DEVELOPMENT"
+            || typeof(process.env.NODE_ENV) === "undefined"
+        )
     };
 
 var gulp = require('gulp'),

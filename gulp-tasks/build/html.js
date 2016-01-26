@@ -17,7 +17,7 @@ module.exports = function(gulp, plugins, buildOptions) {
     return function () {
         var lazypipe = require('lazypipe');
         var production = buildOptions.PRODUCTION,
-            development = !buildOptions.DEVELOPMENT;
+            development = !!buildOptions.DEVELOPMENT;
 
         /* Lazy pipes for HTML */
         /**

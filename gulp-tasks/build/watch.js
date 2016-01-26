@@ -13,7 +13,7 @@ module.exports = function(gulp, plugins, buildOptions) {
     return function() {
         var gulpRun = require('run-sequence'),
             browserSync = buildOptions.browserSync;
-
+        
         // 1. a. Initialise BrowserSync
         browserSync.init({
             port: 8000,
@@ -21,10 +21,13 @@ module.exports = function(gulp, plugins, buildOptions) {
                 port: 8001
             },
             server: {
-                baseDir: './build'
+                baseDir: './build',
+                routes: {
+                    "/source": "./source"
+                }
             }
         });
-
+            
         // 1. b. Perform initial build
         gulpRun(['build']);
         
