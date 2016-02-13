@@ -68,10 +68,12 @@ com.kashis.fed.MainMenu = function() {
 	 * Opens the main menu so that it comes into view.
 	 */
 	MainMenuAPI.open = function() {
-		var menu = _controls.menu,
+		var body = _controls.body,
+            menu = _controls.menu,
 			main = _controls.main,
 			icon = _controls.menuIcon;
-
+        
+        body.addClass('mainMenuOpen');
 		menu.addClass('MainMenu--open');
 		main.addClass('Main--mainMenuOpen');
 		main.on('click', MainMenuAPI.close);
@@ -85,10 +87,12 @@ com.kashis.fed.MainMenu = function() {
 	 * Closes the main menu so that it transitions off-screen.
 	 */
 	MainMenuAPI.close = function() {
-		var menu = _controls.menu,
+		var body = _controls.body,
+            menu = _controls.menu,
 			main = _controls.main,
 			icon = _controls.menuIcon;
-
+        
+        body.removeClass('mainMenuOpen');
 		menu.removeClass('MainMenu--open');
 		main.removeClass('Main--mainMenuOpen');
 		main.off('click', MainMenuAPI.close);

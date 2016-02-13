@@ -1,6 +1,20 @@
 $menu_open_time: 200ms;
 $menu_close_time: 400ms;
 
+body {
+    @include sm-viewport {
+        background: #000000;
+        .Main {
+            opacity: 1;
+            transition: opacity $menu_close_time ease-out;
+        }
+        &.mainMenuOpen .Main {
+            opacity: 0.25;
+            transition: opacity $menu_open_time ease-in;
+        }
+    }
+}
+
 .MainMenu {
 	width: 100vw;
 
@@ -12,12 +26,7 @@ $menu_close_time: 400ms;
 	
 	background-color: $dark_gray_accent2;
 	padding: 0;
-	
-	transition:
-		bottom $menu_open_time ease-in,
-		height $menu_open_time ease-in,
-		padding $menu_open_time ease-in;
-	
+		
 	&:hover {
 
 	}
@@ -39,8 +48,6 @@ $menu_close_time: 400ms;
 		z-index: 9999;
 		
 		display: none;	
-		transition:
-			right $menu_close_time ease-in;
 		
 		> img {
 			height: 50%;
@@ -49,14 +56,6 @@ $menu_close_time: 400ms;
 			&:active {
 				background-color: $dark_gray_accent;
 			}
-		}
-		
-		&.MainMenu-closeBtn {
-			left: auto;
-			right: 74.99vw;
-			
-			transition:
-				right $menu_open_time ease-in;
 		}
 	}
 	
@@ -77,7 +76,7 @@ $menu_close_time: 400ms;
 		border-radius: 100%;
 		
 		text-decoration: none;
-		color: $dark_gray_accent;
+		color: #ffffff;
 	}
 
 	&-menuLinks {
@@ -182,19 +181,16 @@ $menu_close_time: 400ms;
 	@include sm-viewport {
 		height: 100vh;
 		width: 58.33vw;
-		left: 100%;
+        left: 100%;
 		top: 0;
 		
 		padding: 0 8.33vw;
+        transition: transform $menu_open_time ease-in-out;
 		
 		&:hover {
 			height: inherit;
 			padding: 0 8.33vw;
 		}
-		transition:
-			left $menu_close_time ease-in,
-			background-color $menu_close_time ease-in,
-			width $menu_close_time ease-in;
 		
 		.LogoName {
 			margin-top: 16.66vw;
@@ -209,28 +205,42 @@ $menu_close_time: 400ms;
 		
 		&-icon {
 			display: block;
+            transition: transform $menu_open_time ease-in-out;
+            &.MainMenu-closeBtn {
+                left: auto;
+                transform: translateX(-74.99vw);
+            }
 		}
 		
+        .MainMenu-permanentCloseBtn {
+			display: block;
+            opacity: 0;
+            transform: rotate(0);
+            
+			&:active {
+				background-color: $dark_gray_accent;
+				color: #ffffff;
+			}
+		}
+        
 		&--open {
-			left: 24.999vw;
+			transform: translateX(-100%);
+
 			width: 58.33vw;
 			
 			padding: 0 8.33vw;
 			
 			overflow-y: scroll;
-			overflow-x: auto;
-			transition:
-				left $menu_open_time ease-in,
-				background-color $menu_open_time ease-in,
-				width $menu_open_time ease-in;
-		}
-		
-		.MainMenu-permanentCloseBtn {
-			display: block;
-			&:active {
-				background-color: $dark_gray_accent;
-				color: #ffffff;
-			}
+			overflow-x: hidden;
+                        
+            .MainMenu-permanentCloseBtn {
+                animation: ButtonShineIntro ($menu_open_time*4) ($menu_open_time) 1 normal forwards;
+            }
+            
+            .MainMenu-menuLinks li {
+                animation: ListIntroVertical $menu_open_time 0s 1 normal forwards;
+                animation-timing-function: ease-out;
+            }
 		}
 		
 		&-menuLinks {
@@ -246,11 +256,19 @@ $menu_close_time: 400ms;
 					font-size: 8vw;
 					line-height: 1.25;
 					padding: 0.2em 0;
-					
+					color: $dark_gray_highlight;
 					&::active {
 						background-color: $dark_gray;
 					}
 				}
+                
+                transform: translateX(125%);
+                
+                @for $childNo from 1 through 4 {
+                    &:nth-child(#{$childNo}) {
+                        animation-delay: $menu_open_time/2*(1 + $childNo);
+                    }
+                }
 			}
 		}
 		
@@ -277,7 +295,7 @@ $menu_close_time: 400ms;
 							padding: 0.6rem;
 							margin: -0.3rem;
 						}
-					}					
+					}
 				}
 			}
 			
