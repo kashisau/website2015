@@ -1,14 +1,14 @@
-$main-height: calc(80vh - 2.96rem);
+$main-height: calc(76vh - 2.96rem);
 $main-menu-height: calc(8vh + 2.96em);
 $main-sm-padding: 16.66vw 8.33vw 8.33vw 8.33vw;
-$main-sm-offset-margin: -16.66vw -8.33vw 0 -8.33vw;
-$main-sm-offset-margin-nextblock: 0 -8.33vw 0 -8.33vw;
+$main-sm-offset-margin: 0;
+$main-sm-offset-margin-nextblock: 0;
 $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
 
 .Main {
     position: relative;
 	padding: 8vh 8vw;
-	margin: 4vh 2vw 0 2vw;
+	margin: 0;
 	min-height: $main-height;
     
     font-size: 0;

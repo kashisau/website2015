@@ -1,7 +1,12 @@
 .Intro {
 	background-color: $dark_gray;
 	color: rgba(255,255,255, 0.65);
- 
+    background: 
+        url('images/page-bg-overlay.png') repeat-x bottom center fixed,
+        url('images/page-bg-0.jpg') no-repeat bottom center fixed;
+
+    background-size: auto, cover;
+    
   p {
 		font-family: 'colaborate';
 		font-weight: bold;
@@ -18,6 +23,8 @@
 	}
   
   	@include sm-viewport {
+          
+          background-size: contain, cover;
 		p {
 			font-size: 6.82vw;
 			line-height: 1.33;
