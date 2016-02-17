@@ -72,15 +72,17 @@ com.kashis.fed.MainMenu = function() {
             menu = _controls.menu,
 			main = _controls.main,
 			icon = _controls.menuIcon;
-        
-        body.addClass('mainMenuOpen');
-		menu.addClass('MainMenu--open');
-		main.addClass('Main--mainMenuOpen');
-		main.on('click', MainMenuAPI.close);
-		
-		icon
-			.removeClass('MainMenu-openBtn')
-			.addClass('MainMenu-closeBtn');
+
+        window.requestAnimationFrame(() => {
+            body.addClass('mainMenuOpen');
+            menu.addClass('MainMenu--open');
+            main.addClass('Main--mainMenuOpen');
+            main.on('click', MainMenuAPI.close);
+            
+            icon
+                .removeClass('MainMenu-openBtn')
+                .addClass('MainMenu-closeBtn');
+        });
 	}
 	
 	/**
@@ -91,15 +93,17 @@ com.kashis.fed.MainMenu = function() {
             menu = _controls.menu,
 			main = _controls.main,
 			icon = _controls.menuIcon;
-        
-        body.removeClass('mainMenuOpen');
-		menu.removeClass('MainMenu--open');
-		main.removeClass('Main--mainMenuOpen');
-		main.off('click', MainMenuAPI.close);
-		
-		icon
-			.removeClass('MainMenu-closeBtn')
-			.addClass('MainMenu-openBtn');
+
+        window.requestAnimationFrame(() => {
+            body.removeClass('mainMenuOpen');
+            menu.removeClass('MainMenu--open');
+            main.removeClass('Main--mainMenuOpen');
+            main.off('click', MainMenuAPI.close);
+            
+            icon
+                .removeClass('MainMenu-closeBtn')
+                .addClass('MainMenu-openBtn');
+        });
 	}
 	
 	$(document).ready(_init);

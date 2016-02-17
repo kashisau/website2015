@@ -1,6 +1,6 @@
 @keyframes ButtonShineIntro {
     0% {
-        opacity: 0.05;
+        opacity: 0;
         transform: rotate(-30deg);
     }
     10% {
@@ -14,6 +14,22 @@
     }
 }
 
+@keyframes ButtonShineOutro {
+    100% {
+        opacity: 0;
+        transform: rotate(-30deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    10% {
+        transform: rotate(0deg);
+    }
+    0% {
+        opacity: 0.25;
+    }
+}
+
 @keyframes ListIntroVertical {
     0% {
         opacity: 0;
@@ -22,6 +38,18 @@
     100% {
         opacity: 1;
         transform: translateX(0%);
+    }
+
+}
+
+@keyframes ListOutroVertical {
+    0% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(25%);
     }
 
 }

@@ -1,12 +1,12 @@
-$menu_open_time: 200ms;
-$menu_close_time: 400ms;
+$menu_open_time: 400ms;
+$menu_close_time: 800ms;
 
 body {
     @include sm-viewport {
         background: #000000;
         .Main {
             opacity: 1;
-            transition: opacity $menu_close_time ease-out;
+            transition: opacity $menu_close_time ease-out $menu_close_time/4;
         }
         &.mainMenuOpen .Main {
             opacity: 0.25;
@@ -185,7 +185,7 @@ body {
 		top: 0;
 		
 		padding: 0 8.33vw;
-        transition: transform $menu_open_time ease-in-out;
+        transition: transform $menu_open_time ease-in-out $menu_close_time/4;
 		
 		&:hover {
 			height: inherit;
@@ -205,7 +205,7 @@ body {
 		
 		&-icon {
 			display: block;
-            transition: transform $menu_open_time ease-in-out;
+            transition: transform $menu_open_time ease-in-out $menu_close_time/4;
             &.MainMenu-closeBtn {
                 left: auto;
                 transform: translateX(-74.99vw);
@@ -214,8 +214,12 @@ body {
 		
         .MainMenu-permanentCloseBtn {
 			display: block;
-            opacity: 0;
+            
+            opacity: 0.25;
             transform: rotate(0);
+            
+            animation: ButtonShineOutro $menu_close_time/4 1 normal forwards;
+            animation-delay: 0;
             
 			&:active {
 				background-color: $dark_gray_accent;
@@ -240,6 +244,13 @@ body {
             .MainMenu-menuLinks li {
                 animation: ListIntroVertical $menu_open_time 0s 1 normal forwards;
                 animation-timing-function: ease-out;
+                @for $childNo from 1 through 4 {
+                    &:nth-child(#{$childNo}) {
+                        animation-delay: ($menu_open_time/4)*$childNo;
+                    }
+                }
+                transform: translateX(25%);
+                opacity: 0;
             }
 		}
 		
@@ -261,15 +272,18 @@ body {
 						background-color: $dark_gray;
 					}
 				}
-                
-                transform: translateX(125%);
-                
+ 
+                transform: translateX(0%);
+                opacity: 1;
+
+                animation: ListOutroVertical $menu_open_time 0s 1 normal forwards;
+                animation-timing-function: ease-out;
                 @for $childNo from 1 through 4 {
                     &:nth-child(#{$childNo}) {
-                        animation-delay: $menu_open_time/2*(1 + $childNo);
+                        animation-delay: ($menu_open_time/4)*$childNo;
                     }
                 }
-			}
+            }
 		}
 		
 		.ProfileLinks {
