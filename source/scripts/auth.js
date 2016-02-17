@@ -265,7 +265,7 @@ com.kashis.fed.auth = function(){
         return new Promise(function(resolve, reject) {
             var tokenPair = { 
                     renew: localStorage.getItem('renew'),
-                    auth: localStorage.getItem('renew')
+                    auth: localStorage.getItem('auth')
                 };
 
             _validateAuthToken(tokenPair, accessLevel)
