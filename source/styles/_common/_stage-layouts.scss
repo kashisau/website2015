@@ -36,11 +36,6 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
         
         font-size: 1rem;
         
-        @include md-viewport {
-            display: block;
-            min-height: auto;
-        }
-        
         @include sm-viewport {
             display: block;
             min-height: auto;
@@ -75,23 +70,11 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
             }
         }
         
-        @include md-viewport {
-            width: auto;
-            z-index: 101;
-            background-color: #ffffff;
-            box-shadow: $section-shadow;
-        }
     }
     
     &-mainContent {
         width: 56%;
         margin: 0 0 $main-menu-height 0;
-        box-shadow: $section-shadow;
-        
-        @include md-viewport {
-            width: auto;
-            z-index: 100;
-        }
         
         @include sm-viewport {
             margin: $main-sm-offset-margin-nextblock;
@@ -106,7 +89,6 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
         // Used to modify the Main page area into two columns, one for the
         // navigation / blurb (.Main-stageLeft) and the main content area
         // (.Main-mainContent).
-        padding: 0; 
         
         @include sm-viewport {
             padding: $main-sm-padding;

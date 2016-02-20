@@ -6,6 +6,8 @@ $dark_gray_accent2: #232323;
 
 $work_red: #B21F12;
 
+$page_bg_grad: linear-gradient(to bottom, rgba(35,35,35,0) 80%,rgba(35,35,35,1) 100%) fixed;
+
 @mixin background-gradient {
     background-color: $athens_gray;
     background:
