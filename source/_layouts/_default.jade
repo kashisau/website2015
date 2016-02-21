@@ -8,6 +8,7 @@ html(lang="en")
   -var relativeDir = relativeDir || ''
   -var section = section || false
   -var allScripts = baseScripts
+  -var mainMenu = !!mainMenu
   -if (typeof(scripts) !== "undefined") {
     allScripts = baseScripts.concat(scripts)
   -}
@@ -22,7 +23,9 @@ html(lang="en")
     meta(http-equiv="Content-Type",content="text/html; charset=UTF-8")
     meta(name="viewport",content="width=device-width,initial-scale=1.0")
   body.preload
-    include ../_partials/main_menu
+    -if (mainMenu) {
+      include ../_partials/main_menu
+    -}
     block MainContent
     -if (production) {
       script(src="scripts-all.min.js",type="text/javascript")

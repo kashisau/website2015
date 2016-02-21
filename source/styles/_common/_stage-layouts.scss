@@ -1,5 +1,5 @@
-$main-height: calc(76vh - 2.96rem);
-$main-menu-height: calc(8vh + 2.96em);
+$main-height: calc(80vh - 2.96rem);
+$main-menu-height: calc(4vh + 2.96em);
 $main-sm-padding: 16.66vw 8.33vw 8.33vw 8.33vw;
 $main-sm-offset-margin: 0;
 $main-sm-offset-margin-nextblock: 0;
@@ -22,6 +22,8 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
         height: calc(100vh - 24.99vw);
 
         overflow-y: scroll;
+        
+        background-position: bottom 0 left 0, bottom 0 left 0, center center !important;
 
     }
     
@@ -60,7 +62,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
         }
         
         @include sm-viewport {
-            background-color: $work-red;
+            //background-color: $work-red;
             color: #ffffff;
             width: auto;
             min-height: calc(100vh - 24.99vw - 16.66vw);
@@ -80,7 +82,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
             margin: $main-sm-offset-margin-nextblock;
             width: auto;
             
-            @include background-gradient;
+            //@include background-gradient;
             color: $dark_gray;
         }
     }

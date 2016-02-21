@@ -1,6 +1,6 @@
 .Intro {
 	background-color: $dark_gray;
-	color: rgba(255,255,255, 0.65);
+	color: $athens_gray_2;
     
     background: 
         $page_bg_grad,
@@ -8,24 +8,27 @@
         url('images/page-bg-0.jpg') no-repeat;
 
     background-position:
-        bottom calc(8vh + 2.96rem) left 0,
+        bottom 0 left 0,
         bottom 0 left 0,
         center center;
 
     background-size: auto, auto, cover;
     
+    height: 84vh;
+    
   p {
 		font-family: 'colaborate';
 		font-weight: bold;
-		font-size: 0.66em;;
+		font-size: 2.33vw;
 		line-height: 1.66;
 		letter-spacing: -0.05em;
-		
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
 		margin: 0 0 1em 0;
 				
 		strong {
 			font-weight: bold;
 			color: rgba(255,255,255,1);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
 		}
 	}
   

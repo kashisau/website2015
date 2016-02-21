@@ -31,12 +31,16 @@ body {
 	left: 0;
 	bottom: 0;
 	
-	background-color: $dark_gray_accent2;
+	background-color: $main_menu_bg;
 	padding: 0;
 
 	.LogoName {
-		margin: 4vh 6vw;
+		margin: 2vh 6vw;
 		font-size: 2em;
+        
+        &-first, &-last {
+            color: $athens_gray;
+        }
 	}
 
 	&-icon {
@@ -47,7 +51,7 @@ body {
 		position: absolute;
 		right: 0;
 		top: 16.66vw;
-		background-color: $dark_gray_accent2;
+		background-color: $main_menu_bg;
 		z-index: 9999;
 		
 		display: none;	
@@ -86,7 +90,7 @@ body {
 		display: inline-block;
 		padding: 0px;
 		vertical-align: top;
-		margin: 4vh 2vw;
+		margin: 2vh 2vw;
 		
 		ul {
 			list-style: none;
@@ -130,7 +134,7 @@ body {
 		
 		&--social > ul {
 			list-style: none;
-			margin: 4vh 2vw;
+			margin: 2vh 2vw;
 			padding: 0;
 			
 			li {
