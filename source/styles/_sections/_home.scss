@@ -3,16 +3,14 @@
 	color: $athens_gray_2;
     
     background: 
-        $page_bg_grad,
         url('images/page-bg-overlay-grid.png') repeat-x,
         url('images/page-bg-0.jpg') no-repeat;
 
     background-position:
         bottom 0 left 0,
-        bottom 0 left 0,
         center center;
 
-    background-size: auto, auto, cover;
+    background-size: auto, cover;
     
     height: 84vh;
     
