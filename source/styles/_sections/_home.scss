@@ -1,6 +1,7 @@
 .Intro {
 	background-color: $dark_gray;
 	color: $athens_gray_2;
+    text-align: center;
     
     background: 
         url('images/page-bg-overlay-grid.png') repeat-x,
@@ -38,6 +39,34 @@
 			margin: 0 0 1.75em 0;
 		}
 	}
-	
-	
+}
+
+.Home {
+    // Render main menu centrally.
+    .MainMenu {
+        background-color: rgba(35,35,35,0.35);
+        .LogoName {
+            opacity: .5;
+            filter: blur(0.1em) saturate(0);
+
+            &-slogan {
+                display: none;
+            }
+        }
+
+    }
+    .Main .LogoName {
+        font-size: 4vw;
+        margin: 0 1.2em 0 -1.2em;
+        
+        transform: translateY(150%);
+        
+        &-slogan {
+            display: block;
+        }
+        
+        span {
+            text-shadow: 0.01em 0.01em 0.03em rgba(35,35,35,0.65);
+        }
+    }
 }
