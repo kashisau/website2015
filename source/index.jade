@@ -1,24 +1,17 @@
 extends _layouts/_default
 block Vars
-  -mainMenu = true
+  -var mainMenu = true
+  -var section = "home"
 block MainContent
-  div.Main.Intro.TitleFont
-    p Hello
-    p
-      | My name's 
-      strong Kashi Samaraweera
-      |  and I'm a 
-      strong full-stack developer
-      |  for the web.
-    p
-      | I've been responsible for the 
-      strong architecture
-      | , 
-      strong development
-      |  and successful delivery of 
-      strong e-learning systems
-      | , digital 
-      strong interactive detailers
-      |  and websites from microsites to custom-built 
-      strong certification management systems
-      |  for GPs and pharmacists accross Australia.
+  div.Main.Intro
+    .Landing
+        .LogoName.LogoName--fullInfo
+            img(src=relativeDir+"images/mainmenu-logo.png").LogoName-logo
+            div.LogoName-logotype
+                span.LogoName-first Kashi
+                span.LogoName-last Samaraweera
+            div.LogoName-slogan Full-stack developer, Sydney
+            p.icon-address-book
+                a(href="tel:+61404252916") 0404 252 916
+                |  | 
+                a(href="mailto:Kashi%20Samaraweera<kashi@kashis.com.au>") kashi@kashis.com.au

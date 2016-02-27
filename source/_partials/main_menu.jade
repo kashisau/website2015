@@ -7,15 +7,16 @@ div.MainMenu
     div.LogoName-logotype
       span.LogoName-first Kashi
       span.LogoName-last Samaraweera
+    span.LogoName-slogan Full-stack developer, Sydney
   nav.MainMenu-menuLinks
     ul.TitleFont
-      li.MainMenu-homeLink
+      li.MainMenu-homeLink(class=(section==="home")? "is-active" : "")
         a(href="/") Home
-      li.MainMenu-workLink
+      li.MainMenu-workLink(class=(section==="work")? "is-active" : "")
         a(href="/work") Work
-      li.MainMeu-aboutLink
+      li.MainMeu-aboutLink(class=(section==="about")? "is-active" : "")
         a(href="/about") About
-      li.MainMenu-contactLink
+      li.MainMenu-contactLink(class=(section==="contact")? "is-active" : "")
         a(href="/contact") Contact
   footer.ProfileLinks.ProfileLinks--social
     ul
@@ -30,8 +31,11 @@ div.MainMenu
       li.ProfileLinks-instagram
         a(href="https://instagram.com/kashisamaraweera",title="Photos by Kashi on Instagram").icon-instagram Instagram
       li.ProfileLinks-source
-        a(href="https://bitbucket.org/kashis/website2015",title="GIT Repository on BitBuket").icon-cc View source (GIT) 
+        a(href="https://github.com/kashisau/website2015",title="View source on GitHub")
+          img(src=relativeDir+"images/osi-logo.png").osi-logo
+          | View source (GIT)
   footer.ProfileLinks.ProfileLinks--source
-    div.icon-cc
+    div
+      img(src=relativeDir+"images/osi-logo.png").osi-logo
       | This is an open-source project, available on 
-      a(href="https://bitbucket.org/KashiS/website2015") BitBucket
+      a(href="https://github.com/kashisau/website2015") GitHub

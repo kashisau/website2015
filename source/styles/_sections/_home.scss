@@ -1,30 +1,76 @@
 .Intro {
 	background-color: $dark_gray;
-	color: rgba(255,255,255, 0.65);
- 
+	color: $athens_gray_2;
+    text-align: center;
+    
+    background: 
+        $page_bg_grad,
+        url('images/page-bg-overlay-grid.png') repeat,
+        url('images/page-bg-0.jpg') no-repeat;
+
+    background-position:
+        bottom 0 left 0,
+        center center;
+
+    background-size: auto, auto, cover;
+    
+    height: 84vh;
+    
   p {
 		font-family: 'colaborate';
 		font-weight: bold;
-		font-size: 0.66em;;
+
 		line-height: 1.66;
 		letter-spacing: -0.05em;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
 		
-		margin: 0 0 1em 0;
+        text-align:left;
 				
 		strong {
 			font-weight: bold;
 			color: rgba(255,255,255,1);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
 		}
+        
+        a {
+            color: $athens_gray;
+        }
+        
+        a:visited {
+            color: $athens_gray_2;
+        }
 	}
   
-  	@include sm-viewport {
-		p {
-			font-size: 6.82vw;
-			line-height: 1.33;
-			letter-spacing: -0.05em;
-			margin: 0 0 1.75em 0;
-		}
-	}
-	
-	
+}
+@include lg-viewport {
+    .Home {
+        // Render main menu centrally.
+        .MainMenu {
+            .LogoName {
+                opacity: .25;
+                filter: blur(0.1em) saturate(0);
+
+                &-slogan {
+                    display: none;
+                }
+            }
+
+        }
+        .Main .Landing {
+            transform: translateY(100%);
+            .LogoName {
+                font-size: 4vw;
+                margin: 0 1.2em 0 -1.2em;
+                
+                &-slogan {
+                    display: block;
+                }
+                
+                span {
+                    text-shadow: 0.01em 0.01em 0.03em rgba(35,35,35,0.65);
+                }
+            }
+            
+        }
+    }
 }
