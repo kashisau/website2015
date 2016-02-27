@@ -24,33 +24,55 @@ body {
 @import '_common/_stage-layouts';
 @import '_common/_type';
 
-@import '_sections/_home';
-@import '_sections/_work';
-	
+
 .LogoName {
     color: #ffffff;
     line-height: 0.8;
     display: inline-block;
+    text-align: left;
     
-    .LogoName-logo {
+    & &-logo {
         height: 1.38em;
         display: inline-block;
         margin-right: 0.2em;
     }
-    .LogoName-logotype {
+    & &-logotype {
         display: inline-block;
     }
-    .LogoName-first {
+    & &-first {
         display: block;
     }
-    .LogoName-last {
+    & &-last {
         display: block;
         font-size: 0.85em;
     }
+    & &-slogan {
+        display: none;
+        font-weight: normal;
+        font-size: 0.4em;
+        color: $athens_gray_2;
+        letter-spacing: -0.015em;
+        margin-left: 6.27em;
+        margin-bottom: -0.8em;
+    }
+    
+    &.LogoName--fullInfo &-slogan {
+        margin-bottom: inherit;
+    }
+    
+    & p {
+        font-size: 0.4em;
+        margin-left: 6.27em;
+    }
+    
     text-decoration: none;
 }
 
 @import '_common/_main-menu';
+@import '_sections/_home';
+@import '_sections/_work';
+@import '_sections/_about';
+	
 
 header {
     

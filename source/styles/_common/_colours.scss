@@ -1,10 +1,15 @@
 $athens_gray: #FCFCFD;
+$athens_gray_2: #EFEFFA;
+
 $dark_gray: #353526;
 $dark_gray_accent: #616155;
 $dark_gray_highlight: #b8b8bc;
 $dark_gray_accent2: #232323;
 
 $work_red: #B21F12;
+
+$main_menu_bg: rgba(35,35,35,.65);
+$page_bg_grad: linear-gradient(to bottom, rgba(35,35,35,0.45) 0%, rgba(35,35,35,0.45) 98%,$main_menu_bg 100%) fixed;
 
 @mixin background-gradient {
     background-color: $athens_gray;
