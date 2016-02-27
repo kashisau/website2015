@@ -56,6 +56,15 @@ body {
         margin-bottom: -0.8em;
     }
     
+    &.LogoName--fullInfo &-slogan {
+        margin-bottom: inherit;
+    }
+    
+    & p {
+        font-size: 0.4em;
+        margin-left: 6.27em;
+    }
+    
     text-decoration: none;
 }
 

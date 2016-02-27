@@ -3,10 +3,15 @@ block Vars
   -var mainMenu = true
   -var section = "home"
 block MainContent
-  div.Main.Intro.TitleFonts
-    .LogoName
-        img(src=relativeDir+"images/mainmenu-logo.png").LogoName-logo
-        div.LogoName-logotype
-            span.LogoName-first Kashi
-            span.LogoName-last Samaraweera
-        span.LogoName-slogan Full-stack developer, Sydney
+  div.Main.Intro
+    .Landing
+        .LogoName.LogoName--fullInfo
+            img(src=relativeDir+"images/mainmenu-logo.png").LogoName-logo
+            div.LogoName-logotype
+                span.LogoName-first Kashi
+                span.LogoName-last Samaraweera
+            div.LogoName-slogan Full-stack developer, Sydney
+            p.icon-address-book
+                a(href="tel:+61404252916") 0404 252 916
+                |  | 
+                a(href="mailto:Kashi%20Samaraweera<kashi@kashis.com.au>") kashi@kashis.com.au
