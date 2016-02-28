@@ -20,8 +20,14 @@ com.kashis.fed.MainMenu = function() {
 		body: 'body',
 		main: '.Main',
 		menu: '.MainMenu',
+        menuLinks: '.MainMenu-menuLinks',
+        linkListItems: '.MainMenu-menuLinks li',
+        linkListLinks: '.MainMenu-menuLinks a',
 		menuIcon: '.MainMenu-icon',
-		menuToggleBtns: '.MainMenu-openBtn, .MainMenu-closeBtn'
+		menuToggleBtns: '.MainMenu-openBtn, .MainMenu-closeBtn',
+        logo: 'a.LogoName',
+        mmLlogo: '.MainMenu .LogoName',
+        landingLogo: '.Landing .LogoName'
 	},
 	$ = jQuery; 
 	
@@ -37,8 +43,36 @@ com.kashis.fed.MainMenu = function() {
 
 		_controls.menuToggleBtns.on('click', _mainMenuToggle);
 		_controls.body.removeClass('preload');
-	}
-	
+        _controls.linkListLinks.on('click', _navigate);
+        
+        function show(event) {
+            _controls.menu.toggleClass('MainMenu--noLogotype');
+            if (!event) return;
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        _controls.mmLlogo.on('click', show);
+        //setTimeout(show, 1000);
+    }
+    
+    function _navigate(navEvent) {
+        var link = $(navEvent.currentTarget),
+            linkListItem = link.parents('li'),
+            linkListItems = _controls.linkListItems,
+            menuLinks = _controls.menuLinks;
+        
+        navEvent.stopPropagation();
+        navEvent.preventDefault();
+        
+        //if (linkListItem.hasClass('is-active')) return false;
+
+        linkListItems.removeClass('is-active');
+        linkListItem.addClass('is-active');
+        
+        menuLinks.addClass('MainMenu-menuLinks-animateOut');
+        menuLinks.removeClass('MainMenu-menuLinks-animateIn');
+    }
+    
 	/**
 	 * Event handling method for opening or closing the main menu for the site.
 	 * This will attempt to resolve the intention (i.e., either opening or

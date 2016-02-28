@@ -1,6 +1,6 @@
 a(href="/menu").MainMenu-icon.MainMenu-openBtn
     img(src=relativeDir+"images/mainmenu-logo.png")
-div.MainMenu
+div.MainMenu.MainMenu--noLogotype
   a(href="javascript:void(0);",title="Close the main menu").MainMenu-permanentCloseBtn.MainMenu-closeBtn.icon-cancel
   a(href="/").LogoName
     img(src=relativeDir+"images/mainmenu-logo.png").LogoName-logo
@@ -8,7 +8,7 @@ div.MainMenu
       span.LogoName-first Kashi
       span.LogoName-last Samaraweera
     span.LogoName-slogan Full-stack developer, Sydney
-  nav.MainMenu-menuLinks
+  nav.MainMenu-menuLinks.MainMenu-menuLinks-animateIn
     ul.TitleFont
       li.MainMenu-homeLink(class=(section==="home")? "is-active" : "")
         a(href="/") Home
@@ -18,7 +18,7 @@ div.MainMenu
         a(href="/about") About
       li.MainMenu-contactLink(class=(section==="contact")? "is-active" : "")
         a(href="/contact") Contact
-  footer.ProfileLinks.ProfileLinks--social
+  nav.ProfileLinks.ProfileLinks--social
     ul
       li.ProfileLinks-linkedin
         a(href="https://au.linkedin.com/in/kashis",title="LinkedIn profile for Kashi Samaraweera").icon-linkedin LinkedIn
@@ -34,7 +34,7 @@ div.MainMenu
         a(href="https://github.com/kashisau/website2015",title="View source on GitHub")
           img(src=relativeDir+"images/osi-logo.png").osi-logo
           | View source (GIT)
-  footer.ProfileLinks.ProfileLinks--source
+  nav.ProfileLinks.ProfileLinks--source
     div
       img(src=relativeDir+"images/osi-logo.png").osi-logo
       | This is an open-source project, available on 

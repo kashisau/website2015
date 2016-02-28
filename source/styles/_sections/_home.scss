@@ -47,14 +47,10 @@
         // Render main menu centrally.
         .MainMenu {
             .LogoName {
-                opacity: .25;
-                filter: blur(0.1em) saturate(0);
-
                 &-slogan {
                     display: none;
                 }
-            }
-
+            }            
         }
         .Main .Landing {
             transform: translateY(100%);

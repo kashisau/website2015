@@ -28,10 +28,9 @@ body {
 	position: fixed;
 	z-index: 9998;
 	
-	left: 0;
-	bottom: 0;
-	
-	background-color: $main_menu_bg;
+    top: 0;
+    	
+	background-color: transparent;
 	padding: 0;
 
 	.LogoName {
@@ -42,6 +41,18 @@ body {
             color: $athens_gray;
         }
 	}
+    
+    @include lg-viewport {
+        &--noLogotype {
+            .MainMenu-menuLinks {
+                transform: translateX(calc(-9.33em - 9vw));
+                transition: transform $menu_close_time ease-in-out;
+            }
+            .LogoName-first, .LogoName-last {
+                opacity: 0;
+            }
+        }
+    }
 
 	&-icon {
 		width: 16.66vw;
@@ -91,6 +102,8 @@ body {
 		padding: 0px;
 		vertical-align: top;
 		margin: 2vh 2vw;
+        
+        transition: transform $menu_open_time ease-in-out;
 		
 		ul {
 			list-style: none;
@@ -98,6 +111,7 @@ body {
 			margin: 0;
             line-height: 0;
 		}
+        
 		li {
 			list-style: none;
 			text-indent: 0;
@@ -106,12 +120,25 @@ body {
 			
 			display: inline-block;
 			vertical-align: top;
-      
+            
+            opacity: 0.45;
+            
+            animation-duration: 4*$menu_open_time;
+            animation-iteration-count: 1;
+            animation-direction: alternate;
+            animation-fill-mode: backwards;
+            animation-timing-function: ease-in-out;
+            
+            @for $childNo from 1 through 4 {
+                &:nth-child(#{$childNo}) {
+                    animation-delay: ($menu_open_time/2)*($childNo + 1);
+                }
+            }
+            
 			a {
 				font-size: 0.5em;
 				line-height: 2em;
 				color: #ffffff;
-                opacity: 0.45;
 				text-decoration: none;
 				font-family: 'colaborate';
 				text-transform: lowercase;
@@ -120,11 +147,30 @@ body {
 			}
             
             &.is-active {
-                a {
-                    opacity: 1;
-                }
+                opacity: 1;
             }
 		}
+        
+        &-animateIn {
+            li {
+                animation-name: ZoomIn;
+            }
+        }
+        &-animateOut {
+            li {
+                transform: scale(0);
+                animation-name: ZoomOut;
+                
+                animation-duration: $menu_close_time;
+                
+                @for $childNo from 1 through 4 {
+                    &:nth-child(#{$childNo}) {
+                        animation-delay: ($menu_open_time/2)*(4 - $childNo);
+                    }
+                }
+            }
+        }
+
 	}
 	
 	.ProfileLinks {
@@ -213,9 +259,12 @@ body {
 		width: 58.33vw;
         left: 100%;
 		top: 0;
+        bottom: 0;
 		
 		padding: 0 8.33vw;
         transition: transform $menu_open_time ease-in-out $menu_close_time/4;
+        
+        background-color: $main_menu_bg;
 		
 		&:hover {
 			height: inherit;
