@@ -88,3 +88,12 @@
         transform: scale(0);
     }
 }
+
+@keyframes SlideTop {
+    0% {
+        transform: translateX(-112vw);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}

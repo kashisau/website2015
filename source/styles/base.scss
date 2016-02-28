@@ -21,6 +21,7 @@ body {
     margin: 0;
 }
 
+@import '_common/_main-menu';
 @import '_common/_stage-layouts';
 @import '_common/_type';
 
@@ -68,7 +69,7 @@ body {
     text-decoration: none;
 }
 
-@import '_common/_main-menu';
+
 @import '_sections/_home';
 @import '_sections/_work';
 @import '_sections/_about';

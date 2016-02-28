@@ -30,6 +30,7 @@ com.kashis.fed.MainMenu = function() {
         mmLlogo: '.MainMenu .LogoName',
         landingLogo: '.Landing .LogoName'
 	},
+    floating = false,
 	$ = jQuery; 
 	
 	/**
@@ -53,9 +54,16 @@ com.kashis.fed.MainMenu = function() {
             event.stopPropagation();
         }
         _controls.mmLlogo.on('click', show);
-        _controls.window.on('scroll', (e) => {
+        _controls.window.on('scroll', () => {
             var scroll = _controls.window.scrollTop();
-            _controls.body.toggleClass('FloatingMenus', scroll!==0);
+            
+            if (scroll===0 && floating === false) return;
+            if (scroll!==0 && floating === true) return;
+            floating = scroll!==0;
+            
+            window.requestAnimationFrame(() => {
+                _controls.body.toggleClass('FloatingMenus', scroll!==0);
+            })
         });
     }
     
