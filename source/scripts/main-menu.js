@@ -17,6 +17,7 @@ com.kashis.fed.MainMenu = function() {
 	 * Properties
 	 */
 	var _controls = {
+        window: window,
 		body: 'body',
 		main: '.Main',
 		menu: '.MainMenu',
@@ -52,14 +53,23 @@ com.kashis.fed.MainMenu = function() {
             event.stopPropagation();
         }
         _controls.mmLlogo.on('click', show);
-        //setTimeout(show, 1000);
+        _controls.window.on('scroll', (e) => {
+            var scroll = _controls.window.scrollTop();
+            _controls.body.toggleClass('FloatingMenus', scroll!==0);
+        });
     }
     
+    /**
+     * Catches a main menu click for page navigation, allowing the webapp to
+     * handle page transitions (build-up and teardowns).
+     * @param {jqEvent} navEvent    The jQuery-wrapped event that triggered the
+     *                              page navigation.
+     */
     function _navigate(navEvent) {
         var link = $(navEvent.currentTarget),
             linkListItem = link.parents('li'),
             linkListItems = _controls.linkListItems,
-            menuLinks = _controls.menuLinks;
+            menu = _controls.menu;
         
         navEvent.stopPropagation();
         navEvent.preventDefault();
@@ -69,8 +79,12 @@ com.kashis.fed.MainMenu = function() {
         linkListItems.removeClass('is-active');
         linkListItem.addClass('is-active');
         
-        menuLinks.addClass('MainMenu-menuLinks-animateOut');
-        menuLinks.removeClass('MainMenu-menuLinks-animateIn');
+        menu.removeClass('MainMenu--animateIn');
+        menu.addClass('MainMenu--animateOut');
+        
+        menu.on('animationend', (e) => {
+           document.location =  link.get(0).href;
+        });
     }
     
 	/**

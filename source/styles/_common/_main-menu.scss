@@ -20,6 +20,12 @@ body {
             }
         }
     }
+    
+    &.FloatingMenus {
+        .MainMenu::before {
+            transform: scale(120);
+        }
+    }
 }
 
 .MainMenu {
@@ -32,10 +38,29 @@ body {
     	
 	background-color: transparent;
 	padding: 0;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 2.72rem;
+        height: 2.72rem;
+        background-color: $dark_gray_accent2;
+        top: 2vh;
+        left: calc(6vw + 1em);
+        border-radius: 100%;
+
+        transition: transform $menu_open_time ease-in;
+        z-index: -1;
+        
+        transform: scale(0.01);
+    }
 
 	.LogoName {
 		margin: 2vh 6vw;
 		font-size: 2em;
+        z-index: 9999;
         
         &-first, &-last {
             color: $athens_gray;
@@ -123,7 +148,7 @@ body {
             
             opacity: 0.45;
             
-            animation-duration: 4*$menu_open_time;
+            animation-duration: 2*$menu_open_time;
             animation-iteration-count: 1;
             animation-direction: alternate;
             animation-fill-mode: backwards;
@@ -150,13 +175,17 @@ body {
                 opacity: 1;
             }
 		}
-        
-        &-animateIn {
+	}
+
+    &--animateIn {    
+        .MainMenu-menuLinks {
             li {
                 animation-name: ZoomIn;
             }
         }
-        &-animateOut {
+    }
+    &--animateOut {
+        .MainMenu-menuLinks {
             li {
                 transform: scale(0);
                 animation-name: ZoomOut;
@@ -170,8 +199,7 @@ body {
                 }
             }
         }
-
-	}
+    }
 	
 	.ProfileLinks {
 		display: inline-block;

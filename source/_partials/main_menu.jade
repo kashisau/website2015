@@ -1,6 +1,6 @@
 a(href="/menu").MainMenu-icon.MainMenu-openBtn
     img(src=relativeDir+"images/mainmenu-logo.png")
-div.MainMenu.MainMenu--noLogotype
+div.MainMenu.MainMenu--animateIn
   a(href="javascript:void(0);",title="Close the main menu").MainMenu-permanentCloseBtn.MainMenu-closeBtn.icon-cancel
   a(href="/").LogoName
     img(src=relativeDir+"images/mainmenu-logo.png").LogoName-logo
@@ -8,13 +8,13 @@ div.MainMenu.MainMenu--noLogotype
       span.LogoName-first Kashi
       span.LogoName-last Samaraweera
     span.LogoName-slogan Full-stack developer, Sydney
-  nav.MainMenu-menuLinks.MainMenu-menuLinks-animateIn
+  nav.MainMenu-menuLinks
     ul.TitleFont
       li.MainMenu-homeLink(class=(section==="home")? "is-active" : "")
         a(href="/") Home
       li.MainMenu-workLink(class=(section==="work")? "is-active" : "")
         a(href="/work") Work
-      li.MainMeu-aboutLink(class=(section==="about")? "is-active" : "")
+      li.MainMenu-aboutLink(class=(section==="about")? "is-active" : "")
         a(href="/about") About
       li.MainMenu-contactLink(class=(section==="contact")? "is-active" : "")
         a(href="/contact") Contact
