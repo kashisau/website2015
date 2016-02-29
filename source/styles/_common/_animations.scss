@@ -91,9 +91,11 @@
 
 @keyframes SlideTop {
     0% {
-        transform: translateX(-112vw);
+        transform: translateY(-100%);
+        opacity: 0;
     }
     100% {
-        transform: translateX(0);
+        transform: translateY(0);
+        opacity: 1;
     }
 }

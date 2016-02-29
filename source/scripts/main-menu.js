@@ -30,7 +30,8 @@ com.kashis.fed.MainMenu = function() {
         mmLlogo: '.MainMenu .LogoName',
         landingLogo: '.Landing .LogoName'
 	},
-    floating = false,
+    _menuDocked = false,
+    _menuDockScrollThreshold,
 	$ = jQuery; 
 	
 	/**
@@ -54,17 +55,36 @@ com.kashis.fed.MainMenu = function() {
             event.stopPropagation();
         }
         _controls.mmLlogo.on('click', show);
-        _controls.window.on('scroll', () => {
-            var scroll = _controls.window.scrollTop();
+        _controls.window.on('scroll', _updateMenuDock);
+        
+        _controls.window.on('resize', _resize);
+        
+        if (_menuDockScrollThreshold===undefined) _resize();
+    }
+    
+    /**
+     * Triggered on scroll, this method checks to see if the menu should be
+     * docked to the viewport based on how far the user has scrolled.
+     */
+    function _updateMenuDock() {
+        var scroll = _controls.window.scrollTop(),
+            threshold = _menuDockScrollThreshold - scroll <= 0;
             
-            if (scroll===0 && floating === false) return;
-            if (scroll!==0 && floating === true) return;
-            floating = scroll!==0;
+        if (threshold && _menuDocked === true) return;
+        if (!threshold && _menuDocked === false) return;
+        _menuDocked = threshold;
             
-            window.requestAnimationFrame(() => {
-                _controls.body.toggleClass('FloatingMenus', scroll!==0);
-            })
+        window.requestAnimationFrame(() => {
+            _controls.body.toggleClass('FloatingMenus', threshold);
         });
+    }
+    
+    /**
+     * Updates the menu docking threshold based on the new viewport dimensions.
+     */
+    function _resize() {
+        _menuDockScrollThreshold = _controls.window.get(0).innerHeight*.5;
+        _updateMenuDock();
     }
     
     /**

@@ -23,7 +23,7 @@ body {
     
     &.FloatingMenus {
         .MainMenu::before {
-            transform: scale(120);
+            transform: scale(190);
         }
     }
 }
@@ -44,14 +44,14 @@ body {
         content: '';
         display: block;
         position: absolute;
-        width: 2.72rem;
-        height: 2.72rem;
+        width: 1vw;
+        height: 1vw;
         background-color: rgba(35,35,35,1);
-        top: 2vh;
-        left: calc(6vw + 1em);
+        top: 2em;
+        left: calc(6vw + 2em);
         border-radius: 100%;
 
-        transition: transform $menu_open_time*1.5 ease-in;
+        transition: transform $menu_open_time ease-in;
         z-index: -1;
         
         transform: scale(0.01);

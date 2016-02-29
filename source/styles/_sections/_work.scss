@@ -17,3 +17,11 @@
         color: #ffffff;
     }
 }
+
+body.FloatingMenus {
+    .Main-sectionMenu {
+        nav {
+            background-color: $work-red;
+        }
+    }
+}

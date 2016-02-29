@@ -1,4 +1,4 @@
-$main-height: calc(80vh - 2.96rem);
+$main-height: 84vh;//calc(80vh - 2.96rem);
 $main-menu-height: calc(4vh + 2.96em);
 $main-sm-padding: 16.66vw 8.33vw 8.33vw 8.33vw;
 $main-sm-offset-margin: 0;
@@ -29,25 +29,6 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
     
     &-sectionMenu {
         font-size: 1rem;
-        nav {
-            overflow: hidden;
-            &::before {
-                content: '';
-                display: block;
-                position: absolute;
-                width: calc(2vh + 1rem);
-                height: calc(2vh + 1rem);
-                background-color: #ff0000;
-                top: 0;
-                left: 0;
-                border-radius: 100%;
-
-                transition: transform $menu_open_time*1.5 ease-in $menu_open_time*1.5;
-                z-index: -1;
-                
-                transform: scale(0.01);
-            }
-        }
     }
     
     &-bodySection {
@@ -110,29 +91,25 @@ body.FloatingMenus {
     .Main-sectionMenu {
         nav {
             width: 100%;
-            height: 2em;
             padding: 1vh 6vw;
-            
             position: fixed;
+
             top: 0;
             left: 0;
+
             top: calc(3em + 4vh);
             
-            //animation: SlideTop $menu_open_time $menu_open_time 1 normal backwards;
+            animation: SlideTop $menu_open_time $menu_open_time 1 normal backwards;
             animation-timing-function: ease-in-out;
             
-            //background-color: #ff0000;
+            background-color: #ff0000;
             
             z-index: 8999;
             
-            &::before {
-                transform: scale(150);
-            }
-            
             h1 {
-                padding: 0;
+                padding: 1vh 0;
                 margin: 0;
-                 
+                line-height: 1;
                 font-size: 1em;
                 
                 display: inline-block;
@@ -156,7 +133,9 @@ body.FloatingMenus {
                     
                     a {
                         padding: 1vh 4vw;
-                        
+                        font-family: colaborate;
+                        display: block;
+                        color: $athens_gray_2;
                         span {
                             display: none;
                         }
