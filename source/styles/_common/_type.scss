@@ -21,3 +21,13 @@ h2 {
     font-size: 2.4em;
     line-height: 1.33;
 }
+
+@mixin heading-font {
+    font-family: 'colaborate', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: -0.07em;
+}
+@mixin body-font {
+    font-family: 'Merriweather', 'Times New Roman', 'Roman', serif;
+    letter-spacing: normal;
+}

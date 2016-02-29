@@ -4,10 +4,18 @@ block Vars
   -relativeDir = '../'
   -section = "work"
 block MainContent
-  .Main.Work.Main-sectionMenu
-    nav
-      h1 Work
-      include _work-list
+  .Main.Work.Main--sectionMenu
+    nav.PageMenu
+      h1.Section Work
+      h2.Page What I do
+      ul
+        li
+          a(href="#front-end-developer") Front-end development
+        li
+          a(href="#backend-developer") Backend development
+        li
+          a(href="#the-full-stack") The full stack
+    include _work-section-menu
   .Main-bodySection
     p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
     p Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
