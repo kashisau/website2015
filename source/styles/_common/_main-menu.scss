@@ -21,9 +21,11 @@ body {
         }
     }
     
-    &.FloatingMenus {
-        .MainMenu::before {
-            transform: scale(190);
+    @include lg-viewport {
+        &.FloatingMenus {
+            .MainMenu::before {
+                transform: scale(190);
+            }
         }
     }
 }
@@ -177,24 +179,26 @@ body {
 		}
 	}
 
-    &--animateIn {    
-        .MainMenu-menuLinks {
-            li {
-                animation-name: ZoomIn;
+    @include lg-viewport {
+        &--animateIn {    
+            .MainMenu-menuLinks {
+                li {
+                    animation-name: ZoomIn;
+                }
             }
         }
-    }
-    &--animateOut {
-        .MainMenu-menuLinks {
-            li {
-                transform: scale(0);
-                animation-name: ZoomOut;
-                
-                animation-duration: $menu_close_time;
-                
-                @for $childNo from 1 through 4 {
-                    &:nth-child(#{$childNo}) {
-                        animation-delay: ($menu_open_time/2)*(4 - $childNo);
+        &--animateOut {
+            .MainMenu-menuLinks {
+                li {
+                    transform: scale(0);
+                    animation-name: ZoomOut;
+                    
+                    animation-duration: $menu_close_time;
+                    
+                    @for $childNo from 1 through 4 {
+                        &:nth-child(#{$childNo}) {
+                            animation-delay: ($menu_open_time/2)*(4 - $childNo);
+                        }
                     }
                 }
             }
@@ -298,14 +302,14 @@ body {
 			height: inherit;
 			padding: 0 8.33vw;
 		}
-		
+        
 		.LogoName {
 			margin-top: 16.66vw;
 			margin: 16.66vw 0 0 0;
 			display: block;
 			font-size: 3em;
 
-			&-logo {
+			img.LogoName-logo {
 				display: none;
 			}
 		}
@@ -313,10 +317,12 @@ body {
 		&-icon {
 			display: block;
             transition: transform $menu_open_time ease-in-out $menu_close_time/4;
+            
             &.MainMenu-closeBtn {
                 left: auto;
                 transform: translateX(-74.99vw);
             }
+            position: fixed;
 		}
 		
         .MainMenu-permanentCloseBtn {

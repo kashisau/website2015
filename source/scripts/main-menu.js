@@ -28,7 +28,8 @@ com.kashis.fed.MainMenu = function() {
 		menuToggleBtns: '.MainMenu-openBtn, .MainMenu-closeBtn',
         logo: 'a.LogoName',
         mmLlogo: '.MainMenu .LogoName',
-        landingLogo: '.Landing .LogoName'
+        landingLogo: '.Landing .LogoName',
+        pageLinks: '.PageMenu a'
 	},
     _menuDocked = false,
     _menuDockScrollThreshold,
@@ -59,6 +60,23 @@ com.kashis.fed.MainMenu = function() {
         
         _controls.window.on('resize', _resize);
         
+        _controls.pageLinks.on('touchstart', (e) => {
+            var pageLinks = _controls.pageLinks,
+                pageLink = $(e.currentTarget);
+                //fill = pageLink.find("::before");
+
+            e.preventDefault();
+            e.stopPropagation();
+            
+            pageLinks.removeClass('is-touched');
+            pageLink.addClass('is-touched');
+            
+            pageLink.on('transitionend', (e) => {
+                pageLinks.removeClass('is-touched');
+                window.location = pageLink.get(0).href;
+            });
+        });
+        
         if (_menuDockScrollThreshold===undefined) _resize();
     }
     
@@ -83,7 +101,7 @@ com.kashis.fed.MainMenu = function() {
      * Updates the menu docking threshold based on the new viewport dimensions.
      */
     function _resize() {
-        _menuDockScrollThreshold = _controls.window.get(0).innerHeight*.5;
+        _menuDockScrollThreshold = 100;//controls.window.get(0).innerHeight*.5;
         _updateMenuDock();
     }
     

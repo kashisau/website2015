@@ -17,25 +17,31 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
         position: relative;
         margin: 0;
         padding: $main-sm-padding;
-        min-height: calc(100vh - 24.99vw);
+        min-height: 76vh;
         margin: 0;
-        height: calc(100vh - 24.99vw);
-
-        overflow-y: scroll;
-        
+       
         background-position: bottom 0 left 0, bottom 0 left 0, center center !important;
-
     }
     
     &--sectionMenu {
         font-size: 0;
+        padding: 24vh 6vw 12vh 6vw;
         
+        @include sm-viewport {
+            padding: 12vh 6vw;
+            min-height: 72vh;
+            height: 72vh;
+        }   
+            
         .PageMenu, .SectionMenu {
             display: inline-block;
-            vertical-align: top;    
+            vertical-align: top;
+            
+            @include sm-viewport {
+                display: block;
+            }
         }
         
-        padding: 24vh 6vw 12vh 6vw;
         h1, h2, .SectionMenu li a {
             font-color: $athens_gray_2;
             opacity: 1;
@@ -46,7 +52,9 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
             padding: 0;
             margin: 0;
             
-            
+            @include sm-viewport {
+                font-size: 1.66em;
+            }
         }
         h1 {
             &::after {
@@ -55,10 +63,28 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
             padding: 0 0 0 0.33em;
             border-left: 0.1818em solid $dark_gray_highlight;
             text-transform: uppercase;
+            
         }
         
         h2 {
-
+            line-height: 1.15;
+        }
+        
+        @include sm-viewport {
+            h1 {
+                padding: 0;
+                border: none;
+                
+                &::after {
+                    content: none;
+                }
+            }
+            
+            h2 {
+                display: block;
+                font-size: 1em;
+                padding: 0.1818em 0;
+            }
         }
         
         li {
@@ -74,18 +100,72 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
         .PageMenu {
             width: 70%;
             font-size: 2rem;
+            
+            
             ul {
                 margin: 1em 0px 0px 1.5em;
             }
             li a {
                 font-style: italic;
             }
+            
+            @include sm-viewport {
+                width: auto;
+                
+                position: absolute;
+                bottom: 2vh;
+                
+                h1 {
+                    display: block;
+                    font-size: 1em;
+                }
+                
+                h2 {
+                    display: inline-block;
+                    font-size: 1.66em;
+                }
+            
+                ul {
+                    display: none;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    
+                    max-height: 16.66vw;
+                    overflow: hidden;
+                    
+                    background-color: $work-red;
+                    z-index: 1000;
+                }
+                
+                ul, li {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                li {
+                    display: block;
+                }
+                li a {
+                    font-size: 0.5em;
+                    line-height: 8.33vw;
+                    padding: 4.1818vw 8.33vw;
+                }
+            }
+
         }
         
         .SectionMenu {
             margin: 4.1818em 0 0 0;
             font-size: 0.66rem;
             width: 30%;
+            
+            @include sm-viewport {
+                width: auto;
+                display: none;
+            }
+            
             h1, h2 {
                 font-size: 4em;
             }
@@ -103,6 +183,8 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                     padding: 0 0 0 0.33em;
                     border-left: 0.1818em solid rgba(255,255,255,.25);
                     position: relative;
+                    
+                    
                     
                     span {
                         text-transform: none;
@@ -206,59 +288,10 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
 }
 
 body.FloatingMenus {
-    .Main-sectionMenu {
-        nav {
-            width: 100%;
-            padding: 1vh 6vw;
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            top: calc(3em + 4vh);
-            
-            animation: SlideTop $menu_open_time $menu_open_time 1 normal backwards;
-            animation-timing-function: ease-in-out;
-            
-            background-color: #ff0000;
-            
-            z-index: 8999;
-            
-            h1 {
-                padding: 1vh 0;
-                margin: 0;
-                line-height: 1;
-                font-size: 1em;
-                
-                display: inline-block;
-                vertical-align: top;
-            }
-            
-            ul {
-                list-style: none;
-                display: inline-block;
-                vertical-align: top;
-                padding: 0;
-                margin: 0 0 0 4vw;
-                font-size: 1em;
-                
-                li {
-                    vertical-align: top;
-                    list-style: none;
-                    display: inline-block;
-                    padding: 0;
-                    margin: 0;
-                    
-                    a {
-                        padding: 1vh 4vw;
-                        font-family: colaborate;
-                        display: block;
-                        color: $athens_gray_2;
-                        span {
-                            display: none;
-                        }
-                    }
-                }
+    .Main--sectionMenu {
+        @include sm-viewport {
+            .PageMenu ul {
+                display: block !important;
             }
         }
     }
