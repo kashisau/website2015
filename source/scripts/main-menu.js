@@ -32,7 +32,7 @@ com.kashis.fed.MainMenu = function() {
         pageLinks: '.PageMenu a'
 	},
     _menuDocked = false,
-    _menuDockScrollThreshold,
+    _menuDockScrollThreshold = 0,
 	$ = jQuery; 
 	
 	/**
@@ -59,25 +59,16 @@ com.kashis.fed.MainMenu = function() {
         _controls.window.on('scroll', _updateMenuDock);
         
         _controls.window.on('resize', _resize);
-        
-        _controls.pageLinks.on('touchstart', (e) => {
-            var pageLinks = _controls.pageLinks,
-                pageLink = $(e.currentTarget);
-                //fill = pageLink.find("::before");
-
-            e.preventDefault();
-            e.stopPropagation();
+        _controls.pageLinks.on('click', (e) => {
+            var pageMenu = _controls.pageLinks.parents('.PageMenu'),
+                menuWasOpen = pageMenu.hasClass('PageMenu--open');
             
-            pageLinks.removeClass('is-touched');
-            pageLink.addClass('is-touched');
-            
-            pageLink.on('transitionend', (e) => {
-                pageLinks.removeClass('is-touched');
-                window.location = pageLink.get(0).href;
-            });
+            pageMenu.toggleClass('PageMenu--open', !menuWasOpen);
+            _controls.body.toggleClass('PageMenu-is-open', !menuWasOpen);
+            if (!menuWasOpen) {
+                return false;
+            }
         });
-        
-        if (_menuDockScrollThreshold===undefined) _resize();
     }
     
     /**
@@ -86,7 +77,7 @@ com.kashis.fed.MainMenu = function() {
      */
     function _updateMenuDock() {
         var scroll = _controls.window.scrollTop(),
-            threshold = _menuDockScrollThreshold - scroll <= 0;
+            threshold = scroll !== 0;
             
         if (threshold && _menuDocked === true) return;
         if (!threshold && _menuDocked === false) return;

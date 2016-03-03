@@ -5,16 +5,18 @@ block Vars
   -section = "work"
 block MainContent
   .Main.Work.Main--sectionMenu
-    nav.PageMenu
-      h1.Section Work
-      h2.Page What I do
-      ul
-        li
-          a(href="#front-end-development") Front-end development
-        li
-          a(href="#backend-development") Backend development
-        li
-          a(href="#the-full-stack") The full stack
+    .PageMenu
+      .PageMenu-headings
+        h1.Section Work
+        h2.Page What I do
+      nav
+        ul
+          li
+            a(href="#front-end-development") Front-end development
+          li
+            a(href="#backend-development") Backend development
+          li
+            a(href="#the-full-stack") The full stack
     include _work-section-menu
   .Main.Main-bodySection
     h3(id="front-end-development") Front-end development

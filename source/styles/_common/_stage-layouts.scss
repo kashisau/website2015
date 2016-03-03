@@ -111,7 +111,6 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
             
             @include sm-viewport {
                 width: auto;
-                
                 position: absolute;
                 bottom: 2vh;
                 
@@ -124,34 +123,80 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                     display: inline-block;
                     font-size: 1.66em;
                 }
-            
-                ul {
-                    display: none;
-                    position: fixed;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    
-                    max-height: 16.66vw;
-                    overflow: hidden;
-                    
-                    background-color: $work-red;
-                    z-index: 1000;
-                }
                 
-                ul, li {
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                }
-                li {
-                    display: block;
-                }
                 li a {
                     font-size: 0.5em;
                     line-height: 8.33vw;
                     padding: 4.1818vw 8.33vw;
+                    text-decoration: underline dashed;
                 }
+
+                nav {
+                    height: calc(50vh - 16.66vw);
+                    bottom: 0;
+
+                    transform: translateY(46vh);
+                    transition: transform $menu_open_time ease-in-out;
+
+                    width: auto;
+                    left: 0;
+                    right: 0;
+
+                    position: fixed;
+
+                    z-index: 8000;
+                    background-color: $work-red;
+                    
+                    padding: 8.33vw;
+                    
+                    ul {
+                        margin: 0 0 0 0;
+                        
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        
+                        height: 16.66vw;
+                        
+                        transform: translateY(-8.33vw);
+                        transition:
+                            transform $menu_open_time ease-in-out,
+                            height $menu_open_time ease-in-out;
+                        
+                        li {
+                            position: relative;
+                            transform: translateX(-8.33vw);
+                            transition: transform $menu_open_time ease-in-out $menu_open_time;
+                            a {
+                                padding: 0 0;
+                                position: relative;
+                                line-height: 16.66vw;
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &--open {
+                .PageMenu-headings {
+                    position: fixed;
+                    bottom: 50vh;
+                    z-index: 7999;
+                }
+                nav {
+                    transform: translateY(0);
+                    ul {
+                        height: calc(50vh - 16.66vw);
+                        transform: translateY(0);
+                        li {
+                            transform: translateX(0);
+                            a {
+                                line-height: 3em;
+                            }
+                        }
+
+                    }
+                }                        
             }
 
         }
@@ -290,8 +335,13 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
 body.FloatingMenus {
     .Main--sectionMenu {
         @include sm-viewport {
-            .PageMenu ul {
-                display: block !important;
+            .PageMenu nav {
+                transform: translateY(calc(50vh - 16.66vw));
+            }
+            .PageMenu--open {
+                nav {
+                    transform: translateY(0);
+                }                        
             }
         }
     }
