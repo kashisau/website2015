@@ -145,6 +145,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                     right: 0;
 
                     position: fixed;
+                    overflow: hidden;
 
                     z-index: 8000;
                     background-color: $work-red;
@@ -159,9 +160,10 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                         
                         padding: 0;
                         
-                        height: 16.66vw;
+                        //height: 16.66vw;
                         
                         transform: translateY(-8.33vw);
+                        
                         transition:
                             transform $menu_open_time ease-in-out,
                             height $menu_open_time ease-in-out;
@@ -170,6 +172,8 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                             position: relative;
                             list-style: none;
                             transition: transform $menu_open_time ease-in-out $menu_open_time;
+                            height: 16.66vw;
+                            overflow: hidden;
                             a {
                                 padding: 0 0;
                                 position: relative;
@@ -191,34 +195,51 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                                     font-family: Arial, Helvetica, sans-serif;
                                     font-style: normal;
                                 }
+                                
+                                &.is-active::before {
+                                    content: '\e801';
+                                    font-family: "icons";
+                                }
                             }
                         }
                     }
                 }
+
+                @for $i from 0 through 11 {
+                    &.item-#{$i}-is-active {
+                        nav ul {
+                            transform: translateY(-8.33vw - (16.68vw * $i));
+                        }
+                    }
+                }
+                
+                &--open {
+                    .PageMenu-headings {
+                        position: fixed;
+                        bottom: 50vh;
+                        z-index: 7999;
+                    }
+                    nav {
+                        transform: translateY(0);
+                        ul {
+                            height: calc(50vh - 16.66vw);
+                            overflow-y: scroll;
+                            transform: translateY(0);
+                            li {
+                                transform: translateX(0);
+                                a {
+                                    line-height: 3em;
+                                    opacity: 1;
+                                }
+                            }
+
+                        }
+                    }                        
+                }
+                
             }
             
-            &--open {
-                .PageMenu-headings {
-                    position: fixed;
-                    bottom: 50vh;
-                    z-index: 7999;
-                }
-                nav {
-                    transform: translateY(0);
-                    ul {
-                        height: calc(50vh - 16.66vw);
-                        transform: translateY(0);
-                        li {
-                            transform: translateX(0);
-                            a {
-                                line-height: 3em;
-                                opacity: 1;
-                            }
-                        }
-
-                    }
-                }                        
-            }
+            
 
         }
         

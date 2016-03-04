@@ -61,12 +61,27 @@ com.kashis.fed.MainMenu = function() {
         _controls.window.on('resize', _resize);
         _controls.pageLinks.on('click', (e) => {
             var pageMenu = _controls.pageLinks.parents('.PageMenu'),
-                menuWasOpen = pageMenu.hasClass('PageMenu--open');
+                menuOpening = !pageMenu.hasClass('PageMenu--open'),
+                pageLinks = _controls.pageLinks,
+                pageLink = $(e.currentTarget),
+                pageLinkIndex;
             
-            pageMenu.toggleClass('PageMenu--open', !menuWasOpen);
-            _controls.body.toggleClass('PageMenu-is-open', !menuWasOpen);
-            if (!menuWasOpen) {
+            pageMenu.removeClass().addClass('PageMenu');
+            pageMenu.toggleClass('PageMenu--open', menuOpening);
+            _controls.body.toggleClass('PageMenu-is-open', menuOpening);
+            
+            if (menuOpening) {
                 return false;
+            } else {
+                pageLinkIndex = pageLinks.index(e.currentTarget);
+                pageMenu.removeClass();
+                pageMenu.addClass(
+                    'PageMenu item-'
+                    + pageLinkIndex
+                    + '-is-active'
+                );
+                pageLinks.removeClass('is-active');
+                pageLink.addClass('is-active');
             }
         });
     }
