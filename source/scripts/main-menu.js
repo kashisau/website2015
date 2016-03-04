@@ -28,8 +28,7 @@ com.kashis.fed.MainMenu = function() {
 		menuToggleBtns: '.MainMenu-openBtn, .MainMenu-closeBtn',
         logo: 'a.LogoName',
         mmLlogo: '.MainMenu .LogoName',
-        landingLogo: '.Landing .LogoName',
-        pageLinks: '.PageMenu a'
+        landingLogo: '.Landing .LogoName'
 	},
     _menuDocked = false,
     _menuDockScrollThreshold = 0,
@@ -59,31 +58,6 @@ com.kashis.fed.MainMenu = function() {
         _controls.window.on('scroll', _updateMenuDock);
         
         _controls.window.on('resize', _resize);
-        _controls.pageLinks.on('click', (e) => {
-            var pageMenu = _controls.pageLinks.parents('.PageMenu'),
-                menuOpening = !pageMenu.hasClass('PageMenu--open'),
-                pageLinks = _controls.pageLinks,
-                pageLink = $(e.currentTarget),
-                pageLinkIndex;
-            
-            pageMenu.removeClass().addClass('PageMenu');
-            pageMenu.toggleClass('PageMenu--open', menuOpening);
-            _controls.body.toggleClass('PageMenu-is-open', menuOpening);
-            
-            if (menuOpening) {
-                return false;
-            } else {
-                pageLinkIndex = pageLinks.index(e.currentTarget);
-                pageMenu.removeClass();
-                pageMenu.addClass(
-                    'PageMenu item-'
-                    + pageLinkIndex
-                    + '-is-active'
-                );
-                pageLinks.removeClass('is-active');
-                pageLink.addClass('is-active');
-            }
-        });
     }
     
     /**

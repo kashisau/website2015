@@ -13,6 +13,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
     
     font-size: 0;
     
+    
     @include sm-viewport {
         position: relative;
         margin: 0;
@@ -223,7 +224,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                         transform: translateY(0);
                         ul {
                             height: calc(50vh - 16.66vw);
-                            overflow-y: scroll;
+                            overflow-y: auto;
                             transform: translateY(0);
                             li {
                                 transform: translateX(0);
@@ -374,17 +375,29 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
     }
 }
 
-body.FloatingMenus {
-    .Main--sectionMenu {
-        @include sm-viewport {
-            .PageMenu nav {
-                transform: translateY(calc(50vh - 16.66vw));
-            }
-            .PageMenu--open {
-                nav {
-                    transform: translateY(0);
-                }                        
+body {
+
+    &.PageMenu-is-open {
+        .Main:not(.Main--sectionMenu) {
+            opacity: 0.35;
+            transition: opacity $menu_open_time ease-in-out;
+            transition-delay: 0;
+        }
+    }
+
+    &.FloatingMenus {
+        .Main--sectionMenu {
+            @include sm-viewport {
+                .PageMenu nav {
+                    transform: translateY(calc(50vh - 16.66vw));
+                }
+                .PageMenu--open {
+                    nav {
+                        transform: translateY(0);
+                    }                        
+                }
             }
         }
     }
+    
 }
