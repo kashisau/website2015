@@ -25,6 +25,7 @@ com.kashis.fed.PageMenu = function() {
         scrollBody: 'html, body',
 		body: 'body',
 		main: '.Main',
+        mainBody: '.Main:not(.Main--sectionMenu)',
         landingLogo: '.Landing .LogoName',
         pageMenu: '.PageMenu',
         pageLinks: '.PageMenu ul a',
@@ -183,6 +184,8 @@ com.kashis.fed.PageMenu = function() {
     PageMenuAPI.open = function() {
         var pageMenu = _controls.pageMenu;
         
+        _controls.mainBody.on('click', PageMenuAPI.close);
+        
         pageMenu.addClass('PageMenu--open');
         _controls.body.addClass('PageMenu-is-open');
         
@@ -194,6 +197,8 @@ com.kashis.fed.PageMenu = function() {
      */
     PageMenuAPI.close = function() {
         var pageMenu = _controls.pageMenu;
+        
+        _controls.mainBody.off('click', PageMenuAPI.close);
         
         pageMenu.removeClass('PageMenu--open');
         _controls.body.removeClass('PageMenu-is-open');

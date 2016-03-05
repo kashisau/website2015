@@ -212,7 +212,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                                 line-height: 16.66vw;
                                 vertical-align: middle;
                                 text-decoration: none;
-                                //display: inline-block;
+                                
                                 opacity: 0.65;
                                 
                                 transition: opacity $menu_open_time ease-in-out;
@@ -227,11 +227,15 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                                     font-family: Arial, Helvetica, sans-serif;
                                     font-style: normal;
                                     opacity: 0;
-                                    transition: opacity $menu_open_time ease-in-out $menu_open_time;
+                                    transition:
+                                        opacity $menu_open_time ease-in-out $menu_open_time,
+                                        transform $menu_open_time ease-in-out $menu_open_time;
                                 }
                                 
                                 &::before {
                                     opacity: 1;
+                                    transform: scale(1);
+                                    display: inline-block;
                                 }
                                 
                                 &::after {
@@ -244,7 +248,8 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                                 
                                 &.is-active {
                                     &::before {
-                                        opacity: 0;
+                                       opacity: 0;
+                                       transform: scale(1.5);
                                     }
                                     
                                     &::after {
