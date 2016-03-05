@@ -26,8 +26,12 @@ com.kashis.fed.PageMenu = function() {
 		body: 'body',
 		main: '.Main',
         landingLogo: '.Landing .LogoName',
-        pageLinks: '.PageMenu a'
+        pageMenu: '.PageMenu',
+        pageLinks: '.PageMenu a',
+        pageSections: '[id]'
 	},
+    _pageSectionMap = [],
+    _windowHeightDiv2 = 0,
 	$ = jQuery; 
 	
 	/**
@@ -40,16 +44,77 @@ com.kashis.fed.PageMenu = function() {
 			if (_controls.hasOwnProperty(control))
 				_controls[control] = $(_controls[control]);
 
-        _controls.window.on('scroll', _updateMenuDock);
+        _controls.window.on('scroll', PageMenuAPI.trackPageSections);
+        _controls.window.on('resize', PageMenuAPI.updatePageSectionMap);
+        
         _controls.pageLinks.on('click', _toggleMenu);
+        
+        _controls.window.on('load', PageMenuAPI.updatePageSectionMap);
     }
     
     /**
-     * Triggered on scroll, this method checks to see if the menu should be
-     * docked to the viewport based on how far the user has scrolled.
+     * Probes the DOM for the rendered positions of each section within the
+     * page. Each section and its offset are stored in the page section map
+     * property, which is then used by the page tracking method to determine
+     * which page section is currently in view. 
      */
-    function _updateMenuDock() {
-        var scroll = _controls.window.scrollTop();
+    PageMenuAPI.updatePageSectionMap = function() {
+        var sections = _controls.pageSections;
+        _pageSectionMap = [];
+        
+        _windowHeightDiv2 = window.innerHeight / 2;
+        
+        sections.each((index, section) => {
+            if (section.clientHeight === 0) return;
+            section = _controls.pageSections.eq(
+                    _controls.pageSections.index(section)
+                );
+
+            _pageSectionMap.push(
+                {
+                    section: section,
+                    top: section.offset().top - _windowHeightDiv2
+                }
+            );
+        });
+    }
+    
+    /**
+     * Tracks the window's scroll position, using the resultant scroll position
+     * to determine which page section is currently visible in the viewport.
+     * This method is optimised to listen for scroll events.
+     */
+    PageMenuAPI.trackPageSections = function() {
+        var scrollTop = _controls.window.scrollTop(),
+            section = lastSection(_pageSectionMap.slice());
+        
+        if (section === undefined) return;
+        
+        var pageLink = _controls.pageLinks.filter(
+                '[href="#' + section.attr('id') + '"]'),
+            pageLinkIndex = _controls.pageLinks.index(pageLink),
+            pageLinksTotal = _controls.pageLinks.length,
+            pageMenu = _controls.pageMenu.get(0),
+            itemClass = x => "item-" + x + "-is-active";
+        
+        _controls.pageLinks.removeClass('is-active');
+        pageLink.addClass('is-active');
+        
+        for (var i = 0; i < pageLinksTotal; i++)
+            pageMenu.classList.remove(itemClass(i));
+
+        pageMenu.classList.add(itemClass(pageLinkIndex));
+
+        function lastSection(sections) {
+            var section = sections.shift();
+            
+            if (section === undefined) return;
+            if (section.top >= scrollTop) return;
+            if (sections.length === 0) return section.section;
+            
+            if (section.top < scrollTop)
+                return lastSection(sections) || section.section;
+        }
     }
     
     /**
@@ -77,23 +142,19 @@ com.kashis.fed.PageMenu = function() {
         if (menuOpening) return false;
 
         pageLinkIndex = pageLinks.index(pageLink);
-        pageMenu.removeClass();
-        pageMenu.addClass(
-            'PageMenu item-'
-            + pageLinkIndex
-            + '-is-active'
-        );
-        pageLinks.removeClass('is-active');
-        pageLink.addClass('is-active');
+        //pageMenu.removeClass();
+        //pageMenu.addClass('PageMenu');
+        //pageLinks.removeClass('is-active');
+        //pageLink.addClass('is-active');
         
-        PageMenuAPI.goto(pageLink);
+        PageMenuAPI.scrollTo(pageLink);
         return false;
     }
     
     /**
      * Scrolls the page to the destination specified in the internalLink href.
      */
-    PageMenuAPI.goto = function(internalLink) {
+    PageMenuAPI.scrollTo = function(internalLink) {
         var linkTarget = (internalLink.prop("id"))? internalLink
                 : $(internalLink.prop("hash"));
         
@@ -103,13 +164,14 @@ com.kashis.fed.PageMenu = function() {
             scrollTop: linkTarget.offset().top
         },
         {
-            duration: 800,
-            step: (x, fxTween) => {
+            duration: 600,
+            // Smooth out the scroll transition with my favourite trig function:
+            step: (xi, fxTween) => {
                 var x0 = fxTween.start,
                     xn = fxTween.end,
                     xd = xn - x0,
-                    pos = fxTween.pos,
-                    sinePos = x0 + xd * Math.sin(Math.PI/2 * pos);
+                    i = fxTween.pos,
+                    sinePos = x0 + xd * Math.sin(Math.PI/2 * i);
 
                 fxTween.now = sinePos;
             }
