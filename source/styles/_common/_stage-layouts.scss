@@ -101,7 +101,38 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
         .PageMenu {
             width: 70%;
             font-size: 2rem;
+            position: relative;
             
+            &-permanentCloseBtn {
+                display: none;
+                position: fixed;
+                bottom: calc(50vh - 8.33vw - 4.1818vw);
+                right: 4.17vw;
+
+                width: 8.33vw;
+                height: 8.33vw;
+                
+                line-height: 8.33vw;
+                text-align: center;
+                
+                font-size: 0.5em;
+                
+                border-radius: 100%;
+                
+                text-decoration: none;
+                color: #ffffff;
+                z-index: 8005;
+                
+                opacity: 0;
+                transform: rotate(0);
+                
+                animation: ButtonShineOutro $menu_close_time/4 1 normal forwards;
+                animation-delay: 0;
+
+                &:active {
+                    background-color: $dark_gray_accent;
+                }
+            }
             
             ul {
                 margin: 1em 0px 0px 1.5em;
@@ -135,7 +166,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                 }
 
                 nav {
-                    height: calc(50vh - 16.66vw);
+                    height: 50vh;
                     bottom: 0;
 
                     transform: translateY(46vh);
@@ -151,7 +182,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                     z-index: 8000;
                     background-color: $work-red;
                     
-                    padding: 8.33vw;
+                    padding: 0;
                     
                     ul {
                         margin: 0 0 0 0;
@@ -163,7 +194,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                         
                         //height: 16.66vw;
                         
-                        transform: translateY(-8.33vw);
+                        transform: translateY(0);
                         
                         transition:
                             transform $menu_open_time ease-in-out,
@@ -176,7 +207,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                             height: 16.66vw;
                             overflow: hidden;
                             a {
-                                padding: 0 0;
+                                padding: 0 8.33vw;
                                 position: relative;
                                 line-height: 16.66vw;
                                 vertical-align: middle;
@@ -186,7 +217,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                                 
                                 transition: opacity $menu_open_time ease-in-out;
                                 
-                                &::before {
+                                &::before, &::after {
                                     text-decoration-line: none !important;
                                     margin-right: 1em;
                                     margin-left: 0;
@@ -195,12 +226,37 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                                     content: '\26AB';
                                     font-family: Arial, Helvetica, sans-serif;
                                     font-style: normal;
+                                    opacity: 0;
+                                    transition: opacity $menu_open_time ease-in-out $menu_open_time;
                                 }
                                 
-                                &.is-active::before {
+                                &::before {
+                                    opacity: 1;
+                                }
+                                
+                                &::after {
                                     content: '\e801';
                                     font-family: "icons";
+                                    position: absolute;
+                                    left: 8.33vw;
+                                    z-index: 8001;
                                 }
+                                
+                                &.is-active {
+                                    &::before {
+                                        opacity: 0;
+                                    }
+                                    
+                                    &::after {
+                                       opacity: 1;
+                                    }
+                                        
+                                }
+                                
+                                &:active {
+                                   background-color: darken($work-red, 10)
+                                }
+                                
                             }
                         }
                     }
@@ -209,7 +265,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                 @for $i from 0 through 11 {
                     &.item-#{$i}-is-active {
                         nav ul {
-                            transform: translateY(-8.33vw - (16.68vw * $i));
+                            transform: translateY(-16.66vw * $i);
                         }
                     }
                 }
@@ -220,17 +276,28 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                         bottom: 50vh;
                         z-index: 7999;
                     }
+                    
+                    .PageMenu-permanentCloseBtn {
+                        display: block;
+                        animation: ButtonShineIntro ($menu_open_time*4) ($menu_open_time) 1 normal forwards;
+                        animation-delay: 0;
+                    }
+                    
                     nav {
                         transform: translateY(0);
                         ul {
                             height: calc(50vh - 16.66vw);
                             overflow-y: auto;
-                            transform: translateY(0);
+                            transform: translateY(8.33vw);
                             li {
                                 transform: translateX(0);
                                 a {
                                     line-height: 3em;
                                     opacity: 1;
+                                    
+                                    &:active {
+                                        background-color: transparent;
+                                    }
                                 }
                             }
 

@@ -27,7 +27,8 @@ com.kashis.fed.PageMenu = function() {
 		main: '.Main',
         landingLogo: '.Landing .LogoName',
         pageMenu: '.PageMenu',
-        pageLinks: '.PageMenu a',
+        pageLinks: '.PageMenu ul a',
+        closeBtn: '.PageMenu-closeBtn',
         pageSections: '[id]'
 	},
     _pageSectionMap = [],
@@ -46,7 +47,7 @@ com.kashis.fed.PageMenu = function() {
 
         _controls.window.on('scroll', PageMenuAPI.trackPageSections);
         _controls.window.on('resize', PageMenuAPI.updatePageSectionMap);
-        
+        _controls.closeBtn.on('click', PageMenuAPI.close);
         _controls.pageLinks.on('click', _toggleMenu);
         
         _controls.window.on('load', PageMenuAPI.updatePageSectionMap);
@@ -100,10 +101,12 @@ com.kashis.fed.PageMenu = function() {
         _controls.pageLinks.removeClass('is-active');
         pageLink.addClass('is-active');
         
-        for (var i = 0; i < pageLinksTotal; i++)
-            pageMenu.classList.remove(itemClass(i));
+        if (!pageMenu.classList.contains('PageMenu--open')) {
+            for (var i = 0; i < pageLinksTotal; i++)
+                pageMenu.classList.remove(itemClass(i));
 
-        pageMenu.classList.add(itemClass(pageLinkIndex));
+            pageMenu.classList.add(itemClass(pageLinkIndex));
+        }
 
         function lastSection(sections) {
             var section = sections.shift();
@@ -135,19 +138,15 @@ com.kashis.fed.PageMenu = function() {
             pageLinkIndex;
         
         pageMenu.removeClass().addClass('PageMenu');
-        pageMenu.toggleClass('PageMenu--open', menuOpening);
-        _controls.body.toggleClass('PageMenu-is-open', menuOpening);
         
-        // Opening the menu doesn't change the state of our page. Exit here.
-        if (menuOpening) return false;
-
-        pageLinkIndex = pageLinks.index(pageLink);
-        //pageMenu.removeClass();
-        //pageMenu.addClass('PageMenu');
-        //pageLinks.removeClass('is-active');
-        //pageLink.addClass('is-active');
+        if (menuOpening) {
+            PageMenuAPI.open();
+            return false;
+        }
         
+        PageMenuAPI.close();
         PageMenuAPI.scrollTo(pageLink);
+        
         return false;
     }
     
@@ -182,14 +181,24 @@ com.kashis.fed.PageMenu = function() {
      * Opens the page menu.
      */
     PageMenuAPI.open = function() {
+        var pageMenu = _controls.pageMenu;
         
+        pageMenu.addClass('PageMenu--open');
+        _controls.body.addClass('PageMenu-is-open');
+        
+        return false;
     }
     
     /**
      * Closes the page menu.
      */
     PageMenuAPI.close = function() {
+        var pageMenu = _controls.pageMenu;
         
+        pageMenu.removeClass('PageMenu--open');
+        _controls.body.removeClass('PageMenu-is-open');
+        
+        return false;
     }
 
 	$(document).ready(_init);
