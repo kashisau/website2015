@@ -20,46 +20,40 @@
     "url": "https://kashis.com.au"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/kashisau/website2015.git"
+    "type": "git",
+    "url": "https://github.com/kashisau/website2015.git"
   },
-  "scripts" : {
+  "scripts": {
     "build": "gulp build",
     "build-production": "gulp build --production",
     "deploy": "gulp build --production && gulp:ext:production-deploy"
   },
   "dependencies": {
+    "browser-sync": "*",
     "gulp": "*",
-    "gulp-load-plugins": "*",
-    "gulp-util": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-concat": "*",
     "gulp-env": "*",
-    "require-dir": "*",
-    "lazypipe": "*",
-    
-    "run-sequence": "*",
-    "gulp-if": "*",
-    
-    "gulp-imagemin": "*",
     "gulp-filter": "*",
+    "gulp-if": "*",
+    "gulp-imagemin": "*",
+    "gulp-load-plugins": "*",
+    "gulp-minify-html": "*",
+    "gulp-plumber": "*",
+    "gulp-prettify": "*",
+    "gulp-pug": "*",
+    "gulp-rename": "*",
+    "gulp-replace": "*",
     "gulp-rev": "*",
     "gulp-rev-replace": "*",
-
-    "gulp-jade": "*",
-    "gulp-prettify": "*",
-    "gulp-replace": "*",
-    "gulp-minify-html": "*",
-    
-    "gulp-plumber": "*",
-    "gulp-sass": "*",
-    "gulp-autoprefixer": "*",
-    "gulp-concat": "*",
-    "gulp-sourcemaps": "*",
-    "gulp-minify-css": "*",
-    
-    "gulp-uglify": "*",
-    "gulp-rename": "*",
-    
     "gulp-rimraf": "*",
-    "browser-sync": "*"
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "lazypipe": "*",
+    "require-dir": "*",
+    "run-sequence": "*"
   }
 }

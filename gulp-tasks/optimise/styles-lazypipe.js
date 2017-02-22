@@ -11,6 +11,6 @@ module.exports = function(gulp, plugins, buildOptions) {
     var lazypipe = require('lazypipe');
 
     return lazypipe()
-        .pipe(plugins.minifyCss)
+        .pipe(plugins.cleanCss)
         .pipe(plugins.rename, { suffix: '.min' });
 }

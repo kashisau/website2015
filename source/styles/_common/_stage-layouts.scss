@@ -106,7 +106,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
             &-permanentCloseBtn {
                 display: none;
                 position: fixed;
-                bottom: calc(50vh - 8.33vw - 4.1818vw);
+                top: calc(50vh + 16.66vw);
                 right: 4.17vw;
 
                 width: 8.33vw;
@@ -166,11 +166,14 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                 }
 
                 nav {
-                    height: 50vh;
-                    bottom: 0;
+                    height: 16.66vw;
+                    // bottom: 0;
+                    bottom: auto;
+                    top: 0;
 
-                    transform: translateY(46vh);
-                    transition: transform $menu_open_time ease-in-out;
+                    transform: translateY(-12.495vw);
+                    transition: transform $menu_open_time ease-in-out,
+                        height $menu_open_time ease-in-out;
 
                     width: auto;
                     left: 0;
@@ -278,7 +281,7 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                 &--open {
                     .PageMenu-headings {
                         position: fixed;
-                        bottom: 50vh;
+                        top: calc(50vw + 16.66vw + 8.33vw);
                         z-index: 7999;
                     }
                     
@@ -291,7 +294,8 @@ $section-shadow: 0 0 .1em rgba(0,0,0,0.65);
                     nav {
                         transform: translateY(0);
                         ul {
-                            height: calc(50vh - 16.66vw);
+                            height: 50vh;
+                            
                             overflow-y: auto;
                             transform: translateY(8.33vw);
                             li {
@@ -461,11 +465,12 @@ body {
         .Main--sectionMenu {
             @include sm-viewport {
                 .PageMenu nav {
-                    transform: translateY(calc(50vh - 16.66vw));
+                    transform: translateY(0);
                 }
                 .PageMenu--open {
                     nav {
                         transform: translateY(0);
+                        height: calc(50vh + 8.33vw);
                     }                        
                 }
             }

@@ -25,7 +25,7 @@ module.exports = function(gulp, plugins, buildOptions) {
          * preserving the directory structures for the following stream.
          */
         var htmlJadeCompile = lazypipe()
-            .pipe(plugins.jade, {locals: { production: production }});
+            .pipe(plugins.pug, {locals: { production: production }});
 
         /**
          * This lazypipe function prettifies a HTML document so that it is
@@ -50,7 +50,7 @@ module.exports = function(gulp, plugins, buildOptions) {
                 function () { return; };
 
         return gulp.src([
-                './source/**/[^_]*.jade',
+                './source/**/[^_]*.pug',
                 '!./source/_**/*'
             ])
             .pipe(htmlJadeCompile())
